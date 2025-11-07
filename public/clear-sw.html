@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Service Workers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f4f4f4;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Worker Cleanup</h1>
+    <p>Click the button below to clear ALL Service Workers and caches from this domain:</p>
+    <button onclick="clearEverything()">Clear All Service Workers & Caches</button>
+    <div id="log" class="log"></div>
+
+    <script>
+        async function clearEverything() {
+            const log = document.getElementById('log');
+            log.textContent = 'Starting cleanup...\n';
+            
+            try {
+                // 1. Get all service worker registrations
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    log.textContent += `Found ${registrations.length} service worker(s)\n`;
+                    
+                    // Unregister each one
+                    for (let registration of registrations) {
+                        const success = await registration.unregister();
+                        log.textContent += `Unregistered SW at ${registration.scope}: ${success}\n`;
+                    }
+                }
+                
+                // 2. Clear all caches
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    log.textContent += `\nFound ${cacheNames.length} cache(s)\n`;
+                    
+                    for (let cacheName of cacheNames) {
+                        const success = await caches.delete(cacheName);
+                        log.textContent += `Deleted cache "${cacheName}": ${success}\n`;
+                    }
+                }
+                
+                // 3. Clear localStorage and sessionStorage
+                localStorage.clear();
+                sessionStorage.clear();
+                log.textContent += '\nCleared localStorage and sessionStorage\n';
+                
+                // 4. Clear IndexedDB
+                if ('indexedDB' in window) {
+                    const databases = await indexedDB.databases();
+                    for (let db of databases) {
+                        indexedDB.deleteDatabase(db.name);
+                        log.textContent += `Deleted IndexedDB: ${db.name}\n`;
+                    }
+                }
+                
+                log.textContent += '\n✅ Cleanup complete! Now navigate to http://127.0.0.1:5174/';
+                
+            } catch (error) {
+                log.textContent += `\n❌ Error: ${error.message}\n`;
+            }
+        }
+        
+        // Auto-run on page load
+        window.addEventListener('load', () => {
+            clearEverything();
+        });
+    </script>
+</body>
+</html>

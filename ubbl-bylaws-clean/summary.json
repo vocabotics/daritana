@@ -1,0 +1,36 @@
+{
+  "total": 636,
+  "by_part": {
+    "2": 24,
+    "3": 22,
+    "4": 18,
+    "5": 26,
+    "6": 42,
+    "7": 83,
+    "8": 25,
+    "9": 396
+  },
+  "by_category": {
+    "submission": 27,
+    "general": 482,
+    "structural": 25,
+    "spatial": 26,
+    "accessibility": 9,
+    "environmental": 11,
+    "services": 6,
+    "fire_safety": 50
+  },
+  "by_priority": {
+    "standard": 558,
+    "critical": 57,
+    "high": 21
+  },
+  "by_complexity": {
+    "1": 487,
+    "2": 42,
+    "3": 69,
+    "4": 32,
+    "5": 6
+  },
+  "generated": "2025-08-09T14:28:51.248Z"
+}

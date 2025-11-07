@@ -1,0 +1,447 @@
+/* Daritana Design System - 2025 Architecture Platform */
+/* Advanced CSS custom properties for comprehensive theming */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+Tamil:wght@300;400;500;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core Color System - Architect Theme */
+    --color-architect-ink: 15 15 20;
+    --color-architect-paper: 252 252 251;
+    --color-architect-blueprint: 41 98 255;
+    --color-architect-draft: 156 163 175;
+    --color-architect-grid: 229 231 235;
+    
+    /* Brand Colors - Malaysian Market */
+    --color-brand-primary: 41 98 255;
+    --color-brand-secondary: 99 102 241;
+    --color-brand-accent: 236 72 153;
+    --color-brand-success: 34 197 94;
+    --color-brand-warning: 251 146 60;
+    --color-brand-error: 239 68 68;
+    --color-brand-info: 59 130 246;
+    
+    /* Semantic Design Tokens */
+    --background: 252 252 251;
+    --foreground: 15 15 20;
+    --card: 255 255 255;
+    --card-foreground: 15 15 20;
+    --popover: 255 255 255;
+    --popover-foreground: 15 15 20;
+    --primary: 41 98 255;
+    --primary-foreground: 255 255 255;
+    --secondary: 243 244 246;
+    --secondary-foreground: 15 15 20;
+    --muted: 243 244 246;
+    --muted-foreground: 107 114 128;
+    --accent: 99 102 241;
+    --accent-foreground: 255 255 255;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 229 231 235;
+    --input: 229 231 235;
+    --ring: 41 98 255;
+    
+    /* Advanced Spacing System */
+    --space-px: 1px;
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+    
+    /* Typography Scale */
+    --font-family-sans: 'Plus Jakarta Sans', 'Noto Sans SC', 'Noto Sans Tamil', system-ui, sans-serif;
+    --font-family-mono: 'DM Mono', 'Courier New', monospace;
+    
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+    
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* Border Radius System */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-base: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadow System */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    
+    /* Animation Timing */
+    --duration-instant: 50ms;
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+    --duration-slower: 500ms;
+    --duration-slowest: 750ms;
+    
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Z-Index Scale */
+    --z-auto: auto;
+    --z-0: 0;
+    --z-10: 10;
+    --z-20: 20;
+    --z-30: 30;
+    --z-40: 40;
+    --z-50: 50;
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-notification: 1080;
+  }
+  
+  /* Dark Theme - Professional Architect */
+  .dark {
+    --background: 15 15 20;
+    --foreground: 245 245 244;
+    --card: 23 23 30;
+    --card-foreground: 245 245 244;
+    --popover: 23 23 30;
+    --popover-foreground: 245 245 244;
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+    --secondary: 39 39 46;
+    --secondary-foreground: 245 245 244;
+    --muted: 39 39 46;
+    --muted-foreground: 161 161 170;
+    --accent: 99 102 241;
+    --accent-foreground: 255 255 255;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 39 39 46;
+    --input: 39 39 46;
+    --ring: 59 130 246;
+  }
+  
+  /* Blueprint Theme - CAD Mode */
+  .theme-blueprint {
+    --background: 6 25 40;
+    --foreground: 173 216 230;
+    --card: 10 35 55;
+    --card-foreground: 173 216 230;
+    --primary: 0 191 255;
+    --primary-foreground: 6 25 40;
+    --secondary: 15 45 65;
+    --border: 30 60 80;
+    --accent: 0 255 255;
+  }
+}
+
+/* Advanced Component Patterns */
+
+/* Glass Morphism Effect */
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dark .glass-morphism {
+  background: rgba(23, 23, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Neumorphism Effect */
+.neumorphism {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  box-shadow: 20px 20px 60px #d1d1d1, -20px -20px 60px #ffffff;
+}
+
+.dark .neumorphism {
+  background: linear-gradient(145deg, #1e1e26, #17171e);
+  box-shadow: 20px 20px 60px #0f0f14, -20px -20px 60px #25252e;
+}
+
+/* Architect Grid Background */
+.architect-grid-bg {
+  background-image: 
+    linear-gradient(rgba(41, 98, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 98, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+}
+
+.architect-grid-bg-dense {
+  background-image: 
+    linear-gradient(rgba(41, 98, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 98, 255, 0.05) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Isometric Grid Pattern */
+.isometric-grid {
+  background-image: 
+    linear-gradient(30deg, rgba(41, 98, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(41, 98, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(270deg, rgba(41, 98, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 35px;
+}
+
+/* Blueprint Pattern */
+.blueprint-pattern {
+  background-color: rgb(6, 25, 40);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgb(0, 191, 255) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Advanced Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up var(--duration-normal) var(--ease-out);
+}
+
+.animate-slide-down {
+  animation: slide-down var(--duration-normal) var(--ease-out);
+}
+
+.animate-scale-in {
+  animation: scale-in var(--duration-fast) var(--ease-out);
+}
+
+/* Skeleton Loading Effect */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0) 0%,
+    rgba(229, 231, 235, 0.5) 50%,
+    rgba(229, 231, 235, 0) 100%
+  );
+  background-size: 2000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.dark .skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    rgba(39, 39, 46, 0) 0%,
+    rgba(39, 39, 46, 0.5) 50%,
+    rgba(39, 39, 46, 0) 100%
+  );
+}
+
+/* Focus Styles - Accessibility */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: rgb(var(--ring));
+}
+
+/* Scrollbar Styles */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border)) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--border));
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--muted-foreground));
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break-before {
+    page-break-before: always;
+  }
+  
+  .print-break-after {
+    page-break-after: always;
+  }
+  
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+}
+
+/* Mobile Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0 0;
+    --ring: 0 0 0;
+  }
+  
+  .dark {
+    --border: 255 255 255;
+    --ring: 255 255 255;
+  }
+}
+
+/* Malaysian Market Specific */
+.font-malay {
+  font-family: 'Noto Sans Tamil', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.font-chinese {
+  font-family: 'Noto Sans SC', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* PWA Install Banner */
+.pwa-install-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-notification);
+  animation: slide-up var(--duration-normal) var(--ease-out);
+}
+
+/* Offline Indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgb(var(--color-brand-warning));
+  color: white;
+  padding: 8px;
+  text-align: center;
+  z-index: var(--z-notification);
+}

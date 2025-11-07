@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation - {{quotation.quotation_number}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #0066cc;
+        }
+        
+        .company-info {
+            flex: 1;
+        }
+        
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        .company-details {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .document-title {
+            text-align: right;
+            flex: 0.5;
+        }
+        
+        .document-title h1 {
+            font-size: 32px;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        
+        .document-number {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .revision {
+            font-size: 12px;
+            color: #ff6600;
+            margin-top: 5px;
+        }
+        
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .info-block {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .info-block:last-child {
+            margin-right: 0;
+        }
+        
+        .info-block h3 {
+            font-size: 14px;
+            color: #0066cc;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .info-block p {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .items-table th {
+            background: #0066cc;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .items-table th:last-child,
+        .items-table td:last-child {
+            text-align: right;
+        }
+        
+        .items-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+        
+        .items-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .optional-item {
+            background: #fff9e6;
+        }
+        
+        .optional-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            background: #ff9800;
+            color: white;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+        
+        .summary-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        
+        .summary-table {
+            width: 350px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066cc;
+            border-top: 2px solid #0066cc;
+            border-bottom: none;
+            margin-top: 10px;
+            padding-top: 15px;
+        }
+        
+        .summary-label {
+            color: #666;
+        }
+        
+        .summary-value {
+            font-weight: 600;
+        }
+        
+        .terms-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .terms-section h3 {
+            font-size: 16px;
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+        
+        .terms-content {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .signature-block {
+            width: 250px;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 10px;
+            height: 40px;
+        }
+        
+        .signature-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .valid-until {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #ffeaa7;
+            color: #d63031;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        @media print {
+            .container {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="company-info">
+                <div class="company-name">{{company.name}}</div>
+                <div class="company-details">
+                    {{company.address}}<br>
+                    {{company.city}}<br>
+                    Tel: {{company.phone}}<br>
+                    Email: {{company.email}}<br>
+                    {{company.registration}}
+                </div>
+            </div>
+            <div class="document-title">
+                <h1>QUOTATION</h1>
+                <div class="document-number">{{quotation.quotation_number}}</div>
+                {{#if quotation.revision_number}}
+                    <div class="revision">Revision {{quotation.revision_number}}</div>
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Client and Project Info -->
+        <div class="info-section">
+            <div class="info-block">
+                <h3>Bill To</h3>
+                <p><strong>{{quotation.client.firstName}} {{quotation.client.lastName}}</strong></p>
+                <p>{{quotation.client.email}}</p>
+                {{#if quotation.client.phone}}
+                    <p>{{quotation.client.phone}}</p>
+                {{/if}}
+            </div>
+            <div class="info-block">
+                <h3>Project Details</h3>
+                <p><strong>{{quotation.project.name}}</strong></p>
+                <p>Code: {{quotation.project.projectCode}}</p>
+                {{#if quotation.project.location}}
+                    <p>{{quotation.project.location}}</p>
+                {{/if}}
+            </div>
+            <div class="info-block">
+                <h3>Quotation Info</h3>
+                <p>Date: {{formatDate quotation.created_at}}</p>
+                <p>Valid Until: {{formatDate quotation.valid_until}}</p>
+                <p>Payment Terms: {{quotation.payment_terms}}</p>
+                <div class="valid-until">
+                    Valid for {{quotation.payment_terms}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Items Table -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%">#</th>
+                    <th style="width: 40%">Description</th>
+                    <th style="width: 10%">Qty</th>
+                    <th style="width: 10%">Unit</th>
+                    <th style="width: 12%">Unit Price</th>
+                    <th style="width: 8%">SST %</th>
+                    <th style="width: 15%">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each quotation.items}}
+                <tr {{#if this.is_optional}}class="optional-item"{{/if}}>
+                    <td>{{add @index 1}}</td>
+                    <td>
+                        {{this.description}}
+                        {{#if this.is_optional}}
+                            <span class="optional-badge">OPTIONAL</span>
+                        {{/if}}
+                        {{#if this.notes}}
+                            <div style="font-size: 11px; color: #666; margin-top: 5px;">
+                                {{this.notes}}
+                            </div>
+                        {{/if}}
+                    </td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.unit}}</td>
+                    <td>{{formatCurrency this.unit_price}}</td>
+                    <td>{{this.sst_rate}}%</td>
+                    <td>{{formatCurrency (calculateItemTotal this.quantity this.unit_price this.sst_rate)}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <!-- Summary -->
+        <div class="summary-section">
+            <div class="summary-table">
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal:</span>
+                    <span class="summary-value">{{formatCurrency quotation.subtotal}}</span>
+                </div>
+                {{#if quotation.discount_amount}}
+                <div class="summary-row">
+                    <span class="summary-label">Discount:</span>
+                    <span class="summary-value" style="color: #27ae60;">
+                        -{{formatCurrency quotation.discount_amount}}
+                    </span>
+                </div>
+                {{/if}}
+                <div class="summary-row">
+                    <span class="summary-label">SST (8%):</span>
+                    <span class="summary-value">{{formatCurrency quotation.sst_amount}}</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total Amount:</span>
+                    <span>{{formatCurrency quotation.total_amount}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        {{#if quotation.terms_and_conditions}}
+        <div class="terms-section">
+            <h3>Terms & Conditions</h3>
+            <div class="terms-content">
+                {{quotation.terms_and_conditions}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Notes -->
+        {{#if quotation.notes}}
+        <div class="terms-section">
+            <h3>Notes</h3>
+            <div class="terms-content">
+                {{quotation.notes}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="signature-block">
+                <div class="signature-line"></div>
+                <div class="signature-label">
+                    Prepared By<br>
+                    {{quotation.preparedBy.firstName}} {{quotation.preparedBy.lastName}}<br>
+                    {{formatDate quotation.created_at}}
+                </div>
+            </div>
+            <div class="signature-block">
+                <div class="signature-line"></div>
+                <div class="signature-label">
+                    Client Acceptance<br>
+                    Name & Date
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Thank you for your business!</p>
+            <p>This quotation was generated on {{formatDate generatedAt}}</p>
+            <p>{{company.website}} | {{company.email}} | {{company.phone}}</p>
+        </div>
+    </div>
+</body>
+</html>

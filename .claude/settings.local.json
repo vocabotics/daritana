@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(touch:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(npm run dev:*)",
+      "Bash(docker-compose:*)",
+      "Bash(npx tsx:*)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)",
+      "Bash(powershell:*)",
+      "Bash(npm run mock-server:*)",
+      "Bash(psql:*)",
+      "Bash(npm run:*)",
+      "Bash(node test-backend.js)",
+      "Bash(wmic process where processid=21508 delete:*)",
+      "Bash(docker exec:*)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx vite:*)",
+      "Bash(mv:*)",
+      "Bash(dir package.json)",
+      "Bash(dir node_modules)",
+      "Bash(npm ls:*)",
+      "Bash(net start:*)",
+      "Bash(sc query:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(move test-store-integration.js test-store-integration.cjs)",
+      "Bash(npm start)",
+      "Bash(dir:*)",
+      "Bash(timeout:*)"
+    ],
+    "deny": [],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\c\\daritana"
+    ]
+  }
+}

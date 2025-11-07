@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Permissions</title>
+</head>
+<body>
+    <h1>Clear Permissions Cache</h1>
+    <button onclick="clearPermissions()">Clear Permissions</button>
+    <div id="status"></div>
+    
+    <script>
+        function clearPermissions() {
+            // Clear permissions-related localStorage
+            localStorage.removeItem('permissions-storage');
+            
+            // Show status
+            document.getElementById('status').innerHTML = 'Permissions cleared! Please refresh the app.';
+            
+            // Redirect back to app
+            setTimeout(() => {
+                window.location.href = 'http://localhost:5174';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

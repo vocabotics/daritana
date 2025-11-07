@@ -1,0 +1,5293 @@
+{
+  "parts": [
+    {
+      "number": 1,
+      "roman": "I",
+      "title": "PRELIMINARY"
+    },
+    {
+      "number": 1,
+      "roman": "I",
+      "title": "A"
+    },
+    {
+      "number": 2,
+      "roman": "II",
+      "title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": 4,
+      "roman": "IV",
+      "title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": 5,
+      "roman": "V",
+      "title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": 6,
+      "roman": "VI",
+      "title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": 7,
+      "roman": "VII",
+      "title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": 8,
+      "roman": "VIII",
+      "title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": 9,
+      "roman": "IX",
+      "title": "MISCELLANEOUS"
+    },
+    {
+      "number": 1,
+      "roman": "I",
+      "title": "PRELIMINARY"
+    },
+    {
+      "number": 1,
+      "roman": "I",
+      "title": "A"
+    },
+    {
+      "number": 2,
+      "roman": "II",
+      "title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "title": "SPACE, LIGHT AND VENTILATION"
+    },
+    {
+      "number": 4,
+      "roman": "IV",
+      "title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": 5,
+      "roman": "V",
+      "title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": 6,
+      "roman": "VI",
+      "title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": 7,
+      "roman": "VII",
+      "title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": 8,
+      "roman": "VIII",
+      "title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": 9,
+      "roman": "IX",
+      "title": "MISCELLANEOUS"
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": 2,
+      "roman": "II",
+      "title": "PITCHED  ROOFS  COVERED  WITH  PREFORMED  SELE-"
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "title": "PITCHED  OR  FLAT  ROOFS  COVERED  WITH  FULLY"
+    },
+    {
+      "number": 4,
+      "roman": "IV",
+      "title": "A."
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "title": "REINFORCED  CONCRETE  BEAMS"
+    },
+    {
+      "number": 4,
+      "roman": "IV",
+      "title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": 6,
+      "roman": "VI",
+      "title": "STRUCTURAL ALUMINIUM"
+    },
+    {
+      "number": 7,
+      "roman": "VII",
+      "title": "TIMBER  FLOORS"
+    },
+    {
+      "number": 8,
+      "roman": "VIII",
+      "title": "CONCRETE  FLOORS"
+    },
+    {
+      "number": 9,
+      "roman": "IX",
+      "title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    }
+  ],
+  "clauses": [
+    {
+      "number": "1",
+      "title": "Citation.",
+      "part": 1,
+      "part_title": "PRELIMINARY"
+    },
+    {
+      "number": "2",
+      "title": "Interpretation.",
+      "part": 1,
+      "part_title": "PRELIMINARY"
+    },
+    {
+      "number": "3",
+      "title": "Submission  of  plans  for  approval.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "4",
+      "title": "Return  of  plan.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "5",
+      "title": "Supervision  of  work.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "6",
+      "title": "Plans  to  be  signed.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "7",
+      "title": "Withdrawal  or  change  of  principal  submitting  person  or  submitting  person.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "8",
+      "title": "Plans  to  be  deposited.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "9",
+      "title": "Scale  of  plans.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "10",
+      "title": "Plans  required.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "11",
+      "title": "Exemption  from  by-law  10.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "12",
+      "title": "Sketch  plans  for  approval  in  principle.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "13",
+      "title": "Special  permission  to  commence  building  operations.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "14",
+      "title": "Plans  of  alterations.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "15",
+      "title": "Specifications.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "16",
+      "title": "Details  and  calculations  of  structural  plans.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "17",
+      "title": "Power  of  local  authority  to  reject  structural  plans  and  calculations.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "18",
+      "title": "Permits.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "19",
+      "title": "Temporary  permits.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "20",
+      "title": "Advertisement  hoardings.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "21",
+      "title": "Materials  not  to  be  deposited  in  a  street  without  permission.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "22",
+      "title": "Notice  of  commencement  or  resumption  of  building  operations.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "23",
+      "title": "Notice  of  completion  of  setting  out.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "24",
+      "title": "Notice  of  completion  of  excavation  for  foundation.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "25",
+      "title": "Certificate  of  completion  and  compliance.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "26",
+      "title": "Temporary  certificate  of  fitness  for  occupation.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "27",
+      "title": "Partial  certificate  of  completion  and  compliance.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "28",
+      "title": "Offences.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "29",
+      "title": "Fees  for  consideration  of  plans  and  for  permits.",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "30",
+      "title": "Open  spaces  to  be  provided.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "31",
+      "title": "Open  spaces  not  to  be  altered  or  roofed.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "32",
+      "title": "Space  about  buildings  abutting  a  street  and  a  backlane.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "33",
+      "title": "Space  about  buildings  on  lots  abutting  a  street  and  having  no  backlane.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "34",
+      "title": "Space  about  detached  buildings.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "35",
+      "title": "Access  from  a  street.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "36",
+      "title": "Splayed  corner.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "37",
+      "title": "Projections  over  the  street  and  over  the  building  line.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "38",
+      "title": "Width  of  footway.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "39",
+      "title": "Natural  lighting  and  ventilation.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "40",
+      "title": "Air  wells.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "41",
+      "title": "Mechanical  ventilation  and  air  conditioning.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "42",
+      "title": "Minimum  areas  of  rooms  in  residential  buildings.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "43",
+      "title": "Minimum  dimensions  of  latrines,  water  closets  and  bathrooms.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "44",
+      "title": "Height  of  rooms  in  residential  buildings,  shophouses,  schools,  etc.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "45",
+      "title": "Height  of  rooms  in  places  of  public  resorts.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "46",
+      "title": "Height  of  rooms  in  other  buildings.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "47",
+      "title": "Projections  over  a  verandah-way.",
+      "part": 3,
+      "part_title": "SPACE,  LIGHT  AND  VENTILATION"
+    },
+    {
+      "number": "48",
+      "title": "Commencement  of  building  operation.",
+      "part": 4,
+      "part_title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": "49",
+      "title": "Responsibility  of  person  granted  temporary  permits.",
+      "part": 4,
+      "part_title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": "50",
+      "title": "Cancellation  of  temporary  permit.",
+      "part": 4,
+      "part_title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": "51",
+      "title": "Vehicular  access  to  site.",
+      "part": 4,
+      "part_title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": "52",
+      "title": "Rising  mains  to  be  installed  progressively.",
+      "part": 4,
+      "part_title": "TEMPORARY  WORKS  IN  CONNECTION  WITH  BUILDING  OPERATIONS"
+    },
+    {
+      "number": "53",
+      "title": "Building  materials.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "54",
+      "title": "General  requirements  of  loading.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "55",
+      "title": "Permanent  and  imposed  loads.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "56",
+      "title": "Permanent  loads  calculated  from  weights  of  materials  used.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "57",
+      "title": "Weight  of  partitions.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "58",
+      "title": "Contents  of  tanks  and  other  receptacles.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "59",
+      "title": "Imposed  floor  loads.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "60",
+      "title": "Mechanical  stacking.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "61",
+      "title": "Imposed  loads  on  ceilings,  skylights  and  similar  structures.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "62",
+      "title": "Reductions  in  total  imposed  floor  loads.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "63",
+      "title": "Imposed  roof  loads.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "64",
+      "title": "Curved  roofs.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "65",
+      "title": "Roof  coverings.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "66",
+      "title": "Internal  suspended  loads  on  primary  structural  members.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "67",
+      "title": "Amount  of  suspended  load.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "68",
+      "title": "Dynamic  loading.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "69",
+      "title": "Crane  gantry  girders.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "70",
+      "title": "Parapets  and  balustrades.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "71",
+      "title": "Vehicle  barriers  for  car  parks.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "72",
+      "title": "Basement  walls  and  floors.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "73",
+      "title": "Foundations.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "74",
+      "title": "Foundations  of  buildings  not  exceeding  four  storeys.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "75",
+      "title": "Reinforced  concrete  foundations.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "76",
+      "title": "Strip  foundations.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "77",
+      "title": "Brick  footings.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "78",
+      "title": "Foundations  below  invert  of  drains.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "79",
+      "title": "Foundations  under  external  and  party  walls.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "80",
+      "title": "Structure  above  foundations.",
+      "part": 5,
+      "part_title": "STRUCTURAL  REQUIREMENTS"
+    },
+    {
+      "number": "81",
+      "title": "Building  site.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "82",
+      "title": "Drainage  of  subsoil.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "83",
+      "title": "Protection  against  soil  erosion,  etc.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "84",
+      "title": "Prevention  of  dampness.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "85",
+      "title": "Nominal  thickness  of  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "86",
+      "title": "Party  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "86",
+      "title": "Party  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "87",
+      "title": "Openings  in  party  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "88",
+      "title": "Recess.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "89",
+      "title": "Chases.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "90",
+      "title": "Underpinning.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "91",
+      "title": "Coping,  etc.,  to  be  impervious.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "92",
+      "title": "Projections  in  brickwork.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "93",
+      "title": "Measurement  of  the  length  of  a  wall.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "94",
+      "title": "Use  of  100  millimetres  brickwork  and  concrete  blocks  in  load-bearing  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "95",
+      "title": "External  panel  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "96",
+      "title": "Non  load-bearing  partition.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "97",
+      "title": "Timber  built  into  party  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "98",
+      "title": "Fences  and  boundary  walls.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "99",
+      "title": "Cooking  facilities  in  residential  buildings.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "100",
+      "title": "Cooking  facilities  in  quarters.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "101",
+      "title": "Boilers,  fireplaces,  forges  and  incinerators  in  factories.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "102",
+      "title": "Combustible  materials  adjoining  smoke  flues.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "103",
+      "title": "Timber  floors.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "104",
+      "title": "Bearing  for  joists.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "105",
+      "title": "Space  below  floors  to  be  ventilated.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "106",
+      "title": "Dimensions  of  staircases.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "107",
+      "title": "Handrails.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "108",
+      "title": "Maximum  flights.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "109",
+      "title": "Winders.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "110",
+      "title": "No  obstruction  in  staircases.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "111",
+      "title": "Lighting  and  ventilation  of  staircases.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "112",
+      "title": "Enclosure  of  staircases  in  a  shop.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "113",
+      "title": "Use  of  timber  staircases.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "114",
+      "title": "Timber  roofs.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "115",
+      "title": "Roof  coverings  and  drainage  with  a  rainwater  harvesting  and  utilisation  system  (SPAH).",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "116",
+      "title": "Accessible  flat  roofs,  balconies,  etc.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "117",
+      "title": "Access  to  roof  space.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "118",
+      "title": "Refuse  chutes  and  alternate  means  for  disposal  of  refuse.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "119",
+      "title": "Change  of  use  of  building.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "120",
+      "title": "Design  and  construction  of  refuse  chutes.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "121",
+      "title": "Requirements  for  refuse  receptacle  chambers.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "122",
+      "title": "Access  to  refuse  receptacle  chambers.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "123",
+      "title": "Pipes  and  service  ducts.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "124",
+      "title": "Lifts.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "125",
+      "title": "Swimming  pools.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "126",
+      "title": "Steps  and  footway.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "127",
+      "title": "Openings  into  swimming  pool.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "128",
+      "title": "Depth  of  water.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "129",
+      "title": "Location  of  diving  boards.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "130",
+      "title": "Changing  rooms.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "131",
+      "title": "Footbaths  and  shower.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "132",
+      "title": "Private,  residential  swimming  pools.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "133",
+      "title": "Interpretations.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "134",
+      "title": "Designation  of  purpose  groups.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "135",
+      "title": "Rules  of  measurement.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "136",
+      "title": "Provisions  of  compartment  walls  and  compartment  floors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "137",
+      "title": "Compartmentation  by  height.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "138",
+      "title": "Other  walls  and  floors  to  be  constructed  as  compartment  walls  or  compartment  floors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "139",
+      "title": "Separation  of  fire  risk  areas.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "140",
+      "title": "Fire  appliances  access.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "141",
+      "title": "Separating  walls.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "142",
+      "title": "External  walls.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "143",
+      "title": "Beam  or  column.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "144",
+      "title": "Cladding  on  external  wall.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "145",
+      "title": "Reference  to  Sixth  Schedule.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "146",
+      "title": "Relevant  boundary.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "147",
+      "title": "Construction  of  separating  wall.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "148",
+      "title": "Special  requirements  as  to  compartment  walls  and  compartment  floors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "149",
+      "title": "Horizontal  and  vertical  barriers  at  the  external  walls.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "150",
+      "title": "Protected  shafts.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "151",
+      "title": "Ventilation  to  lift  shafts.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "152",
+      "title": "Openings  in  lift  shafts.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "153",
+      "title": "Smoke  detectors  for  lift  lobbies.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "154",
+      "title": "Emergency  mode  of  operation  in  the  event  of  mains  power  failure.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "155",
+      "title": "Fire  mode  of  operation.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "156",
+      "title": "Protected  shafts  as  ventilating  duct.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "157",
+      "title": "Protected  shafts  consisting  of  staircase.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "158",
+      "title": "Stages  in  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "159",
+      "title": "Open  stages.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "160",
+      "title": "Fire  precautions  in  air  conditioning  systems.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "161",
+      "title": "Fire-stopping.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "162",
+      "title": "Fire  doors  in  compartment  walls  and  separating  walls.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "163",
+      "title": "Half  hour  and  one  hour  doors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "164",
+      "title": "Door  closers  for  fire  doors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "165",
+      "title": "Measurement  of  travel  distance  to  exits.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "166",
+      "title": "Exits  to  be  accessible  at  all  times.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "167",
+      "title": "Storey  exits.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "168",
+      "title": "Staircases.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "169",
+      "title": "Exit  route.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "170",
+      "title": "Egress  through  unenclosed  openings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "171",
+      "title": "Horizontal  exits.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "172",
+      "title": "Emergency  exit  signs.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "173",
+      "title": "Exit  doors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "174",
+      "title": "Arrangement  of  storey  exits.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "175",
+      "title": "Calculation  of  occupancy  loads.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "176",
+      "title": "Computing  storey  exit  width.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "177",
+      "title": "Computing  number  of  staircases  and  staircase  width.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "178",
+      "title": "Exits  for  institutional  and  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "179",
+      "title": "Classification  of  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "180",
+      "title": "Space  standards  for  calculating  occupancy  loads.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "181",
+      "title": "Width  of  means  of  egress.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "182",
+      "title": "Rate  of  discharge.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "183",
+      "title": "Exit  details  for  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "184",
+      "title": "Seating.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "185",
+      "title": "Gangway  in  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "186",
+      "title": "Exit  doors  in  places  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "187",
+      "title": "Notice  affixed  to  door  or  gate.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "188",
+      "title": "Travel  distance  in  place  of  assembly.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "189",
+      "title": "Enclosing  means  of  escape  in  certain  buildings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "190",
+      "title": "External  exit  staircase.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "191",
+      "title": "Openings  in  adjacent  walls  not  permitted.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "192",
+      "title": "Moving  walks.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "193",
+      "title": "Power  operated  doors  as  means  of  egress.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "194",
+      "title": "Building  with  single  staircase.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "195",
+      "title": "Staircases  to  reach  roof  level.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "196",
+      "title": "Smoke  lobbies.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "197",
+      "title": "Protected  lobbies.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "198",
+      "title": "Ventilation  of  staircase  enclosures.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "199",
+      "title": "Ventilation  of  staircase  enclosures  in  buildings  not  exceeding  18  metres.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "200",
+      "title": "Ventilation  of  staircase  enclosures  in  buildings  exceeding  18  metres.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "201",
+      "title": "Staircase  enclosures  below  ground  level.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "202",
+      "title": "Pressurised  system  for  staircases.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "203",
+      "title": "Restriction  of  spread  of  flame.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "204",
+      "title": "Classification  of  restriction  of  flame  over  surfaces  of  walls  and  ceilings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "205",
+      "title": "Classification  of  interior  finish  materials.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "206",
+      "title": "Classification  of  surface  of  wall  or  ceiling.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "207",
+      "title": "Exceptions  relating  to  ceilings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "208",
+      "title": "Reference  to  roofs.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "209",
+      "title": "Reference  to  buildings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "210",
+      "title": "Construction  of  roofs.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "211",
+      "title": "Roofing  materials.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "212",
+      "title": "Category  designation  for  fire  penetration  and  spread  of  flame  on  roof  surface.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "213",
+      "title": "Fire  resistance.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "214",
+      "title": "Additional  requirements.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "215",
+      "title": "Height  of  buildings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "216",
+      "title": "Single  storey  buildings.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "217",
+      "title": "Fire  resistance  of  structural  member.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "218",
+      "title": "Compartment  wall  separating  flat  and  maisonette.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "219",
+      "title": "Application  of  these  By-laws  to  floors.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "220",
+      "title": "Floor  area  and  capacity  of  buildings  and  compartments.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "221",
+      "title": "Test  of  fire  resistance.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "222",
+      "title": "Fire  resistance  for  walls.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "223",
+      "title": "Fire  resistance  for  floors  above  ground  floor.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "224",
+      "title": "Fire  resistance  for  any  element  of  structure.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "225",
+      "title": "Fire  alarm  system  and  extinguishment  system.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "226",
+      "title": "Automatic  system  for  hazardous  occupancy.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "227",
+      "title": "Portable  extinguishers.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "228",
+      "title": "Sprinkler  systems.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "229",
+      "title": "Means  of  access  and  fire  fighting  in  buildings  over  18  metres  high.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "230",
+      "title": "Dry  riser  systems.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "231",
+      "title": "Wet  riser  systems.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "232",
+      "title": "Wet  or  dry  riser  system  for  buildings  under  construction.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "233",
+      "title": "Foam  inlets.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "234",
+      "title": "Underground  structures  and  windowless  buildings  to  have  foam  inlets.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "235",
+      "title": "Fixed  extinguishing  system.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "236",
+      "title": "Special  hazards.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "237",
+      "title": "Fire  alarm  systems.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "238",
+      "title": "Fire  command  centre.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "239",
+      "title": "Voice  communication  system.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "240",
+      "title": "Electrical  isolation  switch.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "241",
+      "title": "Special  requirements  for  fire  alarm  systems.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "242",
+      "title": "Fire  fighting  access  lobbies.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "243",
+      "title": "Fire  lifts.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "243",
+      "title": "Fire  lift.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "244",
+      "title": "Standards  required.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "245",
+      "title": "Approval  of  Director  General.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "246",
+      "title": "Certification  on  completion.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "247",
+      "title": "Water  storage.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "248",
+      "title": "Markings  on  wet  riser,  etc.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "249",
+      "title": "Smoke  control.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "250",
+      "title": "Natural  draught  smoke  vent.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "251",
+      "title": "Smoke  vents  to  prevent  dangerous  accumulation  of  smoke.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "252",
+      "title": "Smoke  vents  to  be  openable  by  Fire  Authority.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "253",
+      "title": "Emergency  power  system.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "254",
+      "title": "Buildings  to  which  Parts  VII  and  VIII  apply.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "255",
+      "title": "Power  of  local  authority  to  extend  period,  etc.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "256",
+      "title": "Buildings  exempted.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "257",
+      "title": "Application  of  standard  or  code  of  practice.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "258",
+      "title": "Failure  to  buildings.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "14",
+      "title": "to  16  shall  be  submitted  and  approved  before  erection  of  the  building  approved  in  principle",
+      "part": 2,
+      "part_title": "SUBMISSION  OF  PLANS  FOR  APPROVAL"
+    },
+    {
+      "number": "2",
+      "title": "metres  clear  space  measured  between  the  extreme  projections  of  the  building  and  boundaries",
+      "part": 3,
+      "part_title": "SPACE, LIGHT AND VENTILATION"
+    },
+    {
+      "number": "100",
+      "title": "millimetres  thickness  if  constructed  at  different  time.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "100",
+      "title": "millimetres  of  masonry  or  a  fire  stop  with  an  equivalent  fire  resistance  period  is  provided",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "300",
+      "title": "millimetres  therefrom.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "900",
+      "title": "millimetres  from  the  level  of  the  landing.",
+      "part": 6,
+      "part_title": "CONSTRUCTIONAL  REQUIREMENTS"
+    },
+    {
+      "number": "100",
+      "title": "square  metres.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "2",
+      "title": "metres or more than 10 metres from the centre position of the access opening, measured",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "150",
+      "title": "millimetres,  if  it  is  made  of  non-combustible  material;  and",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "18",
+      "title": "metres  in  height;  and",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "800",
+      "title": "millimetres  X  2,100  millimetres  high  maximum  constructed  of  solid  hardwood  core  of",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "3",
+      "title": "millimetres;",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "450",
+      "title": "millimetres  clear  width  between  rows  of  18  seats  or  less;",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "500",
+      "title": "millimetres  clear  width  between  rows  of  35  seats  or  less;",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "525",
+      "title": "millimetres  clear  width  between  rows  of  45  seats  or  less;",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "550",
+      "title": "millimetres  clear  width  between  rows  of  46  seats  or  more.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "6",
+      "title": "and  Part  7,  shall  have  an  index  of  performance  not  exceeding  6.",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "1",
+      "title": "hour  fire  resistance  period;",
+      "part": 7,
+      "part_title": "FIRE  SAFETY  INSTALLATION  REQUIREMENTS"
+    },
+    {
+      "number": "1489",
+      "title": "and  in  any  case,  the  fire  hydrant  shall  be  located  not  more  than  90  metres  apart.",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "200",
+      "title": "square  metres",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "17",
+      "title": "or  less17,000  or  less196Gravity",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "17",
+      "title": "or  less17,000  or  more194Gravity",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "17",
+      "title": "or  more--4Mechanical",
+      "part": 8,
+      "part_title": "FIRE  ALARM  SYSTEM  AND  FIRE  EXTINGUISHMENT  SYSTEM"
+    },
+    {
+      "number": "1",
+      "title": "New  buildings.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "Buildings  approved  on  a  temporary  basis  and  tentative  sketch  plans.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "3",
+      "title": "Sheds  with  open  sides.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "4",
+      "title": "Open  basements.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "5",
+      "title": "Buildings  of  warehouse  class.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "6",
+      "title": "Alterations  to  existing  buildings.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "7",
+      "title": "Wharves,  bridges,  etc.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "8",
+      "title": "Retaining  walls.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "9",
+      "title": "Series  or  rows  of  building.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "10",
+      "title": "Amendment  plan  to  an  approved  plan.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "11",
+      "title": "Inspection  of  plans.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "12",
+      "title": "Permits  for  minor  works  in  lieu  of  plans.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "13",
+      "title": "Temporary  permits.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "14",
+      "title": "Temporary  Occupation  permits.                                                                                                                Deleted.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "15",
+      "title": "Refund  of  plan  fees.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "16",
+      "title": "Additional  copy  of  notice  or  permit.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "17",
+      "title": "Work  commenced  before  approval  of  plans.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "Particulars  of  the  principal  submitting  person",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "Copy  to:",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1984",
+      "title": "and  approved  plans.  I  hereby  certify  that  the  building/s  is/are  safe  and  fit  for  partial  occupation.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "Particulars  of  the  principal  submitting  person",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "Copy  to:",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "Interpretation.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "Windowless  rooms.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "3",
+      "title": "Filters  for  exhaust  air.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "5",
+      "title": "metres  from  the  external  ground  or  pavement  level.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "4",
+      "title": "Operating  theatres.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "55",
+      "title": "percent  to  65  percent.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "5",
+      "title": "Openings  for  mechanical  ventilation  for  air  conditioning  systems.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "6",
+      "title": "Filtration.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "7",
+      "title": "Mechanical  ventilation  system  in  basement  areas.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "8",
+      "title": "Projection  rooms.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "9",
+      "title": "Any  other  rooms.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "10",
+      "title": "Water  closets  and  toilets.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "11",
+      "title": "Room,  window,  etc.,  air  conditioning  units.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "12",
+      "title": "Fresh  air  changes.",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "of  the  Factories  and  Machinery  Act  1967,  but",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "The  permitted  limit  of  unprotected  areas  in  any  side  of  a  building  or  compartment  shall  be",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "In  calculating  the  size  of  unprotected  areas  or  the  permitted  limit  of  unprotected  areas,  the",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "The  conditions  of  this  Part  shall  be  satisfied  if  a  building  or  compartment  is  so  situated  that",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "2",
+      "title": "For  the  purpose  of  this  Part---",
+      "part": 9,
+      "part_title": "MISCELLANEOUS"
+    },
+    {
+      "number": "1",
+      "title": "The conditions of this Part shall be satisfied if a building is so constructed that the aggregate",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "2",
+      "title": "For  the  purposes  of  this  Part---",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "3",
+      "title": "For  the  purposes  of  this  Part,  no  account  shall  be  taken  of  any  unprotected  area  in  the",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "1",
+      "title": "The  provisions  of  this  Part  apply  only  to  any  building  of  Purpose  Group  I  or  III,  which",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "24",
+      "title": "metres  in  length.",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "2",
+      "title": "The  conditions  of  this  Part  shall  be  satisfied  if  the  distance  between  any  part  of  a  side  of  a",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "3",
+      "title": "for a movable partition",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "2",
+      "title": "in an individual room with",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "300",
+      "title": "square  metres,  or  which  is  utilising  any  floor  above  the  ground  floor  level  or",
+      "part": 3,
+      "part_title": "RULES  FOR  CALCULATION  BY  REFERENCE"
+    },
+    {
+      "number": "1",
+      "title": "Type  1C,  self-",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "15",
+      "title": "m or moreAny1 hour or lessSurface  of  ceiling  exposed  within  the",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "1",
+      "title": "Reinforced  concrete,  minimum  concrete",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "2",
+      "title": "No-fines  concrete  of  Class  2  aggregate:",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "3",
+      "title": "Bricks  of  clay,  concrete  or  sand-lime:",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "4",
+      "title": "Concrete  blocks  of  Class  1  aggregate:",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "5",
+      "title": "Concrete  blocks  of  Class  2  aggregate:",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "6",
+      "title": "Autoclaved  aerated  concrete  blocks  density",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "475",
+      "title": "– 1  200 kg/m",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "7",
+      "title": "Hollow  concrete  blocks,  one  cell  in  wall",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "8",
+      "title": "Hollow  concrete  blocks,  one  cell  in  wall",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "9",
+      "title": "Cellular  clay  blocks  not  less  than  50%  solid:",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "10",
+      "title": "Cavity  wall  with  outer  leaf  of  bricks  or  blocks",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "11",
+      "title": "Cavity  wall  with  outer  leaf  of  cellular  clay",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "50",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "62",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...            ...3",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "75",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...            ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "100",
+      "title": "mm  thick  and  internal  lining  of  insulating  board  of  thickness  of  9  mm",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "16",
+      "title": "mm  gypsum  plaster  on  metal  lathing  ...  ...  ...  ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "19",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "25",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "19",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "5",
+      "title": "mm                ...                    ...                    ...                    ...                    ...                    ...",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "25",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "16",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "10",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "5",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "25",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "16",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "10",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "16",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "10",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "75",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...2",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "50",
+      "title": "mm            ...            ...            ...            ...            ...            ...            ...1",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "50",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...3",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "62",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "75",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "100",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "50",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...3",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "62",
+      "title": "mm  ...        ...        ...                ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "75",
+      "title": "mm  ...        ...        ...        ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "100",
+      "title": "mm ...        ...        ...        ...        ...        ...        ...        ...4",
+      "part": 4,
+      "part_title": "A."
+    },
+    {
+      "number": "38",
+      "title": "§251912.5",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "50",
+      "title": "§191612.512.5",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "100",
+      "title": "mm  pitch  --",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "100",
+      "title": "mm  pitch--",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "32",
+      "title": "§101077",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "140",
+      "title": "–  240  kg/m",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "5",
+      "title": "Insulating  boards  of  density  510  –  880  kg/m",
+      "part": 4,
+      "part_title": "PRESTRESSED  CONCRETE  BEAMS  WITH  POST-TENSIONED  STEEL"
+    },
+    {
+      "number": "25",
+      "title": "mmA12.5  mmA12.5  mmA7  mmA",
+      "part": 8,
+      "part_title": "CONCRETE  FLOORS"
+    },
+    {
+      "number": "7",
+      "title": "mmV7  mmVnilnil",
+      "part": 8,
+      "part_title": "CONCRETE  FLOORS"
+    },
+    {
+      "number": "1",
+      "title": "Education  occupancy.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Hospital  or  nursing  home  (total  floor  area).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Hotel.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Hostel  or  dormitory.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Apartment  or  flat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Service  apartment.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "30",
+      "title": "metres  in  height.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Four  storeys  and  below  or  less  than  1,000  square",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Five  storeys  and  above  or  of  exceeding  1,000",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Exceeding  18  metres  in  height  and  less  than",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "30  metres  and  above  in  height  or  of  exceeding",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Floor  area  which  is  not  exceeding  250  square",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Single  storey",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Two  storeys  and  above  (total  floor  area).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Hawker centre, food court, wet market or dry market.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Combination  of  shop  occupancy,  and  hotel",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Single  storey  detached  unit,  semi-detached  unit  or",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Open structure  design.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Two  storeys  and  above  and  in  the  types  of",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Flatted  factory  block  (two  storeys  and  above).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Vehicle  assembly  or  a  similar  plant.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Special  structure.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Factory  in  operation  after  an  hour  of  darkness  shall  be  required  to  provide  emergency",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "A  special  risk  or  hazardous  process  or  hazardous  storage  shall  be  required  to  provide  fire",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Place  of  assembly  below  the  level  of  exit",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Convention  centre,  community  centre,  private  club,",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Theatre,  cinema,  concert  hall  or  auditorium  (total",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Amusement  centre  (total  floor  area).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Bus  terminal,  ferry  terminal,  train  station  or  airport",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Place  of  worship.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Car  park.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "750",
+      "title": "square  metres  per  floor.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Warehouse  of  non-combustible  product  or  storage",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Warehouse  of  combustible  product  or  storage  of",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "automatic  fire  detection  system.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "manual  electric  fire  alarm  system.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "signal  indicator  alarm  system.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "public  address  system.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "fireman  intercom  system  and  fire  command  centre.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "automatic  fire  monitoring  system.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "7",
+      "title": "self-contained  smoke  detector.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "4 1.25*",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Tafsiran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Pengemukaan  pelan-pelan  untuk  diluluskan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Pengembalian  pelan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Pengawasan  kerja.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Pelan-pelan  hendaklah  ditandatangani.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "7",
+      "title": "Penarikan balik atau pertukaran orang utama yang mengemukakan atau orang yang mengemukakan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "8",
+      "title": "Pelan-pelan  hendaklah  didepositkan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "9",
+      "title": "Skala  pelan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "Pelan-pelan  yang  dikehendaki.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "11",
+      "title": "Pengecualian  daripada  undang-undang  kecil  10.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "12",
+      "title": "Pelan-pelan  lakar  untuk  diluluskan  pada  dasarnya.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "13",
+      "title": "Kebenaran  khas  untuk  memulakan  kerja-kerja  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "14",
+      "title": "Pelan-pelan  bagi  perubahan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "15",
+      "title": "Spesifikasi.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "Butir-butir  dan  kiraan-kiraan  pelan  struktur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "17",
+      "title": "Kuasa  pihak  berkuasa  tempatan  untuk  menolak  pelan  struktur  dan  kiraan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "18",
+      "title": "Permit.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "19",
+      "title": "Permit  sementara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "20",
+      "title": "Papan  dinding  iklan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "21",
+      "title": "Bahan-bahan  tidak  boleh  didepositkan  di  atas  jalan  tanpa  kebenaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "22",
+      "title": "Notis  memulakan  atau  menyambung  semula  kerja-kerja  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "23",
+      "title": "Notis  siapnya  pancang  tanda.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "24",
+      "title": "Notis  siapnya  korekan  bagi  asas  tapak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "25",
+      "title": "Perakuan  siap  dan  pematuhan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "26",
+      "title": "Perakuan  kelayakan  menduduki  sementara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "27",
+      "title": "Perakuan  siap  dan  pematuhan  sebahagian.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "28",
+      "title": "Kesalahan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "29",
+      "title": "Fi  bagi  menimbangkan  pelan  dan  permit.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "30",
+      "title": "Ruang  terbuka  hendaklah  diperuntukkan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "31",
+      "title": "Ruang  terbuka  tidak  boleh  diubah  atau  berbumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "32",
+      "title": "Kawasan  sekeliling  bangunan  yang  bersempadanan  dengan  jalan  dan  lorong  belakang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "33",
+      "title": "Kawasan  sekeliling  bangunan  di  atas  lot  yang  bersempadanan  dengan  jalan  dan  tidak  mempunyai",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "34",
+      "title": "Kawasan  sekeliling  bangunan  berasingan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "35",
+      "title": "Akses  daripada  jalan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "36",
+      "title": "Penjuru  yang  dipotong  rencong.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "37",
+      "title": "Unjuran-unjuran  di  atas  jalan  dan  di  atas  garis  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "38",
+      "title": "Lebar  Lorong  jalan  kaki.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "39",
+      "title": "Cahaya  dan  pengudaraan  semulajadi.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "40",
+      "title": "Telaga  udara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "41",
+      "title": "Pengudaraan  atau  penyamanan  udara  secara  mekanikal.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "42",
+      "title": "Luas  minimum  bilik-bilik  dalam  bangunan  kediaman.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "43",
+      "title": "Dimensi  minimum  tandas,  jamban  pam  dan  bilik  mandi.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "44",
+      "title": "Tinggi  bilik-bilik  dalam  bangunan  kediaman,  rumah  kedai,  sekolah,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "45",
+      "title": "Tinggi  bilik-bilik  di  tempat  tumpuan  awam.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "46",
+      "title": "Tinggi  bilik-bilik  dalam  bangunan-bangunan  lain.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "47",
+      "title": "Unjuran  di  atas  jalan  kaki  lima.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "48",
+      "title": "Memulakan  kerja-kerja  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "49",
+      "title": "Tanggungjawab  orang-orang  yang  diberi  permit  sementara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "50",
+      "title": "Pembatalan  permit  sementara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "51",
+      "title": "Akses  kenderaan  ke  tapak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "52",
+      "title": "Sesalur-sesalur  naik  hendaklah  dipasang  secara  berperingkat-peringkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "53",
+      "title": "Bahan  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "54",
+      "title": "Kehendak-kehendak  am  bebanan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "55",
+      "title": "Beban-beban  kekal  dan  guna.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "56",
+      "title": "Beban  kekal  dikira  daripada  berat  bahan  yang  digunakan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "57",
+      "title": "Berat  dinding  sekat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "58",
+      "title": "Kandungan  tangki  dan  takungan  lain",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "59",
+      "title": "Beban  guna  lantai.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "60",
+      "title": "Penyusunan  dengan  kuasa  jentera.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "61",
+      "title": "Beban  guna  atas  siling,  tingkap  magun  dan  struktur  yang  sama.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "62",
+      "title": "Pengurangan  pada  jumlah  beban  guna  lantai.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "63",
+      "title": "Beban  guna  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "64",
+      "title": "Bumbung  lengkung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "65",
+      "title": "Penutup  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "66",
+      "title": "Beban  ampaian  dalam  di  atas  bangunan  struktur  utama.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "67",
+      "title": "Amaun  beban  ampaian.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "68",
+      "title": "Bebanan  dinamik.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "69",
+      "title": "Galang  gantri  kren.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "70",
+      "title": "Parapet  dan  pelepar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "71",
+      "title": "Penggadang  kenderaan  bagi  tempat  letak  kereta.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "72",
+      "title": "Dinding  dan  lantai  tingkat  bawah  tanah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "73",
+      "title": "Asas  tapak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "74",
+      "title": "Asas  tapak  bangunan  yang  tidak  melebihi  empat  tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "75",
+      "title": "Asas  tapak  konkrit  tetulang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "76",
+      "title": "Asas  tapak  jalur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "77",
+      "title": "Asas  bata.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "78",
+      "title": "Asas  tapak  di  bawah  lantai  dasar  parit.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "79",
+      "title": "Asas  tapak  di  bawah  dinding  luar  dan  dinding  dua  pihak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "80",
+      "title": "Struktur  di  atas  asas  tapak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "81",
+      "title": "Tapak  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "82",
+      "title": "Saliran  tanah  bawah  tapak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "83",
+      "title": "Perlindungan  daripada  hakisan  tanah,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "84",
+      "title": "Mencegah  kelembapan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "85",
+      "title": "Ketebalan  nominal  dinding-dinding.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "86",
+      "title": "Dinding  dua  pihak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "86",
+      "title": "Dinding  dua  pihak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "87",
+      "title": "Ruang  buka  dalam  dinding  dua  pihak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "88",
+      "title": "Ceruk.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "89",
+      "title": "Peparit.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "90",
+      "title": "Topang  bawah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "91",
+      "title": "Kepala  tembok,  dll.,  hendaklah  tak  kelap  air.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "92",
+      "title": "Unjuran  dalam  kerja  batu-bata.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "93",
+      "title": "Mengukur  panjang  sesuatu  dinding.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "94",
+      "title": "Penggunaan  kerja  batu-bata  100  milimeter  tebal  dan  blok  konkrit  dalam  dinding  bawa  beban.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "95",
+      "title": "Dinding  panel  luar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "96",
+      "title": "Dinding  sekat  tak  bawa  beban.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "97",
+      "title": "Kayu  yang  dibina  ke  dalam  dinding  dua  pihak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "98",
+      "title": "Pagar  dan  tembok  sempadan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "99",
+      "title": "Kemudahan  memasak  dalam  bangunan  kediaman.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "100",
+      "title": "Kemudahan  memasak  dalam  rumah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "101",
+      "title": "Dandang,  pendiang,  genahar  dan  pembakar  dalam  kilang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "102",
+      "title": "Bahan  mudah  terbakar  yang  bersampingan  dengan  corong  asap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "103",
+      "title": "Lantai  kayu.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "104",
+      "title": "Alas  bagi  gelegar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "105",
+      "title": "Ruang  di  bawah  lantai  hendaklah  mempunyai  pengudaraan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "106",
+      "title": "Dimensi  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "107",
+      "title": "Susur  tangan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "108",
+      "title": "Lantai  tangga  maksimum.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "109",
+      "title": "Anak  tangga  tirus.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "110",
+      "title": "Tiada  halangan  pada  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "111",
+      "title": "Pencahayaan  dan  pengudaraan  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "112",
+      "title": "Kepungan  tangga  dalam  kedai.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "113",
+      "title": "Penggunaan  tangga  kayu.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "114",
+      "title": "Bumbung  kayu.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "115",
+      "title": "Penutup bumbung dan saliran dengan suatu sistem pengumpulan dan penggunaan semula air hujan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "116",
+      "title": "Bumbung  rata,  langkan,  dll.,  yang  boleh  dimasuki.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "117",
+      "title": "Akses  kepada  ruang  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "118",
+      "title": "Pelongsor  sampah  dan  cara  lain  bagi  pembuangan  sampah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "119",
+      "title": "Pertukaran  kegunaan  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "120",
+      "title": "Reka  bentuk  dan  pembinaan  pelongsor  sampah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "121",
+      "title": "Kehendak-kehendak  bagi  bekas  sampah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "122",
+      "title": "Akses  kepada  bilik  bekas  sampah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "123",
+      "title": "Paip  dan  saluran  perkhidmatan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "124",
+      "title": "Lif-lif.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "125",
+      "title": "Kolam  renang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "126",
+      "title": "Tangga  dan  lorong  jalan  kaki.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "127",
+      "title": "Ruang  buka  ke  dalam  kolam  renang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "128",
+      "title": "Kedalaman  air.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "129",
+      "title": "Tempat  papan  terjun.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "130",
+      "title": "Bilik  salin  pakaian.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "131",
+      "title": "Tempat  mandi  berdiri  dan  pancuran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "132",
+      "title": "Kolam  renang  kediaman,  persendirian.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "133",
+      "title": "Tafsiran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "134",
+      "title": "Menetapkan  kumpulan  maksud.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "135",
+      "title": "Kaedah-kaedah  mengukur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "136",
+      "title": "Peruntukan  bagi  dinding  petak  dan  lantai  petak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "137",
+      "title": "Pemetakan  mengikut  ketinggian.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "138",
+      "title": "Dinding  dan  lantai  lain  hendaklah  dibina  sebagai  dinding  petak  atau  lantai  petak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "139",
+      "title": "Pengasingan  kawasan  risiko  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "140",
+      "title": "Akses  perkakas  bomba.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "141",
+      "title": "Dinding  pengasing,",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "142",
+      "title": "Dinding  luar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "143",
+      "title": "Rasuk  atau  tiang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "144",
+      "title": "Salutan  pada  dinding  luar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "145",
+      "title": "Sebutan  mengenai  Jadual  Keenam.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "146",
+      "title": "Sempadan  berkenaan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "147",
+      "title": "Pembinaan  dinding  pengasing.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "148",
+      "title": "Kehendak  khas  bagi  dinding  petak  dan  lantai  petak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "149",
+      "title": "Pengadang  mendatar  dan  tegak  bagi  dinding  luar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "150",
+      "title": "Lubong  terlindung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "151",
+      "title": "Pengudaraan  bagi  lubong  lif.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "152",
+      "title": "Ruang  buka  bagi  lubong  lif.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "153",
+      "title": "Pengesan  asap  bagi  lobi  lif.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "154",
+      "title": "Cara  gerakan  kecemasan  jika  berlaku  kerosakan  kuasa  sesalur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "155",
+      "title": "Cara  gerakan  menentang  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "156",
+      "title": "Lubong  terlindung  sebagai  saluran  pengudaraan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "157",
+      "title": "Lubong  terlindung  yang  mengandungi  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "158",
+      "title": "Pentas  di  tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "159",
+      "title": "Pentas  terbuka.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "160",
+      "title": "Tindakan  mencegah  kebakaran  dalam  sistem  penyaman  udara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "161",
+      "title": "Pengadang  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "162",
+      "title": "Pintu  api  dalam  dinding  petak  dan  dinding  pengasing.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "163",
+      "title": "Pintu  setengah  jam  dan  satu  jam.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "164",
+      "title": "Penutup  pintu  bagi  pintu  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "165",
+      "title": "Ukuran  jarak  perjalanan  ke  tempat  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "166",
+      "title": "Tempat  keluar  hendaklah  boleh  dilalui  pada  bila-bila  masa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "167",
+      "title": "Pintu  keluar  tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "168",
+      "title": "Tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "169",
+      "title": "Jalan  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "170",
+      "title": "Jalan  keluar  melalui  ruang  buka  tak  berkepung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "171",
+      "title": "Tempat  keluar  mendatar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "172",
+      "title": "Tanda  tempat  keluar  kecemasan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "173",
+      "title": "Pintu  keluar",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "174",
+      "title": "Susunan  pintu  keluar  tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "175",
+      "title": "Penghitungan  beban  pendudukan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "176",
+      "title": "Pengiraan  lebar  pintu  keluar  tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "177",
+      "title": "Pengiraan  bilangan  tangga  dan  lebar  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "178",
+      "title": "Tempat  keluar  bagi  institusional  dan  tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "179",
+      "title": "Pengelasan  tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "180",
+      "title": "Standard  jarak  untuk  mengira  beban  pendudukan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "181",
+      "title": "Lebar  jalan  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "182",
+      "title": "Kadar  aliran  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "183",
+      "title": "Butir-butir  tempat  keluar  bagi  tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "184",
+      "title": "Tempat  duduk.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "185",
+      "title": "Lorong  di  tempat-tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "186",
+      "title": "Pintu  keluar  di  tempat-tempat  perhimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "187",
+      "title": "Notis  yang  dilekatkan  pada  pintu  atau  pintu  pagar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "188",
+      "title": "Jarak  perjalanan  di  tempat  pehimpunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "189",
+      "title": "Pengepungan  jalan  melepaskan  diri  dalam  bangunan  tertentu.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "190",
+      "title": "Tangga  keluar  luaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "191",
+      "title": "Ruang  buka  dalam  dinding  berhampiran  tidak  dibenarkan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "192",
+      "title": "Jalanan  bergerak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "193",
+      "title": "Pintu  kendalian  kuasa  sebagai  jalan  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "194",
+      "title": "Bangunan  yang  mempunyai  tangga  tunggal.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "195",
+      "title": "Tangga  hendaklah  sampai  ke  paras  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "196",
+      "title": "Ruang  asap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "197",
+      "title": "Ruang  terlindung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "198",
+      "title": "Pengudaraan  kepungan  tangga",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "199",
+      "title": "Pengudaraan  kepungan  tangga  bagi  bangunan  yang  tidak  melebihi  18  meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "200",
+      "title": "Pengudaraan  kepungan  tangga  bagi  bangunan  yang  melebihi  18  meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "201",
+      "title": "Kepungan  tangga  di  bawah  paras  tanah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "202",
+      "title": "Sistem  isitekanan  bagi  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "203",
+      "title": "Sekatan  kemerebakan  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "204",
+      "title": "Pengelasan  sekatan  kemerebakan  api  di  permukaan  dinding  dan  siling.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "205",
+      "title": "Pengelasan  bahan  kemasan  dalam.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "206",
+      "title": "Pengelasan  permukaan  dinding  atau  siling.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "207",
+      "title": "Pengecualian  berhubung  dengan  siling.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "208",
+      "title": "Sebutan  mengenai  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "209",
+      "title": "Sebutan  mengenai  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "210",
+      "title": "Pembinaan  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "211",
+      "title": "Bahan  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "212",
+      "title": "Penetapan  kategori  penembusan  api  dan  kemerebakan  api  atas  permukaan  bumbung.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "213",
+      "title": "Ketahanan  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "214",
+      "title": "Kehendak-kehendak  tambahan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "215",
+      "title": "Tingginya  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "216",
+      "title": "Bangunan  satu  tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "217",
+      "title": "Ketahanan  api  bahagian  struktur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "218",
+      "title": "Dinding  petak  yang  mengasingkan  rumah  pangsa  atau  maisonet.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "219",
+      "title": "Pemakaian  Undang-Undang  Kecil  ini  bagi  lantai.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "220",
+      "title": "Keluasan  lantai  dan  muatan  bangunan  dan  petak.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "221",
+      "title": "Ujian  ketahanan  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "222",
+      "title": "Ketahanan  api  bagi  dinding.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "223",
+      "title": "Ketahanan  api  bagi  tingkat  di  atas  tingkat  bawah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "224",
+      "title": "Ketahanan  api  bagi  apa-apa  elemen  struktur.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "225",
+      "title": "Sistem  penggera  kebakaran  dan  sistem  pemadam  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "226",
+      "title": "Sistem  automatik  bagi  pendudukan  berbahaya.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "227",
+      "title": "Pemadam  api  mudah  alih.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "228",
+      "title": "Sistem  semburan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "229",
+      "title": "Cara  akses  dan  menentang  kebakaran  dalam  bangunan  yang  tingginya  lebih  daripada  18  meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "230",
+      "title": "Sistem  pancur  kering.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "231",
+      "title": "Sistem  pancur  basah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "232",
+      "title": "Sistem  pancur  basah  atau  kering  bagi  bangunan  yang  sedang  dibina.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "233",
+      "title": "Aliran  masuk  busa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "234",
+      "title": "Struktur  bawah  tanah  dan  bangunan  tanpa  tingkap  hendaklah  mempunyai  alir  masuk  busa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "235",
+      "title": "Sistem  pemadaman  tetap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "236",
+      "title": "Bahaya  khas.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "237",
+      "title": "Sistem  penggera  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "238",
+      "title": "Pusat  pemerintahan  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "239",
+      "title": "Sistem  komunikasi  suara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "240",
+      "title": "Suis  pengasingan  elektrik.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "241",
+      "title": "Kehendak-kehendak  khas  bagi  sistem  penggera  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "242",
+      "title": "Ruang  akses  menentang  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "243",
+      "title": "Lif  bomba.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "243",
+      "title": "Lif  bomba.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "244",
+      "title": "Piawai  yang  dikehendaki.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "245",
+      "title": "Kelulusan  Ketua  Pengarah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "246",
+      "title": "Perakuan  apabila  siap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "247",
+      "title": "Storan  air.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "248",
+      "title": "Tanda  pada  pancur  basah,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "249",
+      "title": "Kawalan  asap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "250",
+      "title": "Liang  asap  dan  udara  biasa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "251",
+      "title": "Liang  asap  untuk  mencegah  pengumpulan  asap  yang  membahayakan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "252",
+      "title": "Liang  asap  hendaklah  boleh  dibuka  oleh  Pihak  Berkuasa  Bomba.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "253",
+      "title": "Sistem  kuasa  kecemasan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "254",
+      "title": "Bangunan-bangunan  yang  Bahagian  VII  dan  VIII  terpakai  baginya.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "255",
+      "title": "Kuasa  pihak  berkuasa  tempatan  melanjutkan  tempoh,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "256",
+      "title": "Bangunan  yang  dikecualikan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "257",
+      "title": "Pemakaian  piawaian  atau  tata  amalan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "258",
+      "title": "Kemungkiran  kepada  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "150",
+      "title": "milimeter  dan  pemijak  tidak  kurang  daripada  275  milimeter  atau  landaian  pejalan  kaki  yang",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "198",
+      "title": "hingga  200,  Bahagian  VII.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "136",
+      "title": "untuk  membahagikan  sesuatu  bangunan  kepada  petak-petak  bagi  apa-apa  maksud  berhubungan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "22",
+      "title": "dan  kehendak-kehendak  yang  berikut:",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "meter  dari  mana-mana  titik  di  atas  sempadan  berkenaan  dan  bangunan  itu  kurang  daripada  18",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "450",
+      "title": "milimeter  bagi  seorang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "450",
+      "title": "milimeter  lebar  bersih  di  antara  baris-baris  yang  mempunyai  18  tempat  duduk  atau",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "500",
+      "title": "milimeter  lebar  bersih  di  antara  baris-baris  yang  mempunyai  35  tempat  duduk  atau",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "525",
+      "title": "milimeter  lebar  bersih  di  antara  baris-baris  yang  mempunyai  45  tempat  duduk  atau",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "550",
+      "title": "milimeter  lebar  bersih  di  antara  baris-baris  yang  mempunyai  46  tempat  duduk  atau",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "baris  tempat  duduk.  Pintu  keluar  tersebut  hendaklah  memperuntukkan  lebar  bersih  minimum",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "198",
+      "title": "Pengudaraan  kepungan  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "199",
+      "title": "Pengudaraan  kepungan  tangga  bagi  bangunan  yang  tidak  melebihi  18  meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "200",
+      "title": "Pengudaraan  kepungan  tangga  bagi  bangunan  yang  melebihi  18  meter.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "201",
+      "title": "Kepungan  tangga  di  bawah  paras  tanah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "202",
+      "title": "Sistem  isitekanan  bagi  tangga.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "203",
+      "title": "Sekatan  kemerebakan  api.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "204",
+      "title": "Pengelasan  sekatan  kemerebakan  api  di  permukaan  dinding  dan  siling.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "dan  Bahagian  7,  hendaklah  mempunyai  indeks  pelaksanaan  yang  tidak  melebihi  6.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "meter  secara  mendatar  daripada  ruang  buka  pintu  lif  katil  bagi  pelepasan  kebakaran,  dan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "15",
+      "title": "peratus  kawasan  lantai  bagi  koridor  dalam;",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "75",
+      "title": "meter  dan  disediakan  dengan  set  pam  sendiri.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "250",
+      "title": "meter persegi adalah dipetakkan daripada baki tingkat bawah tanah, dua pintu terletak",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "17",
+      "title": "meter  di  atas  lantai  dan  bagi  atrium  dengan  ketinggian  siling  melebihi  17  meter  (dalam",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "17",
+      "title": "atau lebih--4Mekanikal –",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Bangunan  Baru.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Bangunan  yang  diluluskan  atas  asas  sementara  dan  pelan-pelan  lakar  percubaan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Bangsal  dengan  sisi-sisi  terbuka.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Tingkat  bawah  tanah  terbuka.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Bangunan  daripada  kelas  gudang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Perubahan  kepada  bangunan  yang  sedia  ada.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "7",
+      "title": "Dermaga,  jambatan,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "8",
+      "title": "Tembok  penahan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "9",
+      "title": "Rangkaian  atau  deretan  bangunan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "Pelan  pindaan  kepada  pelan  yang  diluluskan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "sebagai  tambahan  kepada  fi  yang  ditetapkan  dalam  subperenggan  (1)  perenggan  ini.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "berkenaan dengan pelan yang diluluskan adalah kena dibayar sebagai tambahan kepada apa-apa",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "11",
+      "title": "Pemeriksaan  pelan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "12",
+      "title": "Permit  bagi  kerja-kerja  kecil  sebagai  ganti  pelan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "13",
+      "title": "Permit  sementara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "14",
+      "title": "Permit  Pendudukan  Sementara.                                                                                                Dipotong.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "15",
+      "title": "Bayar  balik  fi  pelan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "Salinan  tambahan  notis  atau  permit.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "17",
+      "title": "Kerja  dimulakan  sebelum  pelan-pelan  diluluskan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Butir-butir  orang  utama  yang  mengemukakan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Salinan  kepada:",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Butir-butir  orang  utama  yang  mengemukakan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Salinan  kepada:",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Tafsiran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Bilik-bilik  tidak  bertingkap.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Saring  bagi  udara  yang  keluar.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Dewan  bedah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "65",
+      "title": "peratus.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Pembukaan  bagi  penggantian  udara  berjentera  bagi  sistem  penyamanan  udara.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Saringan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "7",
+      "title": "Sistem  penggantian  udara  berjentera  dalam  kawasan  tingkat  bawah  tanah.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "8",
+      "title": "Bilik-bilik  tayang.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "9",
+      "title": "Mana-mana  bilik  lain.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "Jamban  pam  dan  bilik  air.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "11",
+      "title": "Unit-unit  penyamanan  udara  bilik  tingkap,  dll.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "12",
+      "title": "Pertukaran  udara  bersih.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2500",
+      "title": "kg berat kasar, termasuk jalan kereta dan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "11",
+      "title": "kali beban roda tetapi tidak",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Had yang dibenarkan bagi kawasan tak terlindung di sesuatu sisi sesuatu bangunan atau kompatmen",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Bagi menghitung saiz kawasan tak terlindung atau had yang dibenarkan bagi kawasan tak terlindung,",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Syarat-syarat  bagi  Bahagian  ini  adalah  dipenuhkan  jika  sesuatu  bangunan  atau  kompatmen",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Bagi  maksud-maksud  Bahagian  ini—",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "22.54.56.07.08.08.59.510.511.5",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "22.54.56.07.08.09.010.511.012.0",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Syarat-syarat  Bahagian  ini  hendaklah  dipenuhkan  jika  sesuatu  bangunan  dibina  sebegitu  rupa",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Bagi  maksud-maksud  Bahagian  ini—",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Bagi  maksud-maksud  Bahagian  ini,  tiada  perkiraan  boleh  dibuat  mengenai  sesuatu  kawasan  tak",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Peruntukan-peruntukan  Bahagian  ini  terpakai  hanya  kepada  sesuatu  bangunan  daripada  Kumpulan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Syarat-syarat  Bahagian  ini  adalah  dipenuhkan  jika  jarak  di  antara  mana-mana  bahagian  sisi  suatu",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "15",
+      "title": "30 + 45 +15",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "bersih",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "20",
+      "title": "kasar1001001006060",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "bagi suatu dinding sekat yang",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "dalam suatu bilik",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Jenis 1C, kemasan sendiri atau felt bitumen berpasir sedikit, 13 kg minimum",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Jenis 1C, kemasan sendiri atau felt bitumen berpasir sedikit, 13 kg minimum",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Jenis 2B, kemasan sendiri atau felt bitumen berpasir sedikit, 13 kg minimum",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Jenis 5A, felt bitumen gentian kaca, 13 kg minimum",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1961",
+      "title": "(Seksyen Satu 2b)",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Jenis 1C, kemasan sendiri atau felt bitumen berpasir sedikit, minimum 13 kg",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Jenis 1C, kemasan sendiri atau felt bitumen berpasir sedikit, minimum 13 kg",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Jenis 2B, kemasan sendiri atau felt bitumen berpasir sedikit, minimum 13 kg",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Jenis 5A, felt bitumen gentian kaca, minimum 13 kg",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "15",
+      "title": "m atau lebihApa-apa1 jam atau kurangPermukaan   siling   terdedah   dalam",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "100",
+      "title": "mm tebal dan:",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "50",
+      "title": "mm ...2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "62",
+      "title": "mm ...3",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "75",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "100",
+      "title": "mm tebal dan pelapik dalam daripada papan tebatan setebal 9 mm 3",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm plaster gipsum di atas pasang bilah logam ...1",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "19",
+      "title": "mm ...1",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "25",
+      "title": "mm ...2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "19",
+      "title": "mm ...1½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "25",
+      "title": "mm ...2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm ...1½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "mm ...1",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "mm ...½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "25",
+      "title": "mm ...2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm ...1½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "mm ...1",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm ...2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "10",
+      "title": "mm ...1½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "19",
+      "title": "mm papan plaster1½",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "50",
+      "title": "mm ...1",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "50",
+      "title": "mm ...3",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "62",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "75",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "100",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "50",
+      "title": "mm ...3",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "62",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "75",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "100",
+      "title": "mm ...4",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm ditutup pada sebelah bawah dengan papan plaster",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "16",
+      "title": "mm ditutup pada sebelah bawah dengan papan plaster",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "jam2 jam1½ jam1 jam½ jam",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Pendudukan pelajaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "30",
+      "title": "meter tinggi ke atas.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Hospital atau rumah rawatan (jumlah keluasan lantai).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Hotel.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Asrama atau dormitori.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Pangsapuri atau rumah pangsa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "30",
+      "title": "meter  tinggi.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Pangsapuri perkhidmatan.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Empat  tingkat  dan  ke  bawah  atau  kurang  daripada  1,000  meter",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Lima tingkat dan ke atas atau melebihi 1,000 meter persegi.G2",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Melebihi  18  meter  tinggi  dan  kurang  daripada  10,000  meter",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "30  meter  dan  ke  atas  dalam  ketinggian  atau  melebihi  10,000",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Keluasan  lantai  yang  tidak  melebihi  250  meter  persegi  setiap",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Satu tingkat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Dua tingkat dan ke atas (jumlah keluasan lantai).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Pusat penjaja, medan selera, pasar kering",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Gabungan   pendudukan   kedai   dan   pendudukan   hotel   atau",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Unit satu tingkat berasingan, unit berkembar atau unit teres.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Reka bentuk struktur terbuka.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Unit dua tingkat dan ke atas dan dalam jenis unit berasingan, unit",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Blok kilang bertingkat (dua tingkat dan ke atas).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Tempat pemasangan kenderaan atau suatu loji yang serupa.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Struktur khas.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Kilang dalam operasi selepas waktu gelap hendaklah dikehendaki menyediakan pencahayaan kecemasan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Suatu risiko khas atau prosesan berbahaya atau storan berbahaya hendaklah dikehendaki menyediakan",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Tempat perhimpunan di bawah paras jalan keluar lepas melebihi",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Pusat  konvensyen,  pusat  komuniti,  kelab  persendirian,  pusat",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Panggung,  pawagam,  dewan  konsert  atau  auditorium  (jumlah",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "Pusat hiburan (jumlah keluasan lantai).",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "Terminal bas, terminal feri, stesen keretapi atau lapangan terbang",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "Tempat ibadat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Tempat letak kereta.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Gudang  bagi  produk  storan  tidak  boleh  bakar  atau  storan  bagi",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Gudang bagi produk boleh bakar atau storan bagi produk boleh",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "sistem  pengesan  api  automatik.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "sistem  penggera  kebakaran  elektrik  manual.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "sistem  penggera  penunjuk  isyarat.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "4",
+      "title": "sistem  siar  raya.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "5",
+      "title": "sistem  interkom  bomba  dan  pusat  kawalan  kebakaran.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "6",
+      "title": "sistem  pengawasan  api  automatik.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "7",
+      "title": "pengesan  asap  jenis  berkuasa  sendiri.",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "KUANTITI  MINIMUM  SToRAN  AIR  YANG  DIKEHENDAKI",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "KUANTITI  MINIMUM  SToRAN  AIR  YANG  DIKEHENDAKI",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "KUANTITI  MINIMUM  SToRAN  AIR  YANG  DIKEHENDAKI",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Sesalur Kerja AirDiameter .................................................................. mm",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Kolam Air Persendirian DinamikMuatan ...................................................................... m",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "3",
+      "title": "Tangki/Tangki-tangki Storan Paras RendahMuatan ...................................................................... m",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "1",
+      "title": "Pam/Pam-pamKuasa gerakan ...............................................................",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "Tangki TekananJumlah muatan .......................................................... m",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    },
+    {
+      "number": "2",
+      "title": "4 1.25*",
+      "part": 9,
+      "part_title": "MINIMUM  FLAME-SPREAD  CLASSIFICATION  OF  MATERIAL  CONSTRUCTION"
+    }
+  ],
+  "content_sections": []
+}

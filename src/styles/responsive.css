@@ -1,0 +1,369 @@
+/* Responsive Design System for Daritana Platform */
+
+/* Mobile First Breakpoints */
+:root {
+  --mobile-sm: 320px;
+  --mobile-md: 375px;
+  --mobile-lg: 425px;
+  --tablet: 768px;
+  --laptop: 1024px;
+  --desktop: 1440px;
+  --desktop-xl: 1920px;
+}
+
+/* Responsive Grid System */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+/* Mobile Navigation Toggle */
+@media (max-width: 767px) {
+  .sidebar-mobile {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    z-index: 999;
+    transition: left 0.3s ease-in-out;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-mobile.open {
+    left: 0;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+  }
+
+  .mobile-overlay.show {
+    display: block;
+  }
+
+  /* Hide desktop sidebar */
+  .desktop-sidebar {
+    display: none;
+  }
+
+  /* Mobile header adjustments */
+  .mobile-header {
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Mobile content padding */
+  .mobile-content {
+    padding: 1rem;
+  }
+
+  /* Stack cards on mobile */
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile table scroll */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile modal adjustments */
+  .dialog-content {
+    max-width: calc(100vw - 2rem);
+    margin: 1rem;
+  }
+
+  /* Mobile form adjustments */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile button adjustments */
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar-tablet {
+    width: 200px;
+  }
+
+  .content-tablet {
+    margin-left: 200px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .desktop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sidebar-desktop {
+    width: 256px;
+  }
+
+  .content-desktop {
+    margin-left: 256px;
+  }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1440px) {
+  .desktop-xl-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .container-xl {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  button,
+  a,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover effects */
+  button:hover,
+  a:hover {
+    background: inherit;
+  }
+
+  /* Larger inputs */
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print,
+  .sidebar,
+  .header,
+  .footer,
+  button {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .content {
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Responsive Typography */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Responsive Spacing */
+.responsive-padding {
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-padding {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-padding {
+    padding: 2rem;
+  }
+}
+
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Responsive Videos */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Accessibility Improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Visible */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(222.2 84% 4.9%);
+    --foreground: hsl(210 40% 98%);
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+
+  button,
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Orientation Support */
+@media (orientation: landscape) and (max-width: 767px) {
+  .mobile-landscape {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+/* Responsive Utilities */
+.hidden-mobile {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.hidden-tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: 1024px) {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  display: none !important;
+  @media (max-width: 767px) {
+    display: block !important;
+  }
+}
+
+.visible-tablet {
+  display: none !important;
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: block !important;
+  }
+}
+
+.visible-desktop {
+  display: none !important;
+  @media (min-width: 1024px) {
+    display: block !important;
+  }
+}

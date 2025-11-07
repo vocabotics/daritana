@@ -1,0 +1,34 @@
+{
+  "total_clauses": 1001,
+  "by_part": {
+    "1": 1,
+    "2": 3,
+    "3": 39,
+    "4": 97,
+    "5": 2,
+    "6": 13,
+    "7": 34,
+    "8": 33,
+    "9": 779
+  },
+  "by_priority": {
+    "critical": 169,
+    "high": 0,
+    "standard": 832,
+    "low": 0
+  },
+  "by_complexity": {
+    "1": 285,
+    "2": 188,
+    "3": 418,
+    "4": 97,
+    "5": 13
+  },
+  "generated_at": "2025-08-09T14:16:43.187Z",
+  "features": {
+    "rich_explanations": 1001,
+    "examples": 1032,
+    "case_studies": 128,
+    "best_practices": 1001
+  }
+}

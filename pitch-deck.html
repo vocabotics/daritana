@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Daritana - Investor Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000;
+            --secondary: #333;
+            --accent: #666;
+            --light: #f8f8f8;
+            --white: #fff;
+            --grid: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--white);
+            color: var(--primary);
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        /* Architectural grid background */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 100;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 100;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out 0.5s forwards;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 0.2s forwards;
+        }
+
+        .metric {
+            display: inline-block;
+            margin: 1rem 2rem;
+            padding: 1rem 2rem;
+            border: 1px solid var(--grid);
+            background: var(--white);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--primary);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .chart {
+            width: 100%;
+            height: 300px;
+            margin: 2rem 0;
+            background: var(--white);
+            border: 1px solid var(--grid);
+            position: relative;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out 0.7s forwards;
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 0;
+            background: var(--primary);
+            transition: all 0.5s ease-out;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--grid);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .architectural-line {
+            position: absolute;
+            height: 1px;
+            background: var(--grid);
+            opacity: 0.5;
+        }
+
+        .line-1 { top: 20%; left: 10%; width: 80%; }
+        .line-2 { top: 40%; right: 10%; width: 60%; }
+        .line-3 { top: 80%; left: 20%; width: 70%; }
+
+        .slide-number {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .revenue-chart {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            height: 200px;
+            padding: 1rem;
+            background: var(--white);
+            border: 1px solid var(--grid);
+            margin: 2rem 0;
+        }
+
+        .revenue-bar {
+            flex: 1;
+            margin: 0 0.5rem;
+            background: var(--primary);
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.8rem;
+            transition: all 0.8s ease-out;
+        }
+
+        .competitive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .competitive-item {
+            padding: 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--grid);
+            text-align: left;
+        }
+
+        .competitive-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .intro-animation {
+            animation: introSlide 1.5s ease-out;
+        }
+
+        @keyframes introSlide {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { transform: translateY(-10px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 { 
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+            h2 { 
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+            h3 { 
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 0.8rem;
+            }
+            
+            .logo {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+            
+            .competitive-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .competitive-item {
+                padding: 1rem;
+            }
+            
+            .metric {
+                margin: 0.5rem;
+                padding: 0.8rem;
+                display: block;
+                width: calc(100% - 1rem);
+            }
+            
+            .metric-value {
+                font-size: 2rem;
+            }
+            
+            .metric-label {
+                font-size: 0.8rem;
+            }
+            
+            .revenue-chart {
+                height: 150px;
+                margin: 1rem 0;
+            }
+            
+            .progress-indicator {
+                bottom: 1rem;
+                gap: 0.3rem;
+            }
+            
+            .dot {
+                width: 6px;
+                height: 6px;
+            }
+            
+            .navigation {
+                bottom: 1rem;
+                right: 1rem;
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .slide-number {
+                top: 1rem;
+                right: 1rem;
+                font-size: 0.7rem;
+            }
+            
+            .architectural-line {
+                display: none; /* Hide architectural lines on mobile for cleaner look */
+            }
+            
+            /* Stack metrics vertically on mobile */
+            .slide-content > div[style*="display: flex"] {
+                display: block !important;
+                margin: 1rem 0;
+            }
+            
+            .slide-content > div[style*="justify-content: space-around"] .metric {
+                display: block;
+                margin: 0.8rem auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            /* Revenue chart mobile adjustments */
+            .revenue-chart {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem 0.5rem;
+            }
+            
+            .revenue-bar {
+                height: 40px !important;
+                margin: 0.3rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide {
+                padding: 1rem 0.5rem;
+            }
+            
+            h1 { 
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            h2 { 
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+            h3 { 
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .metric {
+                padding: 0.6rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            .revenue-chart {
+                height: 120px;
+            }
+            
+            .competitive-item {
+                padding: 0.8rem;
+            }
+            
+            .competitive-item h4 {
+                font-size: 1rem;
+                margin-bottom: 0.3rem;
+            }
+            
+            .competitive-item p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-number">01 / 11</div>
+            <div class="architectural-line line-1"></div>
+            <div class="architectural-line line-2"></div>
+            <div class="slide-content intro-animation">
+                <div class="logo">
+                    <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;">
+                        <!-- Architectural logo design -->
+                        <rect x="20" y="80" width="160" height="2" fill="currentColor"/>
+                        <rect x="40" y="60" width="120" height="2" fill="currentColor"/>
+                        <rect x="60" y="100" width="80" height="2" fill="currentColor"/>
+                        <rect x="80" y="40" width="40" height="2" fill="currentColor"/>
+                        <rect x="90" y="120" width="20" height="2" fill="currentColor"/>
+                        <!-- Vertical elements -->
+                        <rect x="99" y="20" width="2" height="160" fill="currentColor"/>
+                        <rect x="79" y="40" width="2" height="80" fill="currentColor"/>
+                        <rect x="119" y="60" width="2" height="60" fill="currentColor"/>
+                        <!-- Company name -->
+                        <text x="100" y="170" text-anchor="middle" font-family="Arial" font-size="16" font-weight="100">DARITANA</text>
+                    </svg>
+                </div>
+                <h1>DARITANA</h1>
+                <p>Revolutionizing Malaysia's RM 25 Billion Architecture Industry</p>
+                <p style="font-size: 1rem; color: var(--accent); margin-top: 2rem;">Investor Presentation • January 2025</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide" data-slide="2">
+            <div class="slide-number">02 / 11</div>
+            <div class="architectural-line line-1"></div>
+            <div class="slide-content">
+                <h2>THE PROBLEM</h2>
+                <div style="display: flex; justify-content: space-around; margin: 3rem 0;">
+                    <div class="metric" style="animation-delay: 0.3s;">
+                        <span class="metric-value">RM 3.75B</span>
+                        <span class="metric-label">Annual Productivity Losses</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.4s;">
+                        <span class="metric-value">35%</span>
+                        <span class="metric-label">Project Delays</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.5s;">
+                        <span class="metric-value">45 Days</span>
+                        <span class="metric-label">Average Approval Time</span>
+                    </div>
+                </div>
+                <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">Malaysia's architecture industry suffers from fragmented tools, manual processes, and poor coordination between stakeholders.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide" data-slide="3">
+            <div class="slide-number">03 / 11</div>
+            <div class="architectural-line line-2"></div>
+            <div class="slide-content">
+                <h2>THE SOLUTION</h2>
+                <h3>All-in-One Digital Ecosystem for Malaysian Architects</h3>
+                <div class="competitive-grid">
+                    <div class="competitive-item">
+                        <h4>Project Management</h4>
+                        <p>Unified dashboard for multi-project coordination</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Regulatory Compliance</h4>
+                        <p>Automated PAM/BEM submission workflows</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Payment Processing</h4>
+                        <p>Integrated invoicing and milestone tracking</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Supplier Marketplace</h4>
+                        <p>Direct connections to 500+ material suppliers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Market Opportunity -->
+        <div class="slide" data-slide="4">
+            <div class="slide-number">04 / 11</div>
+            <div class="architectural-line line-3"></div>
+            <div class="slide-content">
+                <h2>MARKET OPPORTUNITY</h2>
+                <div style="display: flex; justify-content: space-around; margin: 3rem 0;">
+                    <div class="metric" style="animation-delay: 0.3s;">
+                        <span class="metric-value">RM 25B</span>
+                        <span class="metric-label">Total Market Size</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.4s;">
+                        <span class="metric-value">8.5%</span>
+                        <span class="metric-label">Annual Growth Rate</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.5s;">
+                        <span class="metric-value">90,000+</span>
+                        <span class="metric-label">Target Professionals</span>
+                    </div>
+                </div>
+                <div style="margin: 2rem 0; text-align: left; max-width: 600px;">
+                    <p><strong>15,000+</strong> Registered Architects</p>
+                    <p><strong>25,000+</strong> Interior Designers</p>
+                    <p><strong>50,000+</strong> Contractors & Builders</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Business Model -->
+        <div class="slide" data-slide="5">
+            <div class="slide-number">05 / 11</div>
+            <div class="architectural-line line-1"></div>
+            <div class="slide-content">
+                <h2>BUSINESS MODEL</h2>
+                <div style="display: flex; justify-content: space-around; margin: 3rem 0;">
+                    <div class="metric" style="animation-delay: 0.3s;">
+                        <span class="metric-value">60%</span>
+                        <span class="metric-label">Subscription Revenue</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.4s;">
+                        <span class="metric-value">25%</span>
+                        <span class="metric-label">Transaction Fees</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.5s;">
+                        <span class="metric-value">15%</span>
+                        <span class="metric-label">Value-Added Services</span>
+                    </div>
+                </div>
+                <div style="background: var(--white); border: 1px solid var(--grid); padding: 2rem; margin: 2rem 0;">
+                    <p><strong>Pricing Tiers:</strong> RM 199 - RM 3,999 per month</p>
+                    <p><strong>Target ARPU:</strong> RM 714 per month</p>
+                    <p><strong>Gross Margin:</strong> 80% by Year 3</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Traction -->
+        <div class="slide" data-slide="6">
+            <div class="slide-number">06 / 11</div>
+            <div class="architectural-line line-2"></div>
+            <div class="slide-content">
+                <h2>CURRENT TRACTION</h2>
+                <div class="competitive-grid">
+                    <div class="competitive-item">
+                        <h4>✓ MVP Development</h4>
+                        <p>React + TypeScript platform with core PM features</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Partnership Pipeline</h4>
+                        <p>Discussions with PAM, BEM, and MSID</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Beta Program</h4>
+                        <p>10 architecture firms lined up for closed beta</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Technical Foundation</h4>
+                        <p>Modern tech stack ready for scale</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Revenue Projections -->
+        <div class="slide" data-slide="7">
+            <div class="slide-number">07 / 11</div>
+            <div class="architectural-line line-3"></div>
+            <div class="slide-content">
+                <h2>REVENUE PROJECTIONS</h2>
+                <div class="revenue-chart">
+                    <div class="revenue-bar" style="height: 20%; animation-delay: 0.5s;" data-value="RM 2M">Y1</div>
+                    <div class="revenue-bar" style="height: 40%; animation-delay: 0.6s;" data-value="RM 8M">Y2</div>
+                    <div class="revenue-bar" style="height: 60%; animation-delay: 0.7s;" data-value="RM 30M">Y3</div>
+                    <div class="revenue-bar" style="height: 80%; animation-delay: 0.8s;" data-value="RM 72M">Y4</div>
+                    <div class="revenue-bar" style="height: 100%; animation-delay: 0.9s;" data-value="RM 125M">Y5</div>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin: 2rem 0;">
+                    <div class="metric" style="animation-delay: 0.4s;">
+                        <span class="metric-value">28%</span>
+                        <span class="metric-label">EBITDA Margin (Y5)</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.5s;">
+                        <span class="metric-value">15,000</span>
+                        <span class="metric-label">Target Customers (Y5)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Competitive Advantage -->
+        <div class="slide" data-slide="8">
+            <div class="slide-number">08 / 11</div>
+            <div class="architectural-line line-1"></div>
+            <div class="slide-content">
+                <h2>COMPETITIVE ADVANTAGE</h2>
+                <div class="competitive-grid">
+                    <div class="competitive-item">
+                        <h4>70% Lower Cost</h4>
+                        <p>vs. International solutions like Autodesk BIM 360</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Malaysian-Specific</h4>
+                        <p>Built for local regulations, currencies, and practices</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Regulatory Partnerships</h4>
+                        <p>Direct integrations with PAM, BEM, and local councils</p>
+                    </div>
+                    <div class="competitive-item">
+                        <h4>Network Effects</h4>
+                        <p>Marketplace connecting all industry stakeholders</p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-weight: 300;">First-mover advantage in Malaysian market with 3+ year exclusive partnerships</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Team & Tech -->
+        <div class="slide" data-slide="9">
+            <div class="slide-number">09 / 11</div>
+            <div class="architectural-line line-2"></div>
+            <div class="slide-content">
+                <h2>EXECUTION PLAN</h2>
+                <div style="text-align: left; max-width: 800px;">
+                    <h3 style="margin: 2rem 0 1rem 0;">Technology Stack</h3>
+                    <p><strong>Frontend:</strong> React + TypeScript + Vite + Tailwind CSS</p>
+                    <p><strong>Backend:</strong> Node.js + PostgreSQL + AWS</p>
+                    <p><strong>Mobile:</strong> React Native for iOS/Android</p>
+                    
+                    <h3 style="margin: 2rem 0 1rem 0;">Go-to-Market Timeline</h3>
+                    <p><strong>Q1 2025:</strong> Close beta program with 10 firms</p>
+                    <p><strong>Q2 2025:</strong> Commercial launch, 100 customers</p>
+                    <p><strong>Q3 2025:</strong> Marketplace beta, partnership activation</p>
+                    <p><strong>Q4 2025:</strong> 1,000 customers, Series A preparation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Funding Ask -->
+        <div class="slide" data-slide="10">
+            <div class="slide-number">10 / 11</div>
+            <div class="architectural-line line-3"></div>
+            <div class="slide-content">
+                <h2>FUNDING ASK</h2>
+                <div style="display: flex; justify-content: space-around; margin: 3rem 0;">
+                    <div class="metric" style="animation-delay: 0.3s;">
+                        <span class="metric-value">RM 3M</span>
+                        <span class="metric-label">Seed Round</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.4s;">
+                        <span class="metric-value">18 Months</span>
+                        <span class="metric-label">Runway</span>
+                    </div>
+                    <div class="metric" style="animation-delay: 0.5s;">
+                        <span class="metric-value">RM 15M</span>
+                        <span class="metric-label">Series A Target</span>
+                    </div>
+                </div>
+                <div style="background: var(--white); border: 1px solid var(--grid); padding: 2rem; margin: 2rem 0; text-align: left;">
+                    <h3>Use of Funds</h3>
+                    <p><strong>60%</strong> Product development & engineering team</p>
+                    <p><strong>25%</strong> Sales & marketing for customer acquisition</p>
+                    <p><strong>10%</strong> Partnership development & compliance</p>
+                    <p><strong>5%</strong> Working capital & operational expenses</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Contact -->
+        <div class="slide" data-slide="11">
+            <div class="slide-number">11 / 11</div>
+            <div class="architectural-line line-1"></div>
+            <div class="architectural-line line-2"></div>
+            <div class="architectural-line line-3"></div>
+            <div class="slide-content">
+                <div class="logo" style="width: 150px; height: 150px;">
+                    <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;">
+                        <rect x="20" y="80" width="160" height="2" fill="currentColor"/>
+                        <rect x="40" y="60" width="120" height="2" fill="currentColor"/>
+                        <rect x="60" y="100" width="80" height="2" fill="currentColor"/>
+                        <rect x="80" y="40" width="40" height="2" fill="currentColor"/>
+                        <rect x="90" y="120" width="20" height="2" fill="currentColor"/>
+                        <rect x="99" y="20" width="2" height="160" fill="currentColor"/>
+                        <rect x="79" y="40" width="2" height="80" fill="currentColor"/>
+                        <rect x="119" y="60" width="2" height="60" fill="currentColor"/>
+                        <text x="100" y="170" text-anchor="middle" font-family="Arial" font-size="16" font-weight="100">DARITANA</text>
+                    </svg>
+                </div>
+                <h2>LET'S BUILD THE FUTURE</h2>
+                <h3>of Malaysian Architecture Together</h3>
+                <div style="margin: 3rem 0; font-size: 1.1rem;">
+                    <p><strong>Next Steps:</strong></p>
+                    <p>• Technical due diligence</p>
+                    <p>• Partnership validation</p>
+                    <p>• Customer discovery calls</p>
+                    <p>• Term sheet discussion</p>
+                </div>
+                <p style="color: var(--accent); margin-top: 2rem;">Contact: hello@daritana.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress indicator -->
+    <div class="progress-indicator">
+        <div class="dot active" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+        <div class="dot" data-slide="6"></div>
+        <div class="dot" data-slide="7"></div>
+        <div class="dot" data-slide="8"></div>
+        <div class="dot" data-slide="9"></div>
+        <div class="dot" data-slide="10"></div>
+        <div class="dot" data-slide="11"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn">Previous</button>
+        <button class="nav-btn" id="nextBtn">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 11;
+        
+        // Navigation functions
+        function showSlide(slideNumber) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            // Remove active classes
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'prev');
+            });
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to current slide
+            const currentSlideEl = document.querySelector(`[data-slide="${slideNumber}"]`);
+            if (currentSlideEl) {
+                currentSlideEl.classList.add('active');
+            }
+            
+            // Add prev class to previous slides
+            for (let i = 1; i < slideNumber; i++) {
+                const prevSlide = document.querySelector(`[data-slide="${i}"]`);
+                if (prevSlide) {
+                    prevSlide.classList.add('prev');
+                }
+            }
+            
+            // Update progress indicator
+            const currentDot = document.querySelector(`.dot[data-slide="${slideNumber}"]`);
+            if (currentDot) {
+                currentDot.classList.add('active');
+            }
+            
+            currentSlide = slideNumber;
+            
+            // Trigger animations for revenue chart
+            if (slideNumber === 7) {
+                setTimeout(() => {
+                    const bars = document.querySelectorAll('.revenue-bar');
+                    bars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.opacity = '1';
+                        }, index * 200);
+                    });
+                }, 500);
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+        
+        // Dot navigation
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const slideNumber = parseInt(e.target.getAttribute('data-slide'));
+                showSlide(slideNumber);
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+        
+        // Touch and click handling
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            
+            // Don't handle swipe if touching navigation elements
+            if (e.target.closest('.navigation') || e.target.closest('.progress-indicator')) {
+                return;
+            }
+            
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const minSwipeDistance = 50;
+            
+            // Only process horizontal swipes that are longer than vertical
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+                if (deltaX > 0) {
+                    prevSlide(); // Swipe right = previous slide
+                } else {
+                    nextSlide(); // Swipe left = next slide
+                }
+            } else if (Math.abs(deltaX) < 30 && Math.abs(deltaY) < 30) {
+                // Small movement = tap to advance
+                nextSlide();
+            }
+        }
+
+        // Click anywhere to advance (for desktop)
+        document.addEventListener('click', (e) => {
+            // Don't advance if clicking on navigation elements or on touch devices
+            if (!e.target.closest('.navigation') && 
+                !e.target.closest('.progress-indicator') && 
+                !('ontouchstart' in window)) {
+                nextSlide();
+            }
+        });
+        
+        // Auto-play introduction animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                showSlide(1);
+            }, 500);
+        });
+        
+        // Prevent scrolling and bouncing on mobile
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Prevent double tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Initialize
+        showSlide(1);
+        
+        // Add mobile instruction overlay for first visit
+        if ('ontouchstart' in window && !localStorage.getItem('daritana-pitch-viewed')) {
+            const instruction = document.createElement('div');
+            instruction.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                font-size: 1.1rem;
+                text-align: center;
+                padding: 2rem;
+            `;
+            instruction.innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: white; margin-bottom: 1rem;">Welcome to Daritana Pitch Deck</h3>
+                    <p>Swipe left/right or tap to navigate</p>
+                    <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+                        ← Swipe right for previous slide<br>
+                        Swipe left for next slide →
+                    </p>
+                </div>
+                <button onclick="this.parentElement.remove(); localStorage.setItem('daritana-pitch-viewed', 'true')" 
+                        style="background: white; color: black; border: none; padding: 0.8rem 2rem; font-size: 1rem; cursor: pointer;">
+                    Start Presentation
+                </button>
+            `;
+            document.body.appendChild(instruction);
+        }
+    </script>
+</body>
+</html>

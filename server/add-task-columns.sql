@@ -1,0 +1,18 @@
+-- Add missing columns to tasks table
+ALTER TABLE tasks 
+ADD COLUMN IF NOT EXISTS start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN IF NOT EXISTS due_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '7 days'),
+ADD COLUMN IF NOT EXISTS progress INTEGER DEFAULT 0 CHECK (progress >= 0 AND progress <= 100),
+ADD COLUMN IF NOT EXISTS estimated_cost DECIMAL(10,2) DEFAULT 0,
+ADD COLUMN IF NOT EXISTS actual_cost DECIMAL(10,2) DEFAULT 0,
+ADD COLUMN IF NOT EXISTS assignee_id UUID,
+ADD COLUMN IF NOT EXISTS assignee_name VARCHAR(255),
+ADD COLUMN IF NOT EXISTS assignee_email VARCHAR(255),
+ADD COLUMN IF NOT EXISTS tags TEXT[];
+
+-- Add foreign key constraint for assignee_id to users table
+ALTER TABLE tasks 
+ADD CONSTRAINT fk_task_assignee 
+FOREIGN KEY (assignee_id) 
+REFERENCES users(id) 
+ON DELETE SET NULL;

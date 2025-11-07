@@ -1,0 +1,39 @@
+{
+  "total_unique_bylaws": 621,
+  "total_duplicates_removed": 15,
+  "original_extraction_count": 636,
+  "by_part": {
+    "2": 24,
+    "3": 22,
+    "4": 18,
+    "5": 26,
+    "6": 42,
+    "7": 83,
+    "8": 25,
+    "9": 381
+  },
+  "by_category": {
+    "general": 467,
+    "spatial": 26,
+    "submission": 27,
+    "fire_safety": 50,
+    "environmental": 11,
+    "services": 6,
+    "structural": 25,
+    "accessibility": 9
+  },
+  "by_priority": {
+    "standard": 543,
+    "critical": 57,
+    "high": 21
+  },
+  "by_complexity": {
+    "1": 485,
+    "2": 39,
+    "3": 60,
+    "4": 31,
+    "5": 6
+  },
+  "extraction_method": "Deduplicated from PDF extraction",
+  "generated": "2025-08-09T14:32:57.699Z"
+}

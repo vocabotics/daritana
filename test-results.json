@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-17T07:22:40.367Z",
+  "apiBaseUrl": "http://localhost:7001/api",
+  "duration": "2.22s",
+  "summary": {
+    "total": 51,
+    "passed": 49,
+    "failed": 2,
+    "successRate": "96.1%"
+  },
+  "errors": [
+    {
+      "test": "PATCH /tasks/task-1755415358723",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "GET /tasks/task-1755415358723",
+      "error": "Request failed with status code 500"
+    }
+  ]
+}
