@@ -49,110 +49,61 @@ import {
   Timer,
   Filter,
   Search,
-  ArrowUpDown
+  ArrowUpDown,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PageWrapper from '@/components/PageWrapper'
-
-interface RFI {
-  id: string
-  projectId: string
-  number: string
-  dateSubmitted: Date
-  submittedBy: 'contractor' | 'architect' | 'consultant'
-  submittedTo: string
-  subject: string
-  description: string
-  attachments: string[]
-  status: 'pending' | 'in_review' | 'clarification_requested' | 'answered' | 'closed'
-  response?: string
-  responseDate?: Date
-  respondedBy?: string
-  daysOpen: number
-  priority: 'low' | 'medium' | 'high' | 'critical'
-  category: string
-  relatedDrawings?: string[]
-  costImpact?: number
-  scheduleImpact?: number
-}
+import { useRFIStore } from '@/store/architect/rfiStore'
+import type { RFI } from '@/types/architect'
 
 export default function RFIManagement() {
-  const [rfis, setRfis] = useState<RFI[]>([])
+  // Zustand store
+  const {
+    rfis,
+    statistics,
+    loading,
+    error,
+    searchTerm,
+    filters,
+    fetchRFIs,
+    fetchStatistics,
+    setSearchTerm,
+    setFilters,
+    clearError
+  } = useRFIStore()
+
+  // Local UI state
   const [selectedRFI, setSelectedRFI] = useState<RFI | null>(null)
   const [showNewRFI, setShowNewRFI] = useState(false)
   const [filter, setFilter] = useState('all')
-  const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState<'date' | 'priority' | 'status'>('date')
 
-  // Mock data for demonstration
+  // Load data on mount
   useEffect(() => {
-    const mockRFIs: RFI[] = [
-      {
-        id: '1',
-        projectId: 'proj-1',
-        number: 'RFI-001',
-        dateSubmitted: new Date('2024-01-15'),
-        submittedBy: 'contractor',
-        submittedTo: 'Structural Consultant',
-        subject: 'Column reinforcement clarification',
-        description: 'Need clarification on column C3 reinforcement details as shown on drawing S-101',
-        attachments: ['photo1.jpg', 'markup.pdf'],
-        status: 'pending',
-        daysOpen: 5,
-        priority: 'high',
-        category: 'Structural',
-        relatedDrawings: ['S-101', 'S-102'],
-        costImpact: 15000,
-        scheduleImpact: 3
-      },
-      {
-        id: '2',
-        projectId: 'proj-1',
-        number: 'RFI-002',
-        dateSubmitted: new Date('2024-01-10'),
-        submittedBy: 'architect',
-        submittedTo: 'MEP Consultant',
-        subject: 'HVAC duct routing conflict',
-        description: 'HVAC ducts conflict with structural beam at grid line 5-B',
-        attachments: ['clash-detection.pdf'],
-        status: 'answered',
-        response: 'Reroute duct as per revised drawing MEP-201A',
-        responseDate: new Date('2024-01-12'),
-        respondedBy: 'John Smith',
-        daysOpen: 2,
-        priority: 'medium',
-        category: 'MEP'
-      },
-      {
-        id: '3',
-        projectId: 'proj-1',
-        number: 'RFI-003',
-        dateSubmitted: new Date('2024-01-18'),
-        submittedBy: 'contractor',
-        submittedTo: 'Architect',
-        subject: 'Facade material specification',
-        description: 'Require exact specification for aluminum composite panel finish',
-        attachments: [],
-        status: 'in_review',
-        daysOpen: 2,
-        priority: 'low',
-        category: 'Architecture'
-      }
-    ]
-    setRfis(mockRFIs)
-  }, [])
+    fetchRFIs()
+    fetchStatistics()
+  }, [fetchRFIs, fetchStatistics])
+
+  // Clear errors when they occur
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      clearError()
+    }
+  }, [error, clearError])
 
   const getStatusIcon = (status: RFI['status']) => {
     switch (status) {
-      case 'pending':
+      case 'open':
         return <Clock className="h-4 w-4 text-yellow-500" />
       case 'in_review':
         return <Eye className="h-4 w-4 text-blue-500" />
-      case 'clarification_requested':
+      case 'clarification_needed':
         return <MessageSquare className="h-4 w-4 text-orange-500" />
-      case 'answered':
+      case 'responded':
         return <CheckCircle className="h-4 w-4 text-green-500" />
       case 'closed':
         return <CheckCircle className="h-4 w-4 text-gray-500" />
@@ -180,8 +131,8 @@ export default function RFIManagement() {
   const filteredRFIs = rfis
     .filter(rfi => {
       if (filter !== 'all' && rfi.status !== filter) return false
-      if (searchTerm && !rfi.subject.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          !rfi.number.toLowerCase().includes(searchTerm.toLowerCase())) return false
+      if (searchTerm && !rfi.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          !rfi.rfiNumber.toLowerCase().includes(searchTerm.toLowerCase())) return false
       return true
     })
     .sort((a, b) => {
@@ -192,25 +143,31 @@ export default function RFIManagement() {
         case 'status':
           return a.status.localeCompare(b.status)
         default:
-          return b.dateSubmitted.getTime() - a.dateSubmitted.getTime()
+          return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()
       }
     })
 
-  const stats = {
+  const stats = statistics || {
     total: rfis.length,
-    pending: rfis.filter(r => r.status === 'pending').length,
-    inReview: rfis.filter(r => r.status === 'in_review').length,
-    answered: rfis.filter(r => r.status === 'answered').length,
-    critical: rfis.filter(r => r.priority === 'critical').length,
-    avgResponseTime: Math.round(
-      rfis.filter(r => r.responseDate).reduce((sum, r) => sum + r.daysOpen, 0) /
-      rfis.filter(r => r.responseDate).length || 1
-    )
+    open: rfis.filter(r => r.status === 'open').length,
+    responded: rfis.filter(r => r.status === 'responded').length,
+    closed: rfis.filter(r => r.status === 'closed').length,
+    avgResponseTime: 0,
+    byCategory: {},
+    byPriority: { critical: rfis.filter(r => r.priority === 'critical').length, high: 0, medium: 0, low: 0 }
   }
 
   return (
     <PageWrapper title="RFI Management">
       <div className="space-y-6">
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">Loading RFIs...</span>
+          </div>
+        )}
+
         {/* Header Stats */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
           <Card>
@@ -223,26 +180,26 @@ export default function RFIManagement() {
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Pending</CardTitle>
+              <CardTitle className="text-sm font-medium">Open</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
+              <div className="text-2xl font-bold text-yellow-600">{stats.open}</div>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">In Review</CardTitle>
+              <CardTitle className="text-sm font-medium">Responded</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-600">{stats.inReview}</div>
+              <div className="text-2xl font-bold text-blue-600">{stats.responded}</div>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Answered</CardTitle>
+              <CardTitle className="text-sm font-medium">Closed</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats.answered}</div>
+              <div className="text-2xl font-bold text-green-600">{stats.closed}</div>
             </CardContent>
           </Card>
           <Card>
@@ -250,7 +207,7 @@ export default function RFIManagement() {
               <CardTitle className="text-sm font-medium">Critical</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-600">{stats.critical}</div>
+              <div className="text-2xl font-bold text-red-600">{stats.byPriority?.critical || 0}</div>
             </CardContent>
           </Card>
           <Card>
@@ -258,7 +215,7 @@ export default function RFIManagement() {
               <CardTitle className="text-sm font-medium">Avg Response</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.avgResponseTime} days</div>
+              <div className="text-2xl font-bold">{stats.avgResponseTime} hrs</div>
             </CardContent>
           </Card>
         </div>
@@ -383,9 +340,9 @@ export default function RFIManagement() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="open">Open</SelectItem>
                   <SelectItem value="in_review">In Review</SelectItem>
-                  <SelectItem value="answered">Answered</SelectItem>
+                  <SelectItem value="responded">Responded</SelectItem>
                   <SelectItem value="closed">Closed</SelectItem>
                 </SelectContent>
               </Select>
@@ -419,69 +376,81 @@ export default function RFIManagement() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredRFIs.map((rfi) => (
-                    <TableRow key={rfi.id} className="cursor-pointer hover:bg-muted/50">
-                      <TableCell className="font-medium">{rfi.number}</TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium">{rfi.subject}</p>
-                          <p className="text-sm text-muted-foreground line-clamp-1">
-                            {rfi.description}
-                          </p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{rfi.category}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="text-sm">
-                          <p>{format(rfi.dateSubmitted, 'dd MMM')}</p>
-                          <p className="text-muted-foreground">
-                            {rfi.submittedBy}
-                          </p>
-                        </div>
-                      </TableCell>
-                      <TableCell>{rfi.submittedTo}</TableCell>
-                      <TableCell>{getPriorityBadge(rfi.priority)}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          {getStatusIcon(rfi.status)}
-                          <span className="capitalize">{rfi.status.replace('_', ' ')}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <Timer className="h-4 w-4 text-muted-foreground" />
-                          {rfi.daysOpen}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        {(rfi.costImpact || rfi.scheduleImpact) && (
-                          <div className="space-y-1">
-                            {rfi.costImpact && (
-                              <p className="text-xs text-orange-600">
-                                RM {rfi.costImpact.toLocaleString()}
-                              </p>
-                            )}
-                            {rfi.scheduleImpact && (
-                              <p className="text-xs text-red-600">
-                                {rfi.scheduleImpact} days
-                              </p>
-                            )}
-                          </div>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setSelectedRFI(rfi)}
-                        >
-                          View
-                        </Button>
+                  {filteredRFIs.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={10} className="text-center py-8 text-muted-foreground">
+                        No RFIs found
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ) : (
+                    filteredRFIs.map((rfi) => {
+                      const daysOpen = Math.floor((new Date().getTime() - new Date(rfi.dateCreated).getTime()) / (1000 * 60 * 60 * 24))
+
+                      return (
+                        <TableRow key={rfi.id} className="cursor-pointer hover:bg-muted/50">
+                          <TableCell className="font-medium">{rfi.rfiNumber}</TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium">{rfi.title}</p>
+                              <p className="text-sm text-muted-foreground line-clamp-1">
+                                {rfi.description}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">{rfi.category}</Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="text-sm">
+                              <p>{format(new Date(rfi.dateCreated), 'dd MMM')}</p>
+                              <p className="text-muted-foreground">
+                                {rfi.requestedBy.name}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell>{rfi.assignedTo?.name || 'Unassigned'}</TableCell>
+                          <TableCell>{getPriorityBadge(rfi.priority)}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              {getStatusIcon(rfi.status)}
+                              <span className="capitalize">{rfi.status.replace('_', ' ')}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-1">
+                              <Timer className="h-4 w-4 text-muted-foreground" />
+                              {daysOpen}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            {(rfi.costImpact || rfi.scheduleImpact) && (
+                              <div className="space-y-1">
+                                {rfi.costImpact > 0 && (
+                                  <p className="text-xs text-orange-600">
+                                    RM {rfi.costImpact.toLocaleString()}
+                                  </p>
+                                )}
+                                {rfi.scheduleImpact > 0 && (
+                                  <p className="text-xs text-red-600">
+                                    {rfi.scheduleImpact} days
+                                  </p>
+                                )}
+                              </div>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setSelectedRFI(rfi)}
+                            >
+                              View
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })
+                  )}
                 </TableBody>
               </Table>
             </div>
