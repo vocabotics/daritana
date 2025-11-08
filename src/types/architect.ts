@@ -442,3 +442,317 @@ export interface ContractStatistics {
   retention: number;
   progress: number; // percentage
 }
+
+// Site Instruction (Architect's Instruction - AI) Types
+export interface SiteInstruction {
+  id: string;
+  instructionNumber: string; // AI-001
+  projectId: string;
+  projectName: string;
+  issuedDate: string;
+  issuedBy: string; // Architect name
+  contractorName: string;
+  subject: string;
+  description: string;
+  category: 'clarification' | 'variation' | 'quality' | 'safety' | 'sequence' | 'rectification' | 'general';
+  priority: 'urgent' | 'high' | 'normal' | 'low';
+  costImplication: number;
+  timeImplication: number; // days
+  isVariation: boolean; // If true, links to variation order
+  relatedVariationId?: string;
+  relatedRFIId?: string;
+  relatedDrawings?: string[]; // Drawing numbers
+  status: 'issued' | 'acknowledged' | 'in_progress' | 'completed' | 'superseded';
+  acknowledgedBy?: string;
+  acknowledgedDate?: string;
+  completionDate?: string;
+  attachments?: {
+    id: string;
+    name: string;
+    url: string;
+    type: string;
+  }[];
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Submittal Types
+export interface Submittal {
+  id: string;
+  submittalNumber: string; // SUB-001
+  projectId: string;
+  type: 'material' | 'shop_drawing' | 'sample' | 'product_data' | 'method_statement' | 'catalog';
+  category: string; // e.g., "Concrete", "Steel", "Finishes"
+  description: string;
+  specSection?: string; // Specification section reference
+  submittedBy: string; // Contractor name
+  submittedDate: string;
+  requiredOnSiteDate?: string;
+  architectReviewDue: string;
+  reviewedBy?: string;
+  reviewedDate?: string;
+  status: 'received' | 'under_review' | 'approved' | 'approved_as_noted' | 'rejected' | 'resubmit';
+  actionRequired: 'architect_review' | 'consultant_review' | 'client_review' | 'contractor_resubmission' | 'none';
+  reviewComments?: string;
+  revisionNumber: number;
+  relatedDrawings?: string[];
+  attachments: {
+    id: string;
+    name: string;
+    url: string;
+    type: string;
+    uploadedDate: string;
+  }[];
+  distributionList?: string[]; // Email addresses
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Meeting Minutes Types
+export interface MeetingMinutes {
+  id: string;
+  meetingNumber: string; // MOM-001
+  projectId: string;
+  meetingType: 'site_progress' | 'coordination' | 'safety' | 'design_review' | 'client' | 'pre_construction';
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  venue: string;
+  chairperson: string;
+  attendees: MeetingAttendee[];
+  apologies?: string[];
+  agenda: AgendaItem[];
+  previousMinutesReview: {
+    reviewed: boolean;
+    comments?: string;
+  };
+  matters: MeetingMatter[];
+  actionItems: ActionItem[];
+  decisions: MeetingDecision[];
+  nextMeetingDate?: string;
+  attachments?: {
+    id: string;
+    name: string;
+    url: string;
+  }[];
+  status: 'draft' | 'circulated' | 'approved';
+  circulatedDate?: string;
+  preparedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MeetingAttendee {
+  id: string;
+  name: string;
+  company: string;
+  role: string;
+  email?: string;
+  present: boolean;
+}
+
+export interface AgendaItem {
+  id: string;
+  number: string; // 1.0, 2.0, etc.
+  title: string;
+  presenter?: string;
+}
+
+export interface MeetingMatter {
+  id: string;
+  agendaItemNumber: string;
+  matter: string;
+  discussionPoints: string[];
+  relatedDocuments?: string[];
+}
+
+export interface ActionItem {
+  id: string;
+  actionNumber: string; // A-001
+  description: string;
+  assignedTo: string;
+  company: string;
+  dueDate: string;
+  priority: 'urgent' | 'high' | 'normal' | 'low';
+  status: 'pending' | 'in_progress' | 'completed' | 'overdue';
+  completedDate?: string;
+  remarks?: string;
+}
+
+export interface MeetingDecision {
+  id: string;
+  decisionNumber: string; // D-001
+  decision: string;
+  madeBy: string;
+  impact: 'cost' | 'time' | 'scope' | 'quality' | 'none';
+  relatedItems?: string[]; // Related action items or matters
+}
+
+// DLP (Defects Liability Period) Types
+export interface DLPManagement {
+  id: string;
+  projectId: string;
+  projectName: string;
+  practicalCompletionDate: string;
+  dlpPeriod: number; // months (usually 12-24 in Malaysia)
+  dlpStartDate: string;
+  dlpExpiryDate: string;
+  halfDLPDate: string; // Usually 6 months for half retention release
+  contractSum: number;
+  retentionPercentage: number; // Usually 5%
+  totalRetentionHeld: number;
+  halfRetentionAmount: number;
+  finalRetentionAmount: number;
+  halfRetentionReleased: boolean;
+  halfRetentionReleaseDate?: string;
+  finalRetentionReleased: boolean;
+  finalRetentionReleaseDate?: string;
+  defects: DLPDefect[];
+  inspections: DLPInspection[];
+  status: 'active' | 'expired' | 'extended';
+  extensionReason?: string;
+  extendedExpiryDate?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DLPDefect {
+  id: string;
+  defectNumber: string; // DLP-D-001
+  description: string;
+  location: string;
+  category: 'structural' | 'architectural' | 'mep' | 'civil' | 'landscape';
+  severity: 'critical' | 'major' | 'minor';
+  reportedDate: string;
+  reportedBy: string;
+  targetCompletionDate: string;
+  status: 'reported' | 'acknowledged' | 'in_progress' | 'completed' | 'verified';
+  completedDate?: string;
+  verifiedDate?: string;
+  verifiedBy?: string;
+  photos?: string[];
+  cost?: number; // If contractor fails to rectify
+}
+
+export interface DLPInspection {
+  id: string;
+  inspectionNumber: string; // DLP-INS-001
+  inspectionDate: string;
+  inspectionType: 'monthly' | 'half_dlp' | 'pre_expiry' | 'final';
+  inspector: string;
+  attendees: string[];
+  defectsFound: number;
+  defectsRectified: number;
+  defectsOutstanding: number;
+  remarks: string;
+  nextInspectionDate?: string;
+  report?: {
+    url: string;
+    uploadedDate: string;
+  };
+}
+
+// Retention Money Tracking
+export interface RetentionTracking {
+  id: string;
+  projectId: string;
+  paymentCertificateId: string;
+  certificateNumber: string;
+  certifiedAmount: number;
+  retentionPercentage: number;
+  retentionAmount: number;
+  cumulativeRetention: number;
+  releaseType?: 'half' | 'final' | 'partial';
+  releaseAmount?: number;
+  releaseDate?: string;
+  releaseConditions?: string;
+  status: 'held' | 'partially_released' | 'fully_released';
+  notes?: string;
+}
+
+// Professional Fee Calculator (Based on LAM Scale)
+export interface FeeCalculation {
+  id: string;
+  projectId: string;
+  projectName: string;
+  projectCost: number; // Estimated or actual
+  feeType: 'lam_scale' | 'percentage' | 'lumpsum' | 'time_based';
+  lamScaleCategory?: 'A' | 'B' | 'C' | 'D' | 'E'; // LAM fee categories
+  customPercentage?: number;
+  lumpsumAmount?: number;
+  workStages: {
+    inception: { percentage: number; amount: number; claimed: number; balance: number };
+    schematic: { percentage: number; amount: number; claimed: number; balance: number };
+    design_development: { percentage: number; amount: number; claimed: number; balance: number };
+    construction_documents: { percentage: number; amount: number; claimed: number; balance: number };
+    tender: { percentage: number; amount: number; claimed: number; balance: number };
+    construction_admin: { percentage: number; amount: number; claimed: number; balance: number };
+  };
+  additionalServices?: {
+    service: string;
+    fee: number;
+    claimed: number;
+  }[];
+  totalFee: number;
+  totalClaimed: number;
+  balance: number;
+  sst: number; // 6% SST in Malaysia
+  grandTotal: number;
+  invoices: {
+    id: string;
+    invoiceNumber: string;
+    date: string;
+    amount: number;
+    status: 'draft' | 'issued' | 'paid';
+  }[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+// CCC (Certificate of Completion and Compliance) Tracking
+export interface CCCTracking {
+  id: string;
+  projectId: string;
+  projectName: string;
+  address: string;
+  authority: 'DBKL' | 'MPPJ' | 'MBPJ' | 'MBSA' | 'MPS' | 'PBT' | 'Other';
+  planApprovalNumber: string;
+  planApprovalDate: string;
+  cfApprovalNumber?: string; // CF (Certificate of Fitness)
+  cfIssueDate?: string;
+  inspections: CCCInspection[];
+  cccApplicationDate?: string;
+  cccSubmittedBy?: string;
+  requiredDocuments: CCCDocument[];
+  cccIssueDate?: string;
+  cccNumber?: string;
+  status: 'planning' | 'under_construction' | 'ready_for_inspection' | 'inspection_in_progress' | 'approved' | 'rejected';
+  remarks?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CCCInspection {
+  id: string;
+  inspectionType: 'architectural' | 'structural' | 'mechanical' | 'electrical' | 'plumbing' | 'fire_safety' | 'final';
+  scheduledDate: string;
+  completedDate?: string;
+  inspector: string;
+  inspectorOrganization: string;
+  result: 'passed' | 'failed' | 'conditional' | 'pending';
+  defects?: string[];
+  remarks?: string;
+  reportUrl?: string;
+}
+
+export interface CCCDocument {
+  id: string;
+  documentType: string; // e.g., "As-Built Drawings", "Test Reports", "Certificates"
+  required: boolean;
+  submitted: boolean;
+  submittedDate?: string;
+  documentUrl?: string;
+  remarks?: string;
+}
