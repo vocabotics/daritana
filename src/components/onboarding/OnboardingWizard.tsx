@@ -103,6 +103,7 @@ import {
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
+import { useOnboardingStore } from '@/store/onboardingStore'
 import { useNavigate } from 'react-router-dom'
 import organizationService, { SUBSCRIPTION_PLANS } from '@/services/organization.service'
 import Confetti from 'react-confetti'
@@ -395,6 +396,12 @@ const availableIntegrations: Integration[] = [
 export const OnboardingWizard: React.FC = () => {
   const navigate = useNavigate()
   const { user, completeOnboarding } = useAuthStore()
+  const {
+    companyRegistrationData,
+    setOrganizationInfo,
+    setProjectTemplates,
+    setIntegrations,
+  } = useOnboardingStore()
   const [currentStep, setCurrentStep] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -424,25 +431,19 @@ export const OnboardingWizard: React.FC = () => {
   const [selectedIntegrations, setSelectedIntegrations] = useState<string[]>([])
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
 
-  // Load company registration data if available
+  // Load company registration data from onboarding store (memory-only, no localStorage)
   React.useEffect(() => {
-    const savedData = localStorage.getItem('companyRegistrationData')
-    if (savedData) {
-      try {
-        const companyData = JSON.parse(savedData)
-        // Pre-populate organization data from company registration
-        setOrganizationData({
-          name: companyData.companyName || '',
-          type: companyData.businessType || 'architecture',
-          size: companyData.teamSize || 'small',
-          country: companyData.country || 'Malaysia',
-          description: companyData.description || '',
-        })
-      } catch (error) {
-        console.error('Failed to load company registration data:', error)
-      }
+    if (companyRegistrationData) {
+      // Pre-populate organization data from company registration
+      setOrganizationData({
+        name: companyRegistrationData.companyName || '',
+        type: companyRegistrationData.businessType as any || 'architecture',
+        size: companyRegistrationData.teamSize as any || 'small',
+        country: companyRegistrationData.country || 'Malaysia',
+        description: companyRegistrationData.description || '',
+      })
     }
-  }, [])
+  }, [companyRegistrationData])
 
   const steps: OnboardingStep[] = [
     {
@@ -569,8 +570,8 @@ export const OnboardingWizard: React.FC = () => {
         const orgResult = await organizationService.createOrganization(orgData)
         setOrganizationId(orgResult.id) // FIX: orgResult is Organization directly, not { organization: Organization }
 
-        // Store organization name for member onboarding
-        localStorage.setItem('organizationName', orgResult.name)
+        // Store organization info in onboarding store (memory-only, no localStorage)
+        setOrganizationInfo(orgResult.id, orgResult.name)
 
         // Step 2: Invite team members if any
         const validMembers = teamMembers.filter(m => m.email && m.email !== adminEmail)
@@ -593,15 +594,25 @@ export const OnboardingWizard: React.FC = () => {
             toast.success(`Invited ${successCount} team member(s) successfully`)
           }
         }
-        
-        // Step 3: Save project templates preference (stored locally for now)
+
+        // Step 3: Save project templates in onboarding store (memory-only, no localStorage)
         if (selectedTemplates.length > 0) {
-          localStorage.setItem('projectTemplates', JSON.stringify(selectedTemplates))
+          setProjectTemplates(selectedTemplates.map(id => ({
+            id,
+            name: id,
+            description: '',
+            selected: true
+          })))
         }
-        
-        // Step 4: Save integrations preference (stored locally for now)
+
+        // Step 4: Save integrations in onboarding store (memory-only, no localStorage)
         if (selectedIntegrations.length > 0) {
-          localStorage.setItem('integrations', JSON.stringify(selectedIntegrations))
+          setIntegrations(selectedIntegrations.map(id => ({
+            id,
+            name: id,
+            description: '',
+            enabled: true
+          })))
         }
       }
       
