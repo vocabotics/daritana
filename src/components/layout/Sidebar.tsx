@@ -41,7 +41,8 @@ import {
   Edit3,
   Construction,
   ClipboardCheck,
-  FileSignature
+  FileSignature,
+  Receipt
 } from 'lucide-react';
 
 // Global navigation (when in global mode)
@@ -88,6 +89,7 @@ const globalNavigation = {
     { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
     { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
     { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'Payment Certificates', href: '/architect/payment-certificates', icon: Receipt, description: 'PAM certificates', highlight: true },
     { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
     { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
 
@@ -135,6 +137,7 @@ const globalNavigation = {
     { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
     { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
     { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'Payment Certificates', href: '/architect/payment-certificates', icon: Receipt, description: 'PAM certificates', highlight: true },
     { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
     { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
 
@@ -174,6 +177,7 @@ const globalNavigation = {
     { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
     { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
     { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'Payment Certificates', href: '/architect/payment-certificates', icon: Receipt, description: 'PAM certificates', highlight: true },
     { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
     { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
 

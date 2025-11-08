@@ -61,6 +61,7 @@ const PunchListManagement = lazy(() => import('@/pages/architect/PunchListManage
 const PAMContractAdmin = lazy(() => import('@/pages/architect/PAMContractAdmin'));
 const UBBLCompliance = lazy(() => import('@/pages/architect/UBBLCompliance'));
 const AuthorityTracking = lazy(() => import('@/pages/architect/AuthorityTracking'));
+const PaymentCertificates = lazy(() => import('@/pages/architect/PaymentCertificates'));
 
 function App() {
   const { isAuthenticated, user, checkAuth, isLoading, isNewOrganization, needsMemberOnboarding, needsVendorOnboarding } = useAuthStore();
@@ -253,6 +254,11 @@ function App() {
                 <Route path="/architect/authorities" element={
                   <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Authority Tracking...</div>}>
                     <AuthorityTracking />
+                  </Suspense>
+                } />
+                <Route path="/architect/payment-certificates" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Payment Certificates...</div>}>
+                    <PaymentCertificates />
                   </Suspense>
                 } />
 
