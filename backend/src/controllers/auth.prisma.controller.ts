@@ -168,35 +168,69 @@ export class AuthController {
       }
     });
 
+    // Get user's organization membership
+    const orgMember = await prisma.organizationMember.findFirst({
+      where: { userId: user.id, isActive: true },
+      include: { organization: true }
+    });
+
     logger.info('User logged in successfully', { userId: user.id, email: user.email });
 
+    // Set HTTP-Only cookies for tokens
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
+      httpOnly: true,
+      secure: isProduction, // HTTPS only in production
+      sameSite: 'strict' as const,
+      path: '/'
+    };
+
+    // Access token cookie (15 minutes)
+    res.cookie('access_token', tokens.accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    // Refresh token cookie (7 or 30 days)
+    res.cookie('refresh_token', tokens.refreshToken, {
+      ...cookieOptions,
+      maxAge: (rememberMe ? 30 : 7) * 24 * 60 * 60 * 1000 // 7 or 30 days
+    });
+
+    // Return user and organization data (NO tokens in response body)
     res.json({
       success: true,
       message: 'Login successful',
-      data: {
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          role: user.role,
-          isActive: user.isActive,
-          emailVerified: user.emailVerified,
-          avatar: user.avatar
-        },
-        tokens
-      }
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+        isActive: user.isActive,
+        emailVerified: user.emailVerified,
+        avatar: user.avatar,
+        memberOnboardingCompleted: user.memberOnboardingCompleted,
+        vendorOnboardingCompleted: user.vendorOnboardingCompleted
+      },
+      organization: orgMember ? {
+        id: orgMember.organization.id,
+        name: orgMember.organization.name,
+        slug: orgMember.organization.slug,
+        plan: orgMember.organization.planId,
+        onboardingCompleted: orgMember.organization.onboardingCompleted
+      } : null
     });
   });
 
   /**
-   * Refresh token
+   * Refresh token (from HTTP-Only cookie)
    */
   static refreshToken = asyncHandler(async (req: Request, res: Response) => {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refresh_token;
 
     if (!refreshToken) {
-      throw new ValidationError('Refresh token is required');
+      throw new AuthenticationError('Refresh token not found');
     }
 
     let decoded: any;
@@ -225,31 +259,65 @@ export class AuthController {
     // Generate new token pair
     const tokens = generateTokenPair(session.user);
 
-    // Update session with new refresh token
+    // Update session with new refresh token (token rotation)
     await prisma.session.update({
       where: { id: session.id },
-      data: { token: tokens.refreshToken }
+      data: {
+        token: tokens.refreshToken,
+        lastUsedAt: new Date()
+      }
+    });
+
+    // Set new HTTP-Only cookies
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'strict' as const,
+      path: '/'
+    };
+
+    // New access token cookie (15 minutes)
+    res.cookie('access_token', tokens.accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000
+    });
+
+    // New refresh token cookie (rotate)
+    res.cookie('refresh_token', tokens.refreshToken, {
+      ...cookieOptions,
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
     res.json({
       success: true,
-      message: 'Token refreshed successfully',
-      data: { tokens }
+      expiresIn: 900 // 15 minutes in seconds
     });
   });
 
   /**
-   * Logout user
+   * Logout user (clear HTTP-Only cookies)
    */
   static logout = asyncHandler(async (req: Request, res: Response) => {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refresh_token;
 
     if (refreshToken) {
-      // Delete session
+      // Delete session from database
       await prisma.session.deleteMany({
         where: { token: refreshToken }
       });
     }
+
+    // Clear HTTP-Only cookies
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict' as const,
+      path: '/'
+    };
+
+    res.clearCookie('access_token', cookieOptions);
+    res.clearCookie('refresh_token', cookieOptions);
 
     res.json({
       success: true,
@@ -258,7 +326,8 @@ export class AuthController {
   });
 
   /**
-   * Get current user
+   * Get current user (from HTTP-Only cookie)
+   * This is the /api/auth/me endpoint
    */
   static getCurrentUser = asyncHandler(async (req: Request, res: Response) => {
     if (!req.userId) {
@@ -280,11 +349,11 @@ export class AuthController {
         position: true,
         website: true,
         linkedin: true,
-        address: true,
-        city: true,
-        state: true,
-        postcode: true,
-        country: true,
+        personalAddress: true,
+        personalCity: true,
+        personalState: true,
+        personalPostcode: true,
+        personalCountry: true,
         language: true,
         timezone: true,
         currency: true,
@@ -296,6 +365,8 @@ export class AuthController {
         isActive: true,
         emailVerified: true,
         twoFactorEnabled: true,
+        memberOnboardingCompleted: true,
+        vendorOnboardingCompleted: true,
         createdAt: true,
         updatedAt: true
       }
@@ -305,9 +376,27 @@ export class AuthController {
       throw new NotFoundError('User');
     }
 
+    // Get user's organization membership
+    const orgMember = await prisma.organizationMember.findFirst({
+      where: { userId: user.id, isActive: true },
+      include: { organization: true }
+    });
+
     res.json({
       success: true,
-      data: { user }
+      user,
+      organization: orgMember ? {
+        id: orgMember.organization.id,
+        name: orgMember.organization.name,
+        slug: orgMember.organization.slug,
+        plan: orgMember.organization.planId,
+        onboardingCompleted: orgMember.organization.onboardingCompleted,
+        status: orgMember.organization.status,
+        maxUsers: orgMember.organization.maxUsers,
+        maxProjects: orgMember.organization.maxProjects,
+        maxStorage: orgMember.organization.maxStorage
+      } : null,
+      permissions: orgMember?.permissions || []
     });
   });
 
@@ -505,5 +594,130 @@ export class AuthController {
       success: true,
       message: 'Email verified successfully'
     });
+  });
+
+  /**
+   * Verify token validity (from HTTP-Only cookie)
+   */
+  static verifyToken = asyncHandler(async (req: Request, res: Response) => {
+    if (!req.userId) {
+      throw new AuthenticationError('Not authenticated');
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: req.userId },
+      select: { id: true, isActive: true, isBanned: true }
+    });
+
+    if (!user || !user.isActive || user.isBanned) {
+      throw new AuthenticationError('Invalid token');
+    }
+
+    res.json({
+      success: true,
+      valid: true,
+      userId: user.id,
+      expiresIn: 900 // Approximate - access tokens last 15 minutes
+    });
+  });
+
+  /**
+   * Mark onboarding as complete
+   */
+  static completeOnboarding = asyncHandler(async (req: Request, res: Response) => {
+    if (!req.userId) {
+      throw new AuthenticationError('Not authenticated');
+    }
+
+    const { type } = req.body; // 'organization' | 'member' | 'vendor'
+
+    if (type === 'organization') {
+      // Mark organization onboarding as complete
+      const orgMember = await prisma.organizationMember.findFirst({
+        where: { userId: req.userId, isActive: true },
+        include: { organization: true }
+      });
+
+      if (!orgMember) {
+        throw new NotFoundError('Organization membership');
+      }
+
+      await prisma.organization.update({
+        where: { id: orgMember.organizationId },
+        data: {
+          onboardingCompleted: true,
+          onboardingCompletedAt: new Date()
+        }
+      });
+
+      logger.info('Organization onboarding completed', {
+        userId: req.userId,
+        organizationId: orgMember.organizationId
+      });
+
+      res.json({
+        success: true,
+        message: 'Organization onboarding completed',
+        organization: {
+          ...orgMember.organization,
+          onboardingCompleted: true,
+          onboardingCompletedAt: new Date()
+        }
+      });
+    } else if (type === 'member') {
+      // Mark member onboarding as complete
+      await prisma.user.update({
+        where: { id: req.userId },
+        data: { memberOnboardingCompleted: true }
+      });
+
+      logger.info('Member onboarding completed', { userId: req.userId });
+
+      const user = await prisma.user.findUnique({
+        where: { id: req.userId },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          memberOnboardingCompleted: true,
+          vendorOnboardingCompleted: true
+        }
+      });
+
+      res.json({
+        success: true,
+        message: 'Member onboarding completed',
+        user
+      });
+    } else if (type === 'vendor') {
+      // Mark vendor onboarding as complete
+      await prisma.user.update({
+        where: { id: req.userId },
+        data: { vendorOnboardingCompleted: true }
+      });
+
+      logger.info('Vendor onboarding completed', { userId: req.userId });
+
+      const user = await prisma.user.findUnique({
+        where: { id: req.userId },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          memberOnboardingCompleted: true,
+          vendorOnboardingCompleted: true
+        }
+      });
+
+      res.json({
+        success: true,
+        message: 'Vendor onboarding completed',
+        user
+      });
+    } else {
+      throw new ValidationError('Invalid onboarding type. Must be "organization", "member", or "vendor"');
+    }
   });
 }

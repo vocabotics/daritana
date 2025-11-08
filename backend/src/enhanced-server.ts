@@ -1,6 +1,7 @@
 import express, { Express } from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import { createServer } from 'http'
 import { Server as SocketIOServer } from 'socket.io'
@@ -114,6 +115,9 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Organization-ID'],
 }))
+
+// Cookie parsing middleware (for HTTP-Only cookie authentication)
+app.use(cookieParser())
 
 // Body parsing middleware
 app.use(express.json({ limit: '50mb' }))

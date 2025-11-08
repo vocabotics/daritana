@@ -3,22 +3,22 @@ import { toast } from 'sonner'
 
 const API_BASE_URL = 'http://localhost:7001/api'
 
-// Create axios instance
+// Create axios instance with credentials support for HTTP-Only cookies
 export const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
+  withCredentials: true, // IMPORTANT: Send cookies with requests
   headers: {
     'Content-Type': 'application/json'
   }
 })
 
-// Request interceptor to add auth token
+// Request interceptor (no longer needed for auth - cookies handled automatically)
+// Keep for potential future middleware needs
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
+    // Cookies are sent automatically with withCredentials: true
+    // No need to manually add Authorization header
     return config
   },
   (error) => Promise.reject(error)
@@ -67,83 +67,48 @@ api.interceptors.response.use(
       
       originalRequest._retry = true
       isRefreshing = true
-      
-      const refreshToken = localStorage.getItem('refresh_token')
-      
-      if (refreshToken) {
-        try {
-          const response = await axios.post(`${API_BASE_URL}/auth/refresh-token`, {
-            refreshToken
+
+      // Refresh token is in HTTP-Only cookie, no need to get from localStorage
+      try {
+        // Call refresh endpoint (refresh_token cookie sent automatically)
+        const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {}, {
+          withCredentials: true // Send cookies
+        })
+
+        if (response.data.success) {
+          // New tokens are set as HTTP-Only cookies automatically
+          // No need to store in localStorage
+
+          // Process queued requests
+          processQueue(null, 'refreshed')
+
+          toast.success('Session refreshed', {
+            description: 'Your session has been automatically renewed',
+            duration: 3000
           })
-          
-          if (response.data.data) {
-            const { token, refreshToken: newRefreshToken } = response.data.data
-            
-            // Update tokens in localStorage
-            localStorage.setItem('access_token', token)
-            if (newRefreshToken) {
-              localStorage.setItem('refresh_token', newRefreshToken)
-            }
-            
-            // Update the authorization header
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-            originalRequest.headers!.Authorization = `Bearer ${token}`
-            
-            // Process queued requests
-            processQueue(null, token)
-            
-            toast.success('Session refreshed', {
-              description: 'Your session has been automatically renewed',
-              duration: 3000
-            })
-            
-            // Retry the original request
-            return api(originalRequest)
-          }
-        } catch (refreshError) {
-          console.error('Token refresh failed:', refreshError)
-          processQueue(refreshError, null)
-          
-          // Clear all auth data
-          localStorage.removeItem('access_token')
-          localStorage.removeItem('refresh_token')
-          localStorage.removeItem('user_data')
-          localStorage.removeItem('organization')
-          localStorage.removeItem('auth-storage')
-          
-          toast.error('Session expired', {
-            description: 'Please log in again to continue',
-            duration: 5000
-          })
-          
-          // Disabled redirect to prevent loops
-          // setTimeout(() => {
-          //   if (!window.location.pathname.includes('/login')) {
-          //     window.location.href = '/login'
-          //   }
-          // }, 1000)
-        } finally {
-          isRefreshing = false
+
+          // Retry the original request
+          return api(originalRequest)
         }
-      } else {
-        // No refresh token available
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('refresh_token')
-        localStorage.removeItem('user_data')
-        localStorage.removeItem('organization')
-        localStorage.removeItem('auth-storage')
-        
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError)
+        processQueue(refreshError, null)
+
+        // No need to clear localStorage - cookies cleared by server
+
         toast.error('Session expired', {
           description: 'Please log in again to continue',
           duration: 5000
         })
-        
-        // Disabled redirect to prevent loops
-        // setTimeout(() => {
-        //   if (!window.location.pathname.includes('/login')) {
-        //     window.location.href = '/login'
-        //   }
-        // }, 1000)
+
+        // Redirect to login after session expiry
+        setTimeout(() => {
+          if (!window.location.pathname.includes('/login')) {
+            window.location.href = '/login'
+          }
+        }, 1000)
+      } finally {
+        isRefreshing = false
       }
     } else if (error.response?.status === 403) {
       toast.error('Access denied', {
