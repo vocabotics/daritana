@@ -43,7 +43,9 @@ import {
   ClipboardCheck,
   FileSignature,
   Receipt,
-  Upload
+  Upload,
+  Calculator,
+  FileCheck
 } from 'lucide-react';
 
 // Global navigation (when in global mode)
@@ -97,6 +99,9 @@ const globalNavigation = {
     { name: 'Submittals', href: '/architect/submittals', icon: Upload, description: 'Submittal tracking' },
     { name: 'Meeting Minutes', href: '/architect/meeting-minutes', icon: Users, description: 'Meeting records' },
     { name: 'DLP Management', href: '/architect/dlp', icon: Shield, description: 'Defects liability' },
+    { name: 'Fee Calculator', href: '/architect/fee-calculator', icon: Calculator, description: 'LAM scale fees', highlight: true },
+    { name: 'CCC Tracking', href: '/architect/ccc-tracking', icon: FileCheck, description: 'Completion certificates' },
+    { name: 'Retention Tracking', href: '/architect/retention-tracking', icon: DollarSign, description: 'Retention money' },
 
     { name: 'divider', label: 'COMPANY' },
     { name: 'HR Management', href: '/hr', icon: UserCheck, description: 'Human Resources' },

@@ -66,6 +66,9 @@ const SiteInstructionRegister = lazy(() => import('@/pages/architect/SiteInstruc
 const SubmittalTracking = lazy(() => import('@/pages/architect/SubmittalTracking'));
 const MeetingMinutes = lazy(() => import('@/pages/architect/MeetingMinutes'));
 const DLPManagement = lazy(() => import('@/pages/architect/DLPManagement'));
+const FeeCalculator = lazy(() => import('@/pages/architect/FeeCalculator'));
+const CCCTracking = lazy(() => import('@/pages/architect/CCCTracking'));
+const RetentionTracking = lazy(() => import('@/pages/architect/RetentionTracking'));
 
 function App() {
   const { isAuthenticated, user, checkAuth, isLoading, isNewOrganization, needsMemberOnboarding, needsVendorOnboarding } = useAuthStore();
@@ -283,6 +286,21 @@ function App() {
                 <Route path="/architect/dlp" element={
                   <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading DLP Management...</div>}>
                     <DLPManagement />
+                  </Suspense>
+                } />
+                <Route path="/architect/fee-calculator" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Fee Calculator...</div>}>
+                    <FeeCalculator />
+                  </Suspense>
+                } />
+                <Route path="/architect/ccc-tracking" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading CCC Tracking...</div>}>
+                    <CCCTracking />
+                  </Suspense>
+                } />
+                <Route path="/architect/retention-tracking" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Retention Tracking...</div>}>
+                    <RetentionTracking />
                   </Suspense>
                 } />
 
