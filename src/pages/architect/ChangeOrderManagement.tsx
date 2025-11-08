@@ -52,7 +52,9 @@ import { format } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
 import { useChangeOrderStore } from '@/store/architect/changeOrderStore'
-import type { ChangeOrder } from '@/types/architect'
+import { useAuthStore } from '@/store/authStore'
+import { ChangeOrderDetail } from '@/components/architect/ChangeOrderDetail'
+import type { ChangeOrder, ChangeOrderApproval } from '@/types/architect'
 
 export default function ChangeOrderManagement() {
   // Zustand store
@@ -63,12 +65,17 @@ export default function ChangeOrderManagement() {
     error,
     fetchChangeOrders,
     fetchCostSummary,
+    approveChangeOrder,
     clearError
   } = useChangeOrderStore()
+
+  // Auth store for current user
+  const { user } = useAuthStore()
 
   // Local UI state
   const [showNewChangeOrder, setShowNewChangeOrder] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<ChangeOrder | null>(null)
+  const [showDetailModal, setShowDetailModal] = useState(false)
   const [filter, setFilter] = useState('all')
 
   // Load data on mount
@@ -84,6 +91,42 @@ export default function ChangeOrderManagement() {
       clearError()
     }
   }, [error, clearError])
+
+  // Approval handlers
+  const handleApprove = async (changeOrderId: string, approvalId: string, comments: string) => {
+    if (!user) return
+
+    const approval: Omit<ChangeOrderApproval, 'id'> = {
+      approverId: user.id,
+      approverName: user.name || user.email,
+      approverRole: user.role,
+      status: 'approved',
+      comments,
+      date: new Date().toISOString()
+    }
+
+    await approveChangeOrder(changeOrderId, approval)
+  }
+
+  const handleReject = async (changeOrderId: string, approvalId: string, comments: string) => {
+    if (!user) return
+
+    const approval: Omit<ChangeOrderApproval, 'id'> = {
+      approverId: user.id,
+      approverName: user.name || user.email,
+      approverRole: user.role,
+      status: 'rejected',
+      comments,
+      date: new Date().toISOString()
+    }
+
+    await approveChangeOrder(changeOrderId, approval)
+  }
+
+  const openDetailModal = (order: ChangeOrder) => {
+    setSelectedOrder(order)
+    setShowDetailModal(true)
+  }
 
   const getStatusBadge = (status: ChangeOrder['status']) => {
     const variants: Record<ChangeOrder['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
@@ -406,15 +449,32 @@ export default function ChangeOrderManagement() {
                       <TableCell>{getStatusBadge(order.status)}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
-                          <Button variant="ghost" size="icon">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => openDetailModal(order)}
+                            title="View details and approvals"
+                          >
                             <Eye className="h-4 w-4" />
                           </Button>
                           {order.status === 'pending_review' && (
                             <>
-                              <Button variant="ghost" size="icon" className="text-green-600">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-green-600"
+                                onClick={() => openDetailModal(order)}
+                                title="Approve"
+                              >
                                 <CheckCircle className="h-4 w-4" />
                               </Button>
-                              <Button variant="ghost" size="icon" className="text-red-600">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-red-600"
+                                onClick={() => openDetailModal(order)}
+                                title="Reject"
+                              >
                                 <XCircle className="h-4 w-4" />
                               </Button>
                             </>
@@ -448,6 +508,19 @@ export default function ChangeOrderManagement() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Change Order Detail Modal with Approval Workflow */}
+      {user && (
+        <ChangeOrderDetail
+          changeOrder={selectedOrder}
+          open={showDetailModal}
+          onOpenChange={setShowDetailModal}
+          currentUserId={user.id}
+          currentUserRole={user.role}
+          onApprove={handleApprove}
+          onReject={handleReject}
+        />
+      )}
     </PageWrapper>
   )
 }
