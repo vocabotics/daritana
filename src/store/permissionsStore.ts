@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { toast } from 'sonner';
 
 export interface Permission {
@@ -2422,29 +2421,13 @@ const defaultGroups: UserGroup[] = [
   }
 ];
 
-// Check if we have existing permissions in localStorage
-const getInitialGroups = () => {
-  const stored = localStorage.getItem('permissions-storage');
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored);
-      if (parsed.state && parsed.state.groups && parsed.state.groups.length >= defaultGroups.length) {
-        // Only use stored groups if we have all the default groups
-        return parsed.state.groups;
-      }
-    } catch (e) {
-      console.error('Failed to parse stored permissions:', e);
-    }
-  }
-  // Return all default groups if stored data is incomplete
-  return defaultGroups;
-};
+// SECURITY: Removed localStorage persistence for permissions
+// Permissions should always be fetched fresh from backend
+// This prevents stale permissions and improves security
 
-export const usePermissionsStore = create<PermissionsState>()(
-  persist(
-    (set, get) => ({
-      groups: getInitialGroups(),
-      currentUserGroup: null,
+export const usePermissionsStore = create<PermissionsState>((set, get) => ({
+  groups: defaultGroups,
+  currentUserGroup: null,
 
       addGroup: (groupData) => {
         const newGroup: UserGroup = {
@@ -2579,15 +2562,4 @@ export const usePermissionsStore = create<PermissionsState>()(
       syncWithBackend: async () => {
         await get().fetchGroups();
       },
-    }),
-    {
-      name: 'permissions-storage',
-      partialize: (state) => ({
-        groups: state.groups,
-        currentUserGroup: state.currentUserGroup
-      }),
-      // Ensure we don't reset to defaults on mount
-      skipHydration: false
-    }
-  )
-);
+    }));
