@@ -482,7 +482,7 @@ export default function ChangeOrderManagement() {
                         </div>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )))}
                 </TableBody>
               </Table>
             </div>

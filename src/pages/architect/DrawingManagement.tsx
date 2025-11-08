@@ -275,7 +275,9 @@ export default function DrawingManagement() {
                               </div>
                             </TableCell>
                           </TableRow>
-                        ))}
+                            )
+                          })
+                        )}
                       </TableBody>
                     </Table>
                   </div>
