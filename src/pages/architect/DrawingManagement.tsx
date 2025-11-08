@@ -101,6 +101,14 @@ export default function DrawingManagement() {
   return (
     <PageWrapper title="Drawing Management">
       <div className="space-y-6">
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">Loading drawings...</span>
+          </div>
+        )}
+
         {/* Header Stats */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           <Card>
@@ -137,7 +145,7 @@ export default function DrawingManagement() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {drawings.reduce((sum, d) => sum + d.revisions, 0)}
+                {drawings.reduce((sum, d) => sum + d.revisions.length, 0)}
               </div>
             </CardContent>
           </Card>
@@ -147,7 +155,7 @@ export default function DrawingManagement() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {drawings.reduce((sum, d) => sum + d.transmittals, 0)}
+                {drawings.reduce((sum, d) => sum + d.transmittals.length, 0)}
               </div>
             </CardContent>
           </Card>
@@ -202,48 +210,65 @@ export default function DrawingManagement() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {drawings.map((drawing) => (
-                          <TableRow key={drawing.id}>
-                            <TableCell className="font-medium">{drawing.number}</TableCell>
-                            <TableCell>{drawing.title}</TableCell>
-                            <TableCell>
-                              <Badge className={getDisciplineColor(drawing.discipline)}>
-                                {drawing.discipline}
-                              </Badge>
+                        {drawings.length === 0 ? (
+                          <TableRow>
+                            <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
+                              No drawings found
                             </TableCell>
-                            <TableCell>
-                              <Badge variant="outline">{drawing.version}</Badge>
-                            </TableCell>
-                            <TableCell>
-                              <div className="flex items-center gap-2">
-                                {getStatusIcon(drawing.status)}
-                                <span className="capitalize">
-                                  {drawing.status.replace('_', ' ')}
-                                </span>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <div className="text-sm">
-                                <p>{format(drawing.uploadDate, 'dd MMM')}</p>
-                                <p className="text-muted-foreground">{drawing.uploadedBy}</p>
-                              </div>
-                            </TableCell>
-                            <TableCell>{drawing.fileSize} MB</TableCell>
-                            <TableCell>
-                              <div className="flex items-center gap-1">
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  onClick={() => {
-                                    setSelectedDrawing(drawing)
-                                    setShowCADViewer(true)
-                                  }}
-                                >
-                                  <Eye className="h-4 w-4" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                  <Download className="h-4 w-4" />
-                                </Button>
+                          </TableRow>
+                        ) : (
+                          drawings.map((drawing) => {
+                            const latestRevision = drawing.revisions.length > 0
+                              ? drawing.revisions[drawing.revisions.length - 1]
+                              : null
+
+                            return (
+                              <TableRow key={drawing.id}>
+                                <TableCell className="font-medium">{drawing.drawingNumber}</TableCell>
+                                <TableCell>{drawing.title}</TableCell>
+                                <TableCell>
+                                  <Badge className={getDisciplineColor(drawing.discipline)}>
+                                    {drawing.discipline}
+                                  </Badge>
+                                </TableCell>
+                                <TableCell>
+                                  <Badge variant="outline">{drawing.currentRevision}</Badge>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex items-center gap-2">
+                                    {getStatusIcon(drawing.status)}
+                                    <span className="capitalize">
+                                      {drawing.status.replace('_', ' ')}
+                                    </span>
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="text-sm">
+                                    <p>{format(new Date(drawing.createdAt), 'dd MMM')}</p>
+                                    <p className="text-muted-foreground">{drawing.createdBy}</p>
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  {latestRevision
+                                    ? `${(latestRevision.fileSize / (1024 * 1024)).toFixed(1)} MB`
+                                    : 'N/A'
+                                  }
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex items-center gap-1">
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      onClick={() => {
+                                        setSelectedDrawing(drawing)
+                                        setShowCADViewer(true)
+                                      }}
+                                    >
+                                      <Eye className="h-4 w-4" />
+                                    </Button>
+                                    <Button variant="ghost" size="icon">
+                                      <Download className="h-4 w-4" />
+                                    </Button>
                                 <Button variant="ghost" size="icon">
                                   <History className="h-4 w-4" />
                                 </Button>
