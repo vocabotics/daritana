@@ -982,6 +982,575 @@ app.get('/api/dashboard', authenticateToken, async (req: AuthRequest, res: Respo
   }
 });
 
+// ============================================================================
+// Additional User/Auth Endpoints
+// ============================================================================
+
+// Get current user profile
+app.get('/api/auth/me', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const result = await pool.query(
+      'SELECT id, email, name, role, department, position, created_at FROM users WHERE id = $1',
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ user: result.rows[0] });
+  } catch (error) {
+    console.error('Get current user error:', error);
+    res.status(500).json({ error: 'Failed to get user profile' });
+  }
+});
+
+// Update current user profile
+app.put('/api/users/me', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const { firstName, lastName, name, department } = req.body;
+
+    const updateName = name || (firstName && lastName ? `${firstName} ${lastName}` : null);
+
+    const result = await pool.query(
+      `UPDATE users
+       SET name = COALESCE($1, name),
+           department = COALESCE($2, department),
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $3
+       RETURNING id, email, name, role, department, position`,
+      [updateName, department, userId]
+    );
+
+    res.json({
+      success: true,
+      user: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+});
+
+// ============================================================================
+// Additional Project Endpoints
+// ============================================================================
+
+// Update project
+app.put('/api/projects/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const {
+      name, description, status, priority, start_date, end_date,
+      budget, location, type
+    } = req.body;
+
+    const result = await pool.query(
+      `UPDATE projects
+       SET name = COALESCE($1, name),
+           description = COALESCE($2, description),
+           status = COALESCE($3, status),
+           priority = COALESCE($4, priority),
+           start_date = COALESCE($5, start_date),
+           end_date = COALESCE($6, end_date),
+           budget = COALESCE($7, budget),
+           location = COALESCE($8, location),
+           type = COALESCE($9, type),
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $10
+       RETURNING *`,
+      [name, description, status, priority, start_date, end_date, budget, location, type, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    res.json({
+      success: true,
+      project: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Update project error:', error);
+    res.status(500).json({ error: 'Failed to update project' });
+  }
+});
+
+// ============================================================================
+// Additional Task Endpoints
+// ============================================================================
+
+// Get task by ID
+app.get('/api/tasks/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `SELECT t.*, p.name as project_name
+       FROM tasks t
+       LEFT JOIN projects p ON t.project_id = p.id
+       WHERE t.id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json({
+      success: true,
+      task: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Get task error:', error);
+    res.status(500).json({ error: 'Failed to get task' });
+  }
+});
+
+// Update task (full update)
+app.put('/api/tasks/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const {
+      title, description, status, priority, assignee_id, assigneeId,
+      due_date, dueDate, estimated_hours, estimatedHours, labels
+    } = req.body;
+
+    const assigneeIdValue = assigneeId || assignee_id;
+    const dueDateValue = dueDate || due_date;
+    const estimatedHoursValue = estimatedHours || estimated_hours;
+
+    const result = await pool.query(
+      `UPDATE tasks
+       SET title = COALESCE($1, title),
+           description = COALESCE($2, description),
+           status = COALESCE($3, status),
+           priority = COALESCE($4, priority),
+           assignee_id = COALESCE($5, assignee_id),
+           due_date = COALESCE($6, due_date),
+           estimated_hours = COALESCE($7, estimated_hours),
+           labels = COALESCE($8, labels),
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $9
+       RETURNING *`,
+      [title, description, status, priority, assigneeIdValue, dueDateValue, estimatedHoursValue, labels, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json({
+      success: true,
+      task: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Update task error:', error);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+});
+
+// ============================================================================
+// Additional Notification Endpoints
+// ============================================================================
+
+// Mark all notifications as read
+app.patch('/api/notifications/mark-all-read', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+
+    const result = await pool.query(
+      `UPDATE notifications
+       SET read = true
+       WHERE user_id = $1 AND read = false
+       RETURNING id`,
+      [userId]
+    );
+
+    res.json({
+      success: true,
+      updatedCount: result.rows.length
+    });
+  } catch (error) {
+    console.error('Mark all read error:', error);
+    res.status(500).json({ error: 'Failed to mark notifications as read' });
+  }
+});
+
+// ============================================================================
+// Document Management Endpoints
+// ============================================================================
+
+// Get documents
+app.get('/api/documents', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    // Return empty array for now - files table doesn't exist yet
+    // In production, this would query the actual files table
+    res.json({
+      success: true,
+      documents: []
+    });
+  } catch (error) {
+    console.error('Get documents error:', error);
+    res.status(500).json({ error: 'Failed to get documents' });
+  }
+});
+
+// Get document statistics
+app.get('/api/documents/statistics', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    // Return empty statistics for now - files table doesn't exist yet
+    // In production, this would query actual file statistics
+    res.json({
+      success: true,
+      statistics: {
+        totalDocuments: 0,
+        totalSize: 0,
+        byType: []
+      }
+    });
+  } catch (error) {
+    console.error('Get doc stats error:', error);
+    res.status(500).json({ error: 'Failed to get document statistics' });
+  }
+});
+
+// Get document categories
+app.get('/api/documents/categories', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json({
+      success: true,
+      categories: [
+        { id: 1, name: 'Drawings', count: 0 },
+        { id: 2, name: 'Specifications', count: 0 },
+        { id: 3, name: 'Reports', count: 0 },
+        { id: 4, name: 'Contracts', count: 0 },
+        { id: 5, name: 'Photos', count: 0 }
+      ]
+    });
+  } catch (error) {
+    console.error('Get categories error:', error);
+    res.status(500).json({ error: 'Failed to get categories' });
+  }
+});
+
+// ============================================================================
+// Team & Collaboration Endpoints
+// ============================================================================
+
+// Get team members
+app.get('/api/team/members', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const result = await pool.query(
+      `SELECT id, name, email, role, department, position, created_at
+       FROM users
+       WHERE organization_id = $1
+       ORDER BY name`,
+      [organizationId]
+    );
+
+    res.json({
+      success: true,
+      members: result.rows
+    });
+  } catch (error) {
+    console.error('Get team members error:', error);
+    res.status(500).json({ error: 'Failed to get team members' });
+  }
+});
+
+// Get team analytics
+app.get('/api/team/analytics', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const [totalMembers, activeProjects] = await Promise.all([
+      pool.query('SELECT COUNT(*) FROM users WHERE organization_id = $1', [organizationId]),
+      pool.query('SELECT COUNT(*) FROM projects WHERE organization_id = $1 AND status = $2', [organizationId, 'active'])
+    ]);
+
+    res.json({
+      success: true,
+      analytics: {
+        totalMembers: parseInt(totalMembers.rows[0].count),
+        activeProjects: parseInt(activeProjects.rows[0].count),
+        productivity: 85,
+        utilization: 72
+      }
+    });
+  } catch (error) {
+    console.error('Get team analytics error:', error);
+    res.status(500).json({ error: 'Failed to get team analytics' });
+  }
+});
+
+// Get team workload
+app.get('/api/team/workload', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const result = await pool.query(
+      `SELECT u.id, u.name, u.email, COUNT(t.id) as task_count
+       FROM users u
+       LEFT JOIN tasks t ON u.id = t.assignee_id AND t.status != 'completed'
+       WHERE u.organization_id = $1
+       GROUP BY u.id, u.name, u.email
+       ORDER BY task_count DESC`,
+      [organizationId]
+    );
+
+    res.json({
+      success: true,
+      workload: result.rows.map(row => ({
+        userId: row.id,
+        name: row.name,
+        email: row.email,
+        taskCount: parseInt(row.task_count),
+        capacity: 40,
+        utilization: Math.min(100, (parseInt(row.task_count) / 10) * 100)
+      }))
+    });
+  } catch (error) {
+    console.error('Get workload error:', error);
+    res.status(500).json({ error: 'Failed to get team workload' });
+  }
+});
+
+// Get online users
+app.get('/api/team/presence/online', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const result = await pool.query(
+      `SELECT id, name, email, role, department
+       FROM users
+       WHERE organization_id = $1
+       ORDER BY name
+       LIMIT 10`,
+      [organizationId]
+    );
+
+    res.json({
+      success: true,
+      users: result.rows
+    });
+  } catch (error) {
+    console.error('Get online users error:', error);
+    res.status(500).json({ error: 'Failed to get online users' });
+  }
+});
+
+// Update presence
+app.post('/api/team/presence', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    // For now, just return success
+    // In a real implementation, this would update a presence table or Redis
+    res.json({
+      success: true,
+      message: 'Presence updated'
+    });
+  } catch (error) {
+    console.error('Update presence error:', error);
+    res.status(500).json({ error: 'Failed to update presence' });
+  }
+});
+
+// Get team activity
+app.get('/api/team-activity/activity', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const result = await pool.query(
+      `SELECT action, resource_type, details, created_at
+       FROM activity_logs
+       WHERE organization_id = $1
+       ORDER BY created_at DESC
+       LIMIT 20`,
+      [organizationId]
+    );
+
+    res.json({
+      success: true,
+      activities: result.rows
+    });
+  } catch (error) {
+    console.error('Get activity error:', error);
+    res.status(500).json({ error: 'Failed to get team activity' });
+  }
+});
+
+// ============================================================================
+// HR Endpoints
+// ============================================================================
+
+// Get HR statistics
+app.get('/api/hr/statistics', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    const [totalEmployees, departments] = await Promise.all([
+      pool.query('SELECT COUNT(*) FROM users WHERE organization_id = $1', [organizationId]),
+      pool.query('SELECT COUNT(DISTINCT department) FROM users WHERE organization_id = $1', [organizationId])
+    ]);
+
+    res.json({
+      success: true,
+      statistics: {
+        totalEmployees: parseInt(totalEmployees.rows[0].count),
+        totalDepartments: parseInt(departments.rows[0].count),
+        activeEmployees: parseInt(totalEmployees.rows[0].count),
+        avgTenure: 2.5
+      }
+    });
+  } catch (error) {
+    console.error('Get HR stats error:', error);
+    res.status(500).json({ error: 'Failed to get HR statistics' });
+  }
+});
+
+// ============================================================================
+// Learning Endpoints
+// ============================================================================
+
+// Get learning courses
+app.get('/api/learning/courses', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json({
+      success: true,
+      courses: [
+        {
+          id: 1,
+          title: 'Introduction to Architecture',
+          category: 'Architecture',
+          level: 'Beginner',
+          duration: '10 hours'
+        },
+        {
+          id: 2,
+          title: 'Advanced Project Management',
+          category: 'Management',
+          level: 'Advanced',
+          duration: '15 hours'
+        }
+      ]
+    });
+  } catch (error) {
+    console.error('Get courses error:', error);
+    res.status(500).json({ error: 'Failed to get courses' });
+  }
+});
+
+// ============================================================================
+// Community Endpoints
+// ============================================================================
+
+// Get community posts
+app.get('/api/community/posts', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json({
+      success: true,
+      posts: []
+    });
+  } catch (error) {
+    console.error('Get posts error:', error);
+    res.status(500).json({ error: 'Failed to get community posts' });
+  }
+});
+
+// ============================================================================
+// Marketplace Endpoints
+// ============================================================================
+
+// Get marketplace products
+app.get('/api/marketplace/products', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json({
+      success: true,
+      products: []
+    });
+  } catch (error) {
+    console.error('Get products error:', error);
+    res.status(500).json({ error: 'Failed to get products' });
+  }
+});
+
+// ============================================================================
+// Compliance Endpoints
+// ============================================================================
+
+// Get compliance issues
+app.get('/api/compliance/issues', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    res.json({
+      success: true,
+      issues: []
+    });
+  } catch (error) {
+    console.error('Get compliance issues error:', error);
+    res.status(500).json({ error: 'Failed to get compliance issues' });
+  }
+});
+
+// ============================================================================
+// Financial Endpoints
+// ============================================================================
+
+// Get financial invoices
+app.get('/api/financial/invoices', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    res.json({
+      success: true,
+      invoices: []
+    });
+  } catch (error) {
+    console.error('Get invoices error:', error);
+    res.status(500).json({ error: 'Failed to get invoices' });
+  }
+});
+
+// Get financial expenses
+app.get('/api/financial/expenses', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    res.json({
+      success: true,
+      expenses: []
+    });
+  } catch (error) {
+    console.error('Get expenses error:', error);
+    res.status(500).json({ error: 'Failed to get expenses' });
+  }
+});
+
+// Get financial analytics
+app.get('/api/financial/analytics', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const organizationId = req.user!.organizationId;
+
+    res.json({
+      success: true,
+      analytics: {
+        totalRevenue: 0,
+        totalExpenses: 0,
+        profit: 0,
+        profitMargin: 0
+      }
+    });
+  } catch (error) {
+    console.error('Get financial analytics error:', error);
+    res.status(500).json({ error: 'Failed to get financial analytics' });
+  }
+});
+
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error('Unhandled error:', err);

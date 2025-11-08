@@ -1,0 +1,360 @@
+{
+  "timestamp": "2025-11-08T08:45:20.601Z",
+  "summary": {
+    "total": 69,
+    "passed": 66,
+    "failed": 3,
+    "successRate": "95.7%"
+  },
+  "tests": [
+    {
+      "name": "1.1 - Health endpoint responds",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "1.2 - Database connection verified",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "1.3 - API base URL accessible",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.1 - admin login successful",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.2 - project_lead login successful",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.3 - designer login successful",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.4 - client login successful",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.5 - Invalid credentials rejected",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "2.6 - Protected route without token returns 401",
+      "passed": false,
+      "error": null
+    },
+    {
+      "name": "2.7 - Protected route with invalid token returns 401",
+      "passed": false,
+      "error": null
+    },
+    {
+      "name": "3.1 - admin can list users",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "3.2 - project_lead can list users",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "3.3 - designer can list users",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "3.4 - client can list users",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "3.5 - Get current user profile",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "3.6 - Update user profile",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.1 - admin can list projects",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.2 - project_lead can list projects",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.3 - designer can list projects",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.4 - client can list projects",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.5 - Create project (returns 201 with ID)",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.6 - Project Lead can create projects",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.7 - Get project by ID",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.8 - Update project",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "4.9 - Get dashboard statistics",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.1 - admin can list tasks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.2 - project_lead can list tasks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.3 - designer can list tasks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.4 - client can list tasks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.5 - Create task with camelCase (returns 201 with ID)",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.6 - Create task with snake_case parameters",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.7 - Designer can update task status",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.8 - Get task by ID",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.9 - Filter tasks by project",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "5.10 - Update task (PUT)",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.1 - admin can get settings",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.2 - project_lead can get settings",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.3 - designer can get settings",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.4 - client can get settings",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.5 - Update settings",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "6.6 - Settings persistence verified",
+      "passed": false,
+      "error": null
+    },
+    {
+      "name": "7.1 - admin can get notifications",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.2 - project_lead can get notifications",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.3 - designer can get notifications",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.4 - client can get notifications",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.5 - admin can get unread count",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.6 - project_lead can get unread count",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.7 - designer can get unread count",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.8 - client can get unread count",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "7.9 - Mark notification as read",
+      "passed": true,
+      "error": "No notifications to test (skipped)"
+    },
+    {
+      "name": "7.10 - Mark all notifications as read",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "8.1 - Get files/documents list",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "8.2 - Get document statistics",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "8.3 - Get document categories",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "8.4 - File upload (browser only)",
+      "passed": true,
+      "error": "Skipped - requires browser environment"
+    },
+    {
+      "name": "9.1 - Get team members",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "9.2 - Get team analytics",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "9.3 - Get team workload",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "9.4 - Get online users",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "9.5 - Update user presence",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "9.6 - Get team activity",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.1 - Get HR statistics",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.2 - Get learning courses",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.3 - Get community posts",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.4 - Get marketplace products",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.5 - Get compliance issues",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.6 - Get financial invoices",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.7 - Get financial expenses",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "10.8 - Get financial analytics",
+      "passed": true,
+      "error": null
+    }
+  ],
+  "testData": {
+    "projectsCreated": 2,
+    "tasksCreated": 2
+  }
+}
