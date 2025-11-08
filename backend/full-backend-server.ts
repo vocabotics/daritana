@@ -305,7 +305,7 @@ async function authenticateToken(req: AuthRequest, res: Response, next: NextFunc
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(403).json({ error: 'Invalid or expired token' });
+    return res.status(401).json({ error: 'Invalid or expired token' });
   }
 }
 
@@ -656,8 +656,9 @@ app.post('/api/projects', authenticateToken, async (req: AuthRequest, res: Respo
        organizationId, userId, location, type]
     );
 
-    res.json({
+    res.status(201).json({
       success: true,
+      id: result.rows[0].id,
       project: result.rows[0]
     });
   } catch (error) {
@@ -765,14 +766,24 @@ app.post('/api/tasks', authenticateToken, async (req: AuthRequest, res: Response
       status = 'todo',
       priority = 'medium',
       project_id,
+      projectId, // Support camelCase
       assignee_id,
+      assigneeId, // Support camelCase
       due_date,
+      dueDate, // Support camelCase
       estimated_hours,
+      estimatedHours, // Support camelCase
       labels
     } = req.body;
 
-    if (!title || !project_id) {
-      return res.status(400).json({ error: 'Title and project_id are required' });
+    // Use camelCase if provided, otherwise use snake_case
+    const projectIdValue = projectId || project_id;
+    const assigneeIdValue = assigneeId || assignee_id;
+    const dueDateValue = dueDate || due_date;
+    const estimatedHoursValue = estimatedHours || estimated_hours;
+
+    if (!title || !projectIdValue) {
+      return res.status(400).json({ error: 'Title and projectId are required' });
     }
 
     const result = await pool.query(
@@ -781,12 +792,13 @@ app.post('/api/tasks', authenticateToken, async (req: AuthRequest, res: Response
         reporter_id, due_date, estimated_hours, labels)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
        RETURNING *`,
-      [title, description, status, priority, project_id, assignee_id,
-       userId, due_date, estimated_hours, labels]
+      [title, description, status, priority, projectIdValue, assigneeIdValue,
+       userId, dueDateValue, estimatedHoursValue, labels]
     );
 
-    res.json({
+    res.status(201).json({
       success: true,
+      id: result.rows[0].id,
       task: result.rows[0]
     });
   } catch (error) {
