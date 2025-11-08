@@ -18,6 +18,7 @@ interface DrawingStore {
   createRevision: (drawingId: string, file: File, revision: Omit<DrawingRevision, 'id' | 'fileUrl' | 'fileSize'>) => Promise<DrawingRevision>;
   updateDrawingStatus: (id: string, status: Drawing['status']) => Promise<void>;
   createTransmittal: (transmittal: Omit<DrawingTransmittal, 'id' | 'transmittalNumber' | 'sentDate'>) => Promise<DrawingTransmittal>;
+  acknowledgeTransmittal: (transmittalId: string) => Promise<void>;
   fetchTransmittals: (projectId: string) => Promise<void>;
   setFilters: (filters: DrawingFilters) => void;
   clearFilters: () => void;
@@ -142,6 +143,21 @@ export const useDrawingStore = create<DrawingStore>((set, get) => ({
     } catch (error) {
       set({ error: 'Failed to create transmittal', loading: false });
       console.error(error);
+      throw error;
+    }
+  },
+
+  // Acknowledge transmittal
+  acknowledgeTransmittal: async (transmittalId: string) => {
+    try {
+      await drawingService.acknowledgeTransmittal(transmittalId);
+      set((state) => ({
+        transmittals: state.transmittals.map(t =>
+          t.id === transmittalId ? { ...t, status: 'acknowledged' as const } : t
+        )
+      }));
+    } catch (error) {
+      console.error('Failed to acknowledge transmittal:', error);
       throw error;
     }
   },

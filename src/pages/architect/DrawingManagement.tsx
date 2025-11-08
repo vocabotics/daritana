@@ -42,23 +42,29 @@ import { format } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
 import CADViewer from '@/components/architect/CADViewer'
+import { DrawingTransmittalList } from '@/components/architect/DrawingTransmittalList'
 import { useDrawingStore } from '@/store/architect/drawingStore'
-import type { Drawing } from '@/types/architect'
+import type { Drawing, DrawingTransmittal } from '@/types/architect'
 
 export default function DrawingManagement() {
   // Zustand store
   const {
     drawings,
+    transmittals,
     loading,
     error,
     fetchDrawings,
+    fetchTransmittals,
+    createTransmittal,
+    acknowledgeTransmittal,
     clearError
   } = useDrawingStore()
 
   // Load data on mount
   useEffect(() => {
     fetchDrawings()
-  }, [fetchDrawings])
+    fetchTransmittals('current-project')
+  }, [fetchDrawings, fetchTransmittals])
 
   // Error handling
   useEffect(() => {
@@ -96,6 +102,28 @@ export default function DrawingManagement() {
       case 'as_built':
         return <Building className="h-4 w-4 text-purple-500" />
     }
+  }
+
+  // Transmittal handlers
+  const handleCreateTransmittal = async (transmittal: Omit<DrawingTransmittal, 'id'>) => {
+    try {
+      await createTransmittal(transmittal)
+    } catch (error) {
+      console.error('Failed to create transmittal:', error)
+    }
+  }
+
+  const handleAcknowledgeTransmittal = async (transmittalId: string) => {
+    try {
+      await acknowledgeTransmittal(transmittalId)
+    } catch (error) {
+      console.error('Failed to acknowledge transmittal:', error)
+    }
+  }
+
+  const handleViewTransmittalDetails = (transmittal: DrawingTransmittal) => {
+    // TODO: Open detail modal or navigate to detail page
+    toast.info(`Viewing transmittal: ${transmittal.transmittalNumber}`)
   }
 
   return (
@@ -312,14 +340,13 @@ export default function DrawingManagement() {
           </TabsContent>
 
           <TabsContent value="transmittals">
-            <Card>
-              <CardHeader>
-                <CardTitle>Drawing Transmittals</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Transmittal log and history will be displayed here</p>
-              </CardContent>
-            </Card>
+            <DrawingTransmittalList
+              transmittals={transmittals}
+              drawings={drawings}
+              onCreateTransmittal={handleCreateTransmittal}
+              onAcknowledge={handleAcknowledgeTransmittal}
+              onViewDetails={handleViewTransmittalDetails}
+            />
           </TabsContent>
 
           <TabsContent value="viewer">
