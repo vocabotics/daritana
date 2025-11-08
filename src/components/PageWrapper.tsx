@@ -47,7 +47,7 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
 };
 
 // Hook for page-level async operations
-export const usePageData = <T>(
+export function usePageData<T>(
   loadData: () => Promise<T>,
   dependencies: any[] = [],
   options?: {
@@ -56,7 +56,7 @@ export const usePageData = <T>(
     loadingMessage?: string;
     errorMessage?: string;
   }
-) => {
+) {
   const asyncState = useAsyncState<T>();
 
   React.useEffect(() => {
@@ -104,6 +104,8 @@ export const withPageWrapper = <P extends object>(
   );
   
   WrappedComponent.displayName = `withPageWrapper(${Component.displayName || Component.name})`;
-  
+
   return WrappedComponent;
 };
+
+export default PageWrapper;

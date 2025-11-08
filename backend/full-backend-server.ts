@@ -7,6 +7,14 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
 
+// Import architect services
+import { rfiService } from './services/rfi.service';
+import { changeOrderService } from './services/changeOrder.service';
+import { drawingService } from './services/drawing.service';
+import { siteVisitService } from './services/siteVisit.service';
+import { punchListService } from './services/punchList.service';
+import { pamContractService } from './services/pamContract.service';
+
 // Load environment variables
 dotenv.config();
 
@@ -1558,6 +1566,284 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     error: 'Internal server error',
     message: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
+});
+
+// ============================================================================
+// Architect Feature Endpoints
+// ============================================================================
+
+// RFI Management
+app.get('/api/rfis', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const rfis = await rfiService.getRFIs(projectId);
+    res.json({ success: true, data: rfis });
+  } catch (error) {
+    console.error('Get RFIs error:', error);
+    res.status(500).json({ error: 'Failed to get RFIs' });
+  }
+});
+
+app.post('/api/rfis', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const rfi = await rfiService.createRFI({
+      ...req.body,
+      submittedBy: userId
+    });
+    res.json({ success: true, data: rfi });
+  } catch (error) {
+    console.error('Create RFI error:', error);
+    res.status(500).json({ error: 'Failed to create RFI' });
+  }
+});
+
+app.put('/api/rfis/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const rfi = await rfiService.updateRFI(req.params.id, req.body);
+    res.json({ success: true, data: rfi });
+  } catch (error) {
+    console.error('Update RFI error:', error);
+    res.status(500).json({ error: 'Failed to update RFI' });
+  }
+});
+
+app.patch('/api/rfis/:id/status', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const { status, response } = req.body;
+    const rfi = await rfiService.updateRFIStatus(req.params.id, status, response);
+    res.json({ success: true, data: rfi });
+  } catch (error) {
+    console.error('Update RFI status error:', error);
+    res.status(500).json({ error: 'Failed to update RFI status' });
+  }
+});
+
+// Change Order Management
+app.get('/api/change-orders', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const changeOrders = await changeOrderService.getChangeOrders(projectId);
+    res.json({ success: true, data: changeOrders });
+  } catch (error) {
+    console.error('Get change orders error:', error);
+    res.status(500).json({ error: 'Failed to get change orders' });
+  }
+});
+
+app.post('/api/change-orders', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const changeOrder = await changeOrderService.createChangeOrder({
+      ...req.body,
+      createdBy: userId
+    });
+    res.json({ success: true, data: changeOrder });
+  } catch (error) {
+    console.error('Create change order error:', error);
+    res.status(500).json({ error: 'Failed to create change order' });
+  }
+});
+
+app.put('/api/change-orders/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const changeOrder = await changeOrderService.updateChangeOrder(req.params.id, req.body);
+    res.json({ success: true, data: changeOrder });
+  } catch (error) {
+    console.error('Update change order error:', error);
+    res.status(500).json({ error: 'Failed to update change order' });
+  }
+});
+
+app.patch('/api/change-orders/:id/approve', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const changeOrder = await changeOrderService.approveChangeOrder(req.params.id, userId);
+    res.json({ success: true, data: changeOrder });
+  } catch (error) {
+    console.error('Approve change order error:', error);
+    res.status(500).json({ error: 'Failed to approve change order' });
+  }
+});
+
+// Drawing Management
+app.get('/api/drawings', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const drawings = await drawingService.getDrawings(projectId);
+    res.json({ success: true, data: drawings });
+  } catch (error) {
+    console.error('Get drawings error:', error);
+    res.status(500).json({ error: 'Failed to get drawings' });
+  }
+});
+
+app.post('/api/drawings', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const drawing = await drawingService.uploadDrawing({
+      ...req.body,
+      uploadedBy: userId
+    });
+    res.json({ success: true, data: drawing });
+  } catch (error) {
+    console.error('Upload drawing error:', error);
+    res.status(500).json({ error: 'Failed to upload drawing' });
+  }
+});
+
+app.put('/api/drawings/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const drawing = await drawingService.updateDrawing(req.params.id, req.body);
+    res.json({ success: true, data: drawing });
+  } catch (error) {
+    console.error('Update drawing error:', error);
+    res.status(500).json({ error: 'Failed to update drawing' });
+  }
+});
+
+// Site Visit Reports
+app.get('/api/site-visits', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const visits = await siteVisitService.getSiteVisits(projectId);
+    res.json({ success: true, data: visits });
+  } catch (error) {
+    console.error('Get site visits error:', error);
+    res.status(500).json({ error: 'Failed to get site visits' });
+  }
+});
+
+app.post('/api/site-visits', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const visit = await siteVisitService.createSiteVisit({
+      ...req.body,
+      inspector: userId
+    });
+    res.json({ success: true, data: visit });
+  } catch (error) {
+    console.error('Create site visit error:', error);
+    res.status(500).json({ error: 'Failed to create site visit' });
+  }
+});
+
+app.put('/api/site-visits/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const visit = await siteVisitService.updateSiteVisit(req.params.id, req.body);
+    res.json({ success: true, data: visit });
+  } catch (error) {
+    console.error('Update site visit error:', error);
+    res.status(500).json({ error: 'Failed to update site visit' });
+  }
+});
+
+// Punch List Management
+app.get('/api/punch-list', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const items = await punchListService.getPunchListItems(projectId);
+    res.json({ success: true, data: items });
+  } catch (error) {
+    console.error('Get punch list error:', error);
+    res.status(500).json({ error: 'Failed to get punch list' });
+  }
+});
+
+app.post('/api/punch-list', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const item = await punchListService.createPunchListItem({
+      ...req.body,
+      createdBy: userId
+    });
+    res.json({ success: true, data: item });
+  } catch (error) {
+    console.error('Create punch list item error:', error);
+    res.status(500).json({ error: 'Failed to create punch list item' });
+  }
+});
+
+app.put('/api/punch-list/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const item = await punchListService.updatePunchListItem(req.params.id, req.body);
+    res.json({ success: true, data: item });
+  } catch (error) {
+    console.error('Update punch list item error:', error);
+    res.status(500).json({ error: 'Failed to update punch list item' });
+  }
+});
+
+app.patch('/api/punch-list/:id/complete', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const item = await punchListService.completePunchListItem(req.params.id, userId);
+    res.json({ success: true, data: item });
+  } catch (error) {
+    console.error('Complete punch list item error:', error);
+    res.status(500).json({ error: 'Failed to complete punch list item' });
+  }
+});
+
+// PAM Contract Administration
+app.get('/api/pam-contracts', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.query.projectId as string;
+    const contracts = await pamContractService.getContracts(projectId);
+    res.json({ success: true, data: contracts });
+  } catch (error) {
+    console.error('Get PAM contracts error:', error);
+    res.status(500).json({ error: 'Failed to get PAM contracts' });
+  }
+});
+
+app.post('/api/pam-contracts', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const contract = await pamContractService.createContract({
+      ...req.body,
+      createdBy: userId
+    });
+    res.json({ success: true, data: contract });
+  } catch (error) {
+    console.error('Create PAM contract error:', error);
+    res.status(500).json({ error: 'Failed to create PAM contract' });
+  }
+});
+
+app.put('/api/pam-contracts/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const contract = await pamContractService.updateContract(req.params.id, req.body);
+    res.json({ success: true, data: contract });
+  } catch (error) {
+    console.error('Update PAM contract error:', error);
+    res.status(500).json({ error: 'Failed to update PAM contract' });
+  }
+});
+
+// Payment Certificates
+app.get('/api/pam-contracts/:id/certificates', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const certificates = await pamContractService.getPaymentCertificates(req.params.id);
+    res.json({ success: true, data: certificates });
+  } catch (error) {
+    console.error('Get payment certificates error:', error);
+    res.status(500).json({ error: 'Failed to get payment certificates' });
+  }
+});
+
+app.post('/api/pam-contracts/:id/certificates', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const certificate = await pamContractService.createPaymentCertificate(req.params.id, {
+      ...req.body,
+      issuedBy: userId
+    });
+    res.json({ success: true, data: certificate });
+  } catch (error) {
+    console.error('Create payment certificate error:', error);
+    res.status(500).json({ error: 'Failed to create payment certificate' });
+  }
 });
 
 // 404 handler

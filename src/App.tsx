@@ -52,6 +52,14 @@ const Integrations = lazy(() => import('@/pages/Integrations'));
 const SecurityEnhanced = lazy(() => import('@/pages/SecurityEnhanced'));
 const Performance = lazy(() => import('@/pages/Performance'));
 
+// Architect feature pages
+const RFIManagement = lazy(() => import('@/pages/architect/RFIManagement'));
+const ChangeOrderManagement = lazy(() => import('@/pages/architect/ChangeOrderManagement'));
+const DrawingManagement = lazy(() => import('@/pages/architect/DrawingManagement'));
+const SiteVisitReports = lazy(() => import('@/pages/architect/SiteVisitReports'));
+const PunchListManagement = lazy(() => import('@/pages/architect/PunchListManagement'));
+const PAMContractAdmin = lazy(() => import('@/pages/architect/PAMContractAdmin'));
+
 function App() {
   const { isAuthenticated, user, checkAuth, isLoading, isNewOrganization, needsMemberOnboarding, needsVendorOnboarding } = useAuthStore();
   const baseUrl = import.meta.env.BASE_URL || '/';
@@ -203,7 +211,39 @@ function App() {
                 <Route path="/search-results" element={<SearchResults />} />
                 <Route path="/test" element={<TestChecklist />} />
                 <Route path="/billing" element={<Billing />} />
-                
+
+                {/* Architect Feature Routes */}
+                <Route path="/architect/rfi" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading RFI Management...</div>}>
+                    <RFIManagement />
+                  </Suspense>
+                } />
+                <Route path="/architect/change-orders" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Change Orders...</div>}>
+                    <ChangeOrderManagement />
+                  </Suspense>
+                } />
+                <Route path="/architect/drawings" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Drawing Management...</div>}>
+                    <DrawingManagement />
+                  </Suspense>
+                } />
+                <Route path="/architect/site-visits" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Site Visits...</div>}>
+                    <SiteVisitReports />
+                  </Suspense>
+                } />
+                <Route path="/architect/punch-list" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Punch List...</div>}>
+                    <PunchListManagement />
+                  </Suspense>
+                } />
+                <Route path="/architect/contracts" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Contract Admin...</div>}>
+                    <PAMContractAdmin />
+                  </Suspense>
+                } />
+
                 {/* New Feature Routes with Lazy Loading */}
                 <Route path="/analytics" element={
                   <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Analytics...</div>}>

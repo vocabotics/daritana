@@ -505,9 +505,21 @@ export const OnboardingWizard: React.FC = () => {
       const nameParts = (user?.name || 'Admin User').split(' ')
       const adminFirstName = nameParts[0] || 'Admin'
       const adminLastName = nameParts.slice(1).join(' ') || 'User'
-      
-      // Generate a temporary password (in production, should prompt user)
-      const adminPassword = 'TempPassword123!' // TODO: Add password field in organization step
+
+      // Generate a secure random password
+      const generateSecurePassword = () => {
+        const length = 16
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()'
+        let password = ''
+        const array = new Uint8Array(length)
+        crypto.getRandomValues(array)
+        for (let i = 0; i < length; i++) {
+          password += charset[array[i] % charset.length]
+        }
+        return password
+      }
+
+      const adminPassword = generateSecurePassword()
       
       // Map plan selection to UUID
       const planMap: Record<string, string> = {

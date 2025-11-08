@@ -61,6 +61,7 @@
     "cmdk": "latest",
     "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
+    "dxf-parser": "^1.1.2",
     "embla-carousel-react": "^8.5.1",
     "framer-motion": "^12.23.12",
     "googleapis": "^155.0.1",
