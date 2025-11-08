@@ -35,7 +35,13 @@ import {
   Activity,
   Zap,
   Lock,
-  HardHat
+  HardHat,
+  Ruler,
+  ClipboardList,
+  Edit3,
+  Construction,
+  ClipboardCheck,
+  FileSignature
 } from 'lucide-react';
 
 // Global navigation (when in global mode)
@@ -73,6 +79,19 @@ const globalNavigation = {
     { name: 'ARIA Assistant', href: '/aria', icon: Brain, description: 'AI Work Manager', highlight: true },
     { name: 'Construction Monitor', href: '/construction/1', icon: HardHat, description: 'Site Progress Tracking' },
     { name: 'Enterprise PM', href: '/enterprise-pm', icon: Briefcase, description: 'Advanced PM Tools' },
+
+    // Architect Tools
+    { name: 'divider', label: 'ARCHITECT TOOLS' },
+    { name: 'RFI Management', href: '/architect/rfi', icon: ClipboardList, description: 'Request for Information' },
+    { name: 'Change Orders', href: '/architect/change-orders', icon: Edit3, description: 'Variation management' },
+    { name: 'Drawings', href: '/architect/drawings', icon: Ruler, description: 'Drawing register' },
+    { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
+    { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
+    { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
+    { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
+
+    { name: 'divider', label: 'COMPANY' },
     { name: 'HR Management', href: '/hr', icon: UserCheck, description: 'Human Resources' },
     { name: 'Learning Platform', href: '/learning', icon: GraduationCap, description: 'Digital Learning' },
     { name: 'Analytics', href: '/analytics', icon: Activity, description: 'Advanced analytics' },
@@ -100,27 +119,38 @@ const globalNavigation = {
     // Main
     { name: 'Dashboard', href: '/dashboard', icon: Home, description: 'Leadership overview' },
     { name: 'ARIA AI', href: '/aria', icon: Brain, description: 'AI Assistant' },
-    
+
     // Project Management
     { name: 'divider', label: 'PROJECT MANAGEMENT' },
     { name: 'Projects', href: '/projects', icon: FolderOpen, description: 'All projects' },
     { name: 'Enterprise PM', href: '/enterprise-pm', icon: Briefcase, description: 'Advanced tools' },
     { name: 'Construction', href: '/construction/1', icon: HardHat, description: 'Site monitoring' },
     { name: 'Calendar', href: '/calendar', icon: Calendar, description: 'Schedule' },
-    
+
+    // Architect Tools
+    { name: 'divider', label: 'ARCHITECT TOOLS' },
+    { name: 'RFI Management', href: '/architect/rfi', icon: ClipboardList, description: 'Request for Information' },
+    { name: 'Change Orders', href: '/architect/change-orders', icon: Edit3, description: 'Variation management' },
+    { name: 'Drawings', href: '/architect/drawings', icon: Ruler, description: 'Drawing register' },
+    { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
+    { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
+    { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
+    { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
+
     // Operations
     { name: 'divider', label: 'OPERATIONS' },
     { name: 'Financial', href: '/financial', icon: DollarSign, description: 'Finance & Budget' },
     { name: 'HR Management', href: '/hr', icon: UserCheck, description: 'Human resources' },
     { name: 'Virtual Studio', href: '/team', icon: Users, description: 'Team workspace' },
     { name: 'Documents', href: '/documents', icon: FileText, description: 'File management' },
-    
+
     // Analytics & Compliance
     { name: 'divider', label: 'INSIGHTS' },
     { name: 'Analytics', href: '/analytics', icon: Activity, description: 'Data analytics' },
     { name: 'Reports', href: '/reports', icon: BarChart3, description: 'Reports' },
     { name: 'Compliance', href: '/compliance', icon: Shield, description: 'Regulations' },
-    
+
     // System
     { name: 'divider', label: 'SYSTEM' },
     { name: 'Integrations', href: '/integrations', icon: Plug, description: 'Apps' },
@@ -135,6 +165,19 @@ const globalNavigation = {
     { name: 'Design Tasks', href: '/tasks', icon: CheckSquare, description: 'Creative assignments' },
     { name: 'Design Briefs', href: '/design-brief', icon: Palette, description: 'Client requirements' },
     { name: 'Documents', href: '/documents', icon: FileText, description: 'Design documents' },
+
+    // Architect Tools
+    { name: 'divider', label: 'ARCHITECT TOOLS' },
+    { name: 'RFI Management', href: '/architect/rfi', icon: ClipboardList, description: 'Request for Information', highlight: true },
+    { name: 'Change Orders', href: '/architect/change-orders', icon: Edit3, description: 'Variation management' },
+    { name: 'Drawings', href: '/architect/drawings', icon: Ruler, description: 'Drawing register' },
+    { name: 'Site Visits', href: '/architect/site-visits', icon: Construction, description: 'Site inspections' },
+    { name: 'Punch List', href: '/architect/punch-list', icon: ClipboardCheck, description: 'Defect tracking' },
+    { name: 'PAM Contracts', href: '/architect/contracts', icon: FileSignature, description: 'Contract admin' },
+    { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
+    { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
+
+    { name: 'divider', label: 'PROFESSIONAL' },
     { name: 'Portfolio', href: '/portfolio', icon: Layers, description: 'Your work showcase' },
     { name: 'Marketplace', href: '/marketplace', icon: TrendingUp, description: 'Find opportunities' },
     { name: 'Community', href: '/community', icon: Globe, description: 'Designer network' },

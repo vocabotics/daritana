@@ -59,6 +59,8 @@ const DrawingManagement = lazy(() => import('@/pages/architect/DrawingManagement
 const SiteVisitReports = lazy(() => import('@/pages/architect/SiteVisitReports'));
 const PunchListManagement = lazy(() => import('@/pages/architect/PunchListManagement'));
 const PAMContractAdmin = lazy(() => import('@/pages/architect/PAMContractAdmin'));
+const UBBLCompliance = lazy(() => import('@/pages/architect/UBBLCompliance'));
+const AuthorityTracking = lazy(() => import('@/pages/architect/AuthorityTracking'));
 
 function App() {
   const { isAuthenticated, user, checkAuth, isLoading, isNewOrganization, needsMemberOnboarding, needsVendorOnboarding } = useAuthStore();
@@ -241,6 +243,16 @@ function App() {
                 <Route path="/architect/contracts" element={
                   <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Contract Admin...</div>}>
                     <PAMContractAdmin />
+                  </Suspense>
+                } />
+                <Route path="/architect/ubbl" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading UBBL Compliance...</div>}>
+                    <UBBLCompliance />
+                  </Suspense>
+                } />
+                <Route path="/architect/authorities" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Authority Tracking...</div>}>
+                    <AuthorityTracking />
                   </Suspense>
                 } />
 
