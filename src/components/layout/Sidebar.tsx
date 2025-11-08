@@ -42,7 +42,8 @@ import {
   Construction,
   ClipboardCheck,
   FileSignature,
-  Receipt
+  Receipt,
+  Upload
 } from 'lucide-react';
 
 // Global navigation (when in global mode)
@@ -92,6 +93,10 @@ const globalNavigation = {
     { name: 'Payment Certificates', href: '/architect/payment-certificates', icon: Receipt, description: 'PAM certificates', highlight: true },
     { name: 'UBBL Compliance', href: '/architect/ubbl', icon: Shield, description: 'Building compliance' },
     { name: 'Authorities', href: '/architect/authorities', icon: Building, description: 'Submissions tracking' },
+    { name: 'Site Instructions', href: '/architect/site-instructions', icon: FileSignature, description: 'AI register', highlight: true },
+    { name: 'Submittals', href: '/architect/submittals', icon: Upload, description: 'Submittal tracking' },
+    { name: 'Meeting Minutes', href: '/architect/meeting-minutes', icon: Users, description: 'Meeting records' },
+    { name: 'DLP Management', href: '/architect/dlp', icon: Shield, description: 'Defects liability' },
 
     { name: 'divider', label: 'COMPANY' },
     { name: 'HR Management', href: '/hr', icon: UserCheck, description: 'Human Resources' },

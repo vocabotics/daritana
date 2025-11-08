@@ -62,6 +62,10 @@ const PAMContractAdmin = lazy(() => import('@/pages/architect/PAMContractAdmin')
 const UBBLCompliance = lazy(() => import('@/pages/architect/UBBLCompliance'));
 const AuthorityTracking = lazy(() => import('@/pages/architect/AuthorityTracking'));
 const PaymentCertificates = lazy(() => import('@/pages/architect/PaymentCertificates'));
+const SiteInstructionRegister = lazy(() => import('@/pages/architect/SiteInstructionRegister'));
+const SubmittalTracking = lazy(() => import('@/pages/architect/SubmittalTracking'));
+const MeetingMinutes = lazy(() => import('@/pages/architect/MeetingMinutes'));
+const DLPManagement = lazy(() => import('@/pages/architect/DLPManagement'));
 
 function App() {
   const { isAuthenticated, user, checkAuth, isLoading, isNewOrganization, needsMemberOnboarding, needsVendorOnboarding } = useAuthStore();
@@ -259,6 +263,26 @@ function App() {
                 <Route path="/architect/payment-certificates" element={
                   <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Payment Certificates...</div>}>
                     <PaymentCertificates />
+                  </Suspense>
+                } />
+                <Route path="/architect/site-instructions" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Site Instructions...</div>}>
+                    <SiteInstructionRegister />
+                  </Suspense>
+                } />
+                <Route path="/architect/submittals" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Submittals...</div>}>
+                    <SubmittalTracking />
+                  </Suspense>
+                } />
+                <Route path="/architect/meeting-minutes" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Meeting Minutes...</div>}>
+                    <MeetingMinutes />
+                  </Suspense>
+                } />
+                <Route path="/architect/dlp" element={
+                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading DLP Management...</div>}>
+                    <DLPManagement />
                   </Suspense>
                 } />
 
