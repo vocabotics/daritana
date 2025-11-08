@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -35,69 +35,38 @@ import {
   Layers,
   GitBranch,
   History,
-  Send
+  Send,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
 import CADViewer from '@/components/architect/CADViewer'
-
-interface Drawing {
-  id: string
-  projectId: string
-  number: string
-  title: string
-  discipline: 'architectural' | 'structural' | 'mep' | 'civil' | 'landscape'
-  category: string
-  version: string
-  status: 'draft' | 'for_review' | 'approved' | 'for_construction' | 'as_built'
-  fileSize: number
-  format: string
-  uploadedBy: string
-  uploadDate: Date
-  approvedBy?: string
-  approvalDate?: Date
-  transmittals: number
-  revisions: number
-}
+import { useDrawingStore } from '@/store/architect/drawingStore'
+import type { Drawing } from '@/types/architect'
 
 export default function DrawingManagement() {
-  const [drawings, setDrawings] = useState<Drawing[]>([
-    {
-      id: '1',
-      projectId: 'proj-1',
-      number: 'A-101',
-      title: 'Ground Floor Plan',
-      discipline: 'architectural',
-      category: 'Floor Plans',
-      version: 'Rev C',
-      status: 'for_construction',
-      fileSize: 2.5,
-      format: 'DWG',
-      uploadedBy: 'John Architect',
-      uploadDate: new Date('2024-01-15'),
-      approvedBy: 'Project Manager',
-      approvalDate: new Date('2024-01-16'),
-      transmittals: 3,
-      revisions: 2
-    },
-    {
-      id: '2',
-      projectId: 'proj-1',
-      number: 'S-201',
-      title: 'Foundation Layout',
-      discipline: 'structural',
-      category: 'Foundation',
-      version: 'Rev B',
-      status: 'for_review',
-      fileSize: 3.2,
-      format: 'DWG',
-      uploadedBy: 'Jane Engineer',
-      uploadDate: new Date('2024-01-18'),
-      transmittals: 1,
-      revisions: 1
+  // Zustand store
+  const {
+    drawings,
+    loading,
+    error,
+    fetchDrawings,
+    clearError
+  } = useDrawingStore()
+
+  // Load data on mount
+  useEffect(() => {
+    fetchDrawings()
+  }, [fetchDrawings])
+
+  // Error handling
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      clearError()
     }
-  ])
+  }, [error, clearError])
 
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
   const [selectedDrawing, setSelectedDrawing] = useState<Drawing | null>(null)
