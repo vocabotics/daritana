@@ -32,11 +32,15 @@ import {
   Filter,
   Plus,
   Edit,
-  Trash2
+  Trash2,
+  LayoutGrid,
+  List,
+  XCircle
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
+import { PunchListKanban } from '@/components/architect/PunchListKanban'
 
 interface PunchListItem {
   id: string
@@ -51,13 +55,14 @@ interface PunchListItem {
   contractor: string
   dateCreated: Date
   dueDate: Date
-  status: 'open' | 'in_progress' | 'pending_review' | 'completed' | 'rejected'
+  status: 'identified' | 'assigned' | 'in_progress' | 'pending_verification' | 'verified' | 'closed'
   photos?: string[]
   completedDate?: Date
   verifiedBy?: string
 }
 
 export default function PunchListManagement() {
+  const [viewMode, setViewMode] = useState<'table' | 'kanban'>('kanban')
   const [punchItems, setPunchItems] = useState<PunchListItem[]>([
     {
       id: '1',
@@ -72,7 +77,7 @@ export default function PunchListManagement() {
       contractor: 'ABC Painters',
       dateCreated: new Date('2024-01-15'),
       dueDate: new Date('2024-01-22'),
-      status: 'open',
+      status: 'identified',
       photos: ['photo1.jpg']
     },
     {
@@ -103,7 +108,54 @@ export default function PunchListManagement() {
       contractor: 'DEF Construction',
       dateCreated: new Date('2024-01-17'),
       dueDate: new Date('2024-01-18'),
-      status: 'pending_review'
+      status: 'pending_verification'
+    },
+    {
+      id: '4',
+      projectId: 'proj-1',
+      itemNumber: 'PL-004',
+      location: 'Level 3',
+      room: 'Bathroom',
+      description: 'Tile grouting incomplete',
+      category: 'quality',
+      priority: 'medium',
+      assignedTo: 'Tiling Contractor',
+      contractor: 'ABC Tilers',
+      dateCreated: new Date('2024-01-14'),
+      dueDate: new Date('2024-01-25'),
+      status: 'assigned'
+    },
+    {
+      id: '5',
+      projectId: 'proj-1',
+      itemNumber: 'PL-005',
+      location: 'Level 1',
+      room: 'Living Room',
+      description: 'Window seal leak during rain',
+      category: 'functional',
+      priority: 'high',
+      assignedTo: 'Glazing Contractor',
+      contractor: 'XYZ Windows',
+      dateCreated: new Date('2024-01-12'),
+      dueDate: new Date('2024-01-19'),
+      status: 'verified'
+    },
+    {
+      id: '6',
+      projectId: 'proj-1',
+      itemNumber: 'PL-006',
+      location: 'Level 2',
+      room: 'Corridor',
+      description: 'Emergency lighting not functioning',
+      category: 'safety',
+      priority: 'critical',
+      assignedTo: 'Electrical Contractor',
+      contractor: 'DEF Electrical',
+      dateCreated: new Date('2024-01-10'),
+      dueDate: new Date('2024-01-15'),
+      status: 'closed',
+      completedDate: new Date('2024-01-14'),
+      verifiedBy: 'Architect A'
     }
   ])
 
@@ -140,17 +192,35 @@ export default function PunchListManagement() {
 
   const getStatusIcon = (status: PunchListItem['status']) => {
     switch (status) {
-      case 'open':
+      case 'identified':
         return <Circle className="h-4 w-4 text-gray-500" />
+      case 'assigned':
+        return <User className="h-4 w-4 text-blue-500" />
       case 'in_progress':
-        return <Clock className="h-4 w-4 text-blue-500" />
-      case 'pending_review':
-        return <AlertTriangle className="h-4 w-4 text-yellow-500" />
-      case 'completed':
+        return <Clock className="h-4 w-4 text-yellow-500" />
+      case 'pending_verification':
+        return <AlertTriangle className="h-4 w-4 text-orange-500" />
+      case 'verified':
         return <CheckCircle2 className="h-4 w-4 text-green-500" />
-      case 'rejected':
-        return <Circle className="h-4 w-4 text-red-500" />
+      case 'closed':
+        return <XCircle className="h-4 w-4 text-gray-500" />
     }
+  }
+
+  const handleItemMove = (itemId: string, newStatus: PunchListItem['status']) => {
+    setPunchItems(items =>
+      items.map(item =>
+        item.id === itemId
+          ? { ...item, status: newStatus }
+          : item
+      )
+    )
+    toast.success('Item status updated')
+  }
+
+  const handleItemClick = (item: PunchListItem) => {
+    toast.info(`Viewing item: ${item.itemNumber}`)
+    // TODO: Open detail modal
   }
 
   const filteredItems = punchItems.filter(item => {
@@ -161,12 +231,12 @@ export default function PunchListManagement() {
 
   const stats = {
     total: punchItems.length,
-    open: punchItems.filter(i => i.status === 'open').length,
+    identified: punchItems.filter(i => i.status === 'identified').length,
     inProgress: punchItems.filter(i => i.status === 'in_progress').length,
-    completed: punchItems.filter(i => i.status === 'completed').length,
+    verified: punchItems.filter(i => i.status === 'verified').length,
     critical: punchItems.filter(i => i.priority === 'critical').length,
     overdue: punchItems.filter(i =>
-      i.status !== 'completed' && new Date(i.dueDate) < new Date()
+      i.status !== 'verified' && i.status !== 'closed' && new Date(i.dueDate) < new Date()
     ).length
   }
 
@@ -185,10 +255,10 @@ export default function PunchListManagement() {
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Open</CardTitle>
+              <CardTitle className="text-sm font-medium">Identified</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-600">{stats.open}</div>
+              <div className="text-2xl font-bold text-gray-600">{stats.identified}</div>
             </CardContent>
           </Card>
           <Card>
@@ -201,10 +271,10 @@ export default function PunchListManagement() {
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Completed</CardTitle>
+              <CardTitle className="text-sm font-medium">Verified</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
+              <div className="text-2xl font-bold text-green-600">{stats.verified}</div>
             </CardContent>
           </Card>
           <Card>
@@ -231,19 +301,46 @@ export default function PunchListManagement() {
             <div className="flex items-center justify-between">
               <CardTitle>Punch List Items</CardTitle>
               <div className="flex items-center gap-2">
-                <Select value={filter} onValueChange={setFilter}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Items</SelectItem>
-                    <SelectItem value="open">Open</SelectItem>
-                    <SelectItem value="in_progress">In Progress</SelectItem>
-                    <SelectItem value="pending_review">Pending Review</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="critical">Critical Only</SelectItem>
-                  </SelectContent>
-                </Select>
+                {/* View Toggle */}
+                <div className="flex items-center border rounded-lg p-1">
+                  <Button
+                    variant={viewMode === 'kanban' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('kanban')}
+                    className="h-8"
+                  >
+                    <LayoutGrid className="h-4 w-4 mr-2" />
+                    Kanban
+                  </Button>
+                  <Button
+                    variant={viewMode === 'table' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('table')}
+                    className="h-8"
+                  >
+                    <List className="h-4 w-4 mr-2" />
+                    Table
+                  </Button>
+                </div>
+
+                {viewMode === 'table' && (
+                  <Select value={filter} onValueChange={setFilter}>
+                    <SelectTrigger className="w-48">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Items</SelectItem>
+                      <SelectItem value="identified">Identified</SelectItem>
+                      <SelectItem value="assigned">Assigned</SelectItem>
+                      <SelectItem value="in_progress">In Progress</SelectItem>
+                      <SelectItem value="pending_verification">Pending Verification</SelectItem>
+                      <SelectItem value="verified">Verified</SelectItem>
+                      <SelectItem value="closed">Closed</SelectItem>
+                      <SelectItem value="critical">Critical Only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+
                 <Button>
                   <Plus className="h-4 w-4 mr-2" />
                   Add Item
@@ -256,132 +353,149 @@ export default function PunchListManagement() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="rounded-md border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-12">
-                      <Checkbox />
-                    </TableHead>
-                    <TableHead>Item #</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Description</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Priority</TableHead>
-                    <TableHead>Assigned To</TableHead>
-                    <TableHead>Due Date</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredItems.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>
-                        <Checkbox
-                          checked={selectedItems.includes(item.id)}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setSelectedItems([...selectedItems, item.id])
-                            } else {
-                              setSelectedItems(selectedItems.filter(id => id !== item.id))
-                            }
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">{item.itemNumber}</TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium">{item.location}</p>
-                          <p className="text-sm text-muted-foreground">{item.room}</p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="line-clamp-2">{item.description}</p>
-                          {item.photos && item.photos.length > 0 && (
-                            <div className="flex items-center gap-1 mt-1">
-                              <Camera className="h-3 w-3 text-muted-foreground" />
-                              <span className="text-xs text-muted-foreground">
-                                {item.photos.length} photos
+            {/* Kanban View */}
+            {viewMode === 'kanban' && (
+              <PunchListKanban
+                items={punchItems}
+                onItemMove={handleItemMove}
+                onItemClick={handleItemClick}
+              />
+            )}
+
+            {/* Table View */}
+            {viewMode === 'table' && (
+              <>
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-12">
+                          <Checkbox />
+                        </TableHead>
+                        <TableHead>Item #</TableHead>
+                        <TableHead>Location</TableHead>
+                        <TableHead>Description</TableHead>
+                        <TableHead>Category</TableHead>
+                        <TableHead>Priority</TableHead>
+                        <TableHead>Assigned To</TableHead>
+                        <TableHead>Due Date</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead></TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredItems.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell>
+                            <Checkbox
+                              checked={selectedItems.includes(item.id)}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setSelectedItems([...selectedItems, item.id])
+                                } else {
+                                  setSelectedItems(selectedItems.filter(id => id !== item.id))
+                                }
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell className="font-medium">{item.itemNumber}</TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium">{item.location}</p>
+                              <p className="text-sm text-muted-foreground">{item.room}</p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="line-clamp-2">{item.description}</p>
+                              {item.photos && item.photos.length > 0 && (
+                                <div className="flex items-center gap-1 mt-1">
+                                  <Camera className="h-3 w-3 text-muted-foreground" />
+                                  <span className="text-xs text-muted-foreground">
+                                    {item.photos.length} photos
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              {getCategoryIcon(item.category)}
+                              <span className="capitalize text-sm">{item.category}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge className={getPriorityColor(item.priority)}>
+                              {item.priority}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium text-sm">{item.assignedTo}</p>
+                              <p className="text-xs text-muted-foreground">{item.contractor}</p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="text-sm">
+                              <p>{format(item.dueDate, 'dd MMM')}</p>
+                              {new Date(item.dueDate) < new Date() && item.status !== 'verified' && item.status !== 'closed' && (
+                                <Badge variant="destructive" className="text-xs">Overdue</Badge>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              {getStatusIcon(item.status)}
+                              <span className="capitalize text-sm">
+                                {item.status.replace('_', ' ')}
                               </span>
                             </div>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          {getCategoryIcon(item.category)}
-                          <span className="capitalize text-sm">{item.category}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge className={getPriorityColor(item.priority)}>
-                          {item.priority}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium text-sm">{item.assignedTo}</p>
-                          <p className="text-xs text-muted-foreground">{item.contractor}</p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="text-sm">
-                          <p>{format(item.dueDate, 'dd MMM')}</p>
-                          {new Date(item.dueDate) < new Date() && item.status !== 'completed' && (
-                            <Badge variant="destructive" className="text-xs">Overdue</Badge>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          {getStatusIcon(item.status)}
-                          <span className="capitalize text-sm">
-                            {item.status.replace('_', ' ')}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <Button variant="ghost" size="icon">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          {item.status === 'pending_review' && (
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="text-green-600"
-                              onClick={() => toast.success('Item approved')}
-                            >
-                              <CheckCircle2 className="h-4 w-4" />
-                            </Button>
-                          )}
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-
-            {selectedItems.length > 0 && (
-              <div className="mt-4 p-4 bg-muted/50 rounded-lg flex items-center justify-between">
-                <span className="text-sm font-medium">
-                  {selectedItems.length} items selected
-                </span>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm">
-                    Assign To
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    Change Priority
-                  </Button>
-                  <Button variant="outline" size="sm" className="text-red-600">
-                    Delete
-                  </Button>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-1">
+                              <Button variant="ghost" size="icon" onClick={() => handleItemClick(item)}>
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              {item.status === 'pending_verification' && (
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="text-green-600"
+                                  onClick={() => {
+                                    handleItemMove(item.id, 'verified')
+                                    toast.success('Item verified')
+                                  }}
+                                >
+                                  <CheckCircle2 className="h-4 w-4" />
+                                </Button>
+                              )}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </div>
-              </div>
+
+                {selectedItems.length > 0 && (
+                  <div className="mt-4 p-4 bg-muted/50 rounded-lg flex items-center justify-between">
+                    <span className="text-sm font-medium">
+                      {selectedItems.length} items selected
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm">
+                        Assign To
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        Change Priority
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-red-600">
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </CardContent>
         </Card>
