@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -20,78 +20,47 @@ import {
   Shield,
   Briefcase,
   Calculator,
-  Receipt
+  Receipt,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
+import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
-
-interface Contract {
-  id: string
-  projectId: string
-  contractNumber: string
-  contractType: 'pam2018' | 'pam2006' | 'cidb' | 'custom'
-  contractor: string
-  contractSum: number
-  commencementDate: Date
-  completionDate: Date
-  defectsLiabilityPeriod: number // months
-  retentionPercentage: number
-  performanceBond: number
-  status: 'active' | 'completed' | 'terminated' | 'suspended'
-}
-
-interface PaymentCertificate {
-  id: string
-  certificateNumber: string
-  date: Date
-  workCompleted: number
-  materials: number
-  retention: number
-  previousPayments: number
-  netPayment: number
-  status: 'draft' | 'issued' | 'paid'
-}
+import { usePAMContractStore } from '@/store/architect/pamContractStore'
+import type { PAMContract } from '@/types/architect'
 
 export default function PAMContractAdmin() {
-  const [activeContract] = useState<Contract>({
-    id: '1',
-    projectId: 'proj-1',
-    contractNumber: 'PAM/2024/001',
-    contractType: 'pam2018',
-    contractor: 'ABC Construction Sdn Bhd',
-    contractSum: 5500000,
-    commencementDate: new Date('2024-01-01'),
-    completionDate: new Date('2024-12-31'),
-    defectsLiabilityPeriod: 12,
-    retentionPercentage: 5,
-    performanceBond: 275000,
-    status: 'active'
-  })
+  // Zustand store
+  const {
+    contracts,
+    currentContract,
+    loading,
+    error,
+    fetchContracts,
+    fetchContract,
+    clearError
+  } = usePAMContractStore()
 
-  const [certificates] = useState<PaymentCertificate[]>([
-    {
-      id: '1',
-      certificateNumber: 'PC-001',
-      date: new Date('2024-01-31'),
-      workCompleted: 550000,
-      materials: 100000,
-      retention: 32500,
-      previousPayments: 0,
-      netPayment: 617500,
-      status: 'paid'
-    },
-    {
-      id: '2',
-      certificateNumber: 'PC-002',
-      date: new Date('2024-02-29'),
-      workCompleted: 880000,
-      materials: 150000,
-      retention: 51500,
-      previousPayments: 617500,
-      netPayment: 361000,
-      status: 'issued'
+  // Load data on mount
+  useEffect(() => {
+    fetchContracts()
+    // Load first contract if available
+    if (contracts.length > 0 && !currentContract) {
+      fetchContract(contracts[0].id)
     }
-  ])
+  }, [fetchContracts, fetchContract, contracts.length, currentContract])
+
+  // Error handling
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      clearError()
+    }
+  }, [error, clearError])
+
+  // Use first contract as active, or current contract from store
+  const activeContract = currentContract || contracts[0]
+  const certificates = activeContract?.certificates || []
 
   const contractProgress = 35
   const timeElapsed = 18 // weeks
