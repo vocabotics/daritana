@@ -45,91 +45,45 @@ import {
   Edit,
   Eye,
   Send,
-  Calculator
+  Calculator,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
-
-interface ChangeOrder {
-  id: string
-  projectId: string
-  number: string
-  title: string
-  description: string
-  requestedBy: string
-  dateRequested: Date
-  category: 'client_request' | 'site_condition' | 'design_error' | 'code_compliance' | 'value_engineering'
-  status: 'draft' | 'pending_review' | 'approved' | 'rejected' | 'in_progress' | 'completed'
-  costImpact: number
-  scheduleImpact: number // days
-  originalContractAmount: number
-  approvedBy?: string
-  approvalDate?: Date
-  attachments: string[]
-  relatedRFIs?: string[]
-}
+import { useChangeOrderStore } from '@/store/architect/changeOrderStore'
+import type { ChangeOrder } from '@/types/architect'
 
 export default function ChangeOrderManagement() {
-  const [changeOrders, setChangeOrders] = useState<ChangeOrder[]>([])
+  // Zustand store
+  const {
+    changeOrders,
+    costSummary,
+    loading,
+    error,
+    fetchChangeOrders,
+    fetchCostSummary,
+    clearError
+  } = useChangeOrderStore()
+
+  // Local UI state
   const [showNewChangeOrder, setShowNewChangeOrder] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<ChangeOrder | null>(null)
   const [filter, setFilter] = useState('all')
 
-  // Mock data
+  // Load data on mount
   useEffect(() => {
-    const mockOrders: ChangeOrder[] = [
-      {
-        id: '1',
-        projectId: 'proj-1',
-        number: 'CO-001',
-        title: 'Additional Solar Panels Installation',
-        description: 'Client requested additional 20 solar panels on roof',
-        requestedBy: 'Client - Mr. Ahmad',
-        dateRequested: new Date('2024-01-10'),
-        category: 'client_request',
-        status: 'approved',
-        costImpact: 85000,
-        scheduleImpact: 14,
-        originalContractAmount: 2500000,
-        approvedBy: 'Project Manager',
-        approvalDate: new Date('2024-01-12'),
-        attachments: ['solar-spec.pdf', 'revised-electrical.dwg'],
-        relatedRFIs: ['RFI-015', 'RFI-016']
-      },
-      {
-        id: '2',
-        projectId: 'proj-1',
-        number: 'CO-002',
-        title: 'Foundation Redesign - Rock Layer',
-        description: 'Unexpected rock layer requires foundation modification',
-        requestedBy: 'Site Engineer',
-        dateRequested: new Date('2024-01-15'),
-        category: 'site_condition',
-        status: 'pending_review',
-        costImpact: 120000,
-        scheduleImpact: 21,
-        originalContractAmount: 2500000,
-        attachments: ['soil-report.pdf', 'foundation-revision.dwg']
-      },
-      {
-        id: '3',
-        projectId: 'proj-1',
-        number: 'CO-003',
-        title: 'Premium Marble Flooring Upgrade',
-        description: 'Upgrade from standard tiles to imported marble',
-        requestedBy: 'Client - Mrs. Lee',
-        dateRequested: new Date('2024-01-18'),
-        category: 'client_request',
-        status: 'draft',
-        costImpact: 45000,
-        scheduleImpact: 7,
-        originalContractAmount: 2500000,
-        attachments: ['material-samples.pdf']
-      }
-    ]
-    setChangeOrders(mockOrders)
-  }, [])
+    fetchChangeOrders()
+    fetchCostSummary('proj-1') // TODO: Get from project context
+  }, [fetchChangeOrders, fetchCostSummary])
+
+  // Error handling
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      clearError()
+    }
+  }, [error, clearError])
 
   const getStatusBadge = (status: ChangeOrder['status']) => {
     const variants: Record<ChangeOrder['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
@@ -157,15 +111,16 @@ export default function ChangeOrderManagement() {
     )
   }
 
-  const getCategoryBadge = (category: ChangeOrder['category']) => {
-    const labels: Record<ChangeOrder['category'], string> = {
-      client_request: 'Client Request',
+  const getReasonBadge = (reason: ChangeOrder['reason']) => {
+    const labels: Record<ChangeOrder['reason'], string> = {
+      design_change: 'Design Change',
       site_condition: 'Site Condition',
-      design_error: 'Design Error',
-      code_compliance: 'Code Compliance',
-      value_engineering: 'Value Engineering'
+      client_request: 'Client Request',
+      error_omission: 'Error/Omission',
+      regulatory: 'Regulatory',
+      other: 'Other'
     }
-    return <Badge variant="outline">{labels[category]}</Badge>
+    return <Badge variant="outline">{labels[reason]}</Badge>
   }
 
   const filteredOrders = changeOrders.filter(order => {
@@ -173,24 +128,41 @@ export default function ChangeOrderManagement() {
     return order.status === filter
   })
 
-  const stats = {
+  const stats = costSummary || {
+    original: 0,
+    approved: changeOrders
+      .filter(o => o.status === 'approved')
+      .reduce((sum, o) => sum + o.costImpact, 0),
+    pending: changeOrders
+      .filter(o => o.status === 'pending_review')
+      .reduce((sum, o) => sum + o.costImpact, 0),
+    total: changeOrders.reduce((sum, o) => sum + o.costImpact, 0)
+  }
+
+  const calculatedStats = {
     total: changeOrders.length,
     pending: changeOrders.filter(o => o.status === 'pending_review').length,
     approved: changeOrders.filter(o => o.status === 'approved').length,
-    totalCostImpact: changeOrders
-      .filter(o => o.status === 'approved')
-      .reduce((sum, o) => sum + o.costImpact, 0),
+    totalCostImpact: stats.approved,
     totalScheduleImpact: changeOrders
       .filter(o => o.status === 'approved')
       .reduce((sum, o) => sum + o.scheduleImpact, 0),
-    percentChange: ((changeOrders
-      .filter(o => o.status === 'approved')
-      .reduce((sum, o) => sum + o.costImpact, 0) / 2500000) * 100).toFixed(2)
+    percentChange: stats.original > 0
+      ? ((stats.approved / stats.original) * 100).toFixed(2)
+      : '0.00'
   }
 
   return (
     <PageWrapper title="Change Order Management">
       <div className="space-y-6">
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">Loading change orders...</span>
+          </div>
+        )}
+
         {/* Header Stats */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           <Card>
@@ -198,7 +170,7 @@ export default function ChangeOrderManagement() {
               <CardTitle className="text-sm font-medium">Total Changes</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.total}</div>
+              <div className="text-2xl font-bold">{calculatedStats.total}</div>
             </CardContent>
           </Card>
           <Card>
@@ -206,7 +178,7 @@ export default function ChangeOrderManagement() {
               <CardTitle className="text-sm font-medium">Pending Review</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
+              <div className="text-2xl font-bold text-yellow-600">{calculatedStats.pending}</div>
             </CardContent>
           </Card>
           <Card>
@@ -214,7 +186,7 @@ export default function ChangeOrderManagement() {
               <CardTitle className="text-sm font-medium">Approved</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
+              <div className="text-2xl font-bold text-green-600">{calculatedStats.approved}</div>
             </CardContent>
           </Card>
           <Card>
@@ -223,10 +195,10 @@ export default function ChangeOrderManagement() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                RM {stats.totalCostImpact.toLocaleString()}
+                RM {calculatedStats.totalCostImpact.toLocaleString()}
               </div>
               <p className="text-xs text-muted-foreground">
-                {stats.percentChange}% of contract
+                {calculatedStats.percentChange}% of contract
               </p>
             </CardContent>
           </Card>
@@ -235,7 +207,7 @@ export default function ChangeOrderManagement() {
               <CardTitle className="text-sm font-medium">Schedule Impact</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.totalScheduleImpact} days</div>
+              <div className="text-2xl font-bold">{calculatedStats.totalScheduleImpact} days</div>
             </CardContent>
           </Card>
         </div>
@@ -267,17 +239,18 @@ export default function ChangeOrderManagement() {
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="co-category">Category</Label>
+                          <Label htmlFor="co-reason">Reason</Label>
                           <Select>
-                            <SelectTrigger id="co-category">
-                              <SelectValue placeholder="Select category" />
+                            <SelectTrigger id="co-reason">
+                              <SelectValue placeholder="Select reason" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="client_request">Client Request</SelectItem>
+                              <SelectItem value="design_change">Design Change</SelectItem>
                               <SelectItem value="site_condition">Site Condition</SelectItem>
-                              <SelectItem value="design_error">Design Error</SelectItem>
-                              <SelectItem value="code_compliance">Code Compliance</SelectItem>
-                              <SelectItem value="value_engineering">Value Engineering</SelectItem>
+                              <SelectItem value="client_request">Client Request</SelectItem>
+                              <SelectItem value="error_omission">Error/Omission</SelectItem>
+                              <SelectItem value="regulatory">Regulatory</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -377,7 +350,7 @@ export default function ChangeOrderManagement() {
                   <TableRow>
                     <TableHead>CO #</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>Category</TableHead>
+                    <TableHead>Reason</TableHead>
                     <TableHead>Requested By</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Cost Impact</TableHead>
@@ -387,42 +360,49 @@ export default function ChangeOrderManagement() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredOrders.map((order) => (
-                    <TableRow key={order.id}>
-                      <TableCell className="font-medium">{order.number}</TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium">{order.title}</p>
-                          <p className="text-sm text-muted-foreground line-clamp-1">
-                            {order.description}
-                          </p>
-                        </div>
+                  {filteredOrders.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                        No change orders found
                       </TableCell>
-                      <TableCell>{getCategoryBadge(order.category)}</TableCell>
-                      <TableCell>{order.requestedBy}</TableCell>
-                      <TableCell>{format(order.dateRequested, 'dd MMM yyyy')}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          {order.costImpact > 0 ? (
-                            <TrendingUp className="h-4 w-4 text-red-500" />
-                          ) : order.costImpact < 0 ? (
-                            <TrendingDown className="h-4 w-4 text-green-500" />
-                          ) : null}
-                          <span className={order.costImpact > 0 ? 'text-red-600' : 'text-green-600'}>
-                            RM {Math.abs(order.costImpact).toLocaleString()}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        {order.scheduleImpact > 0 && (
+                    </TableRow>
+                  ) : (
+                    filteredOrders.map((order) => (
+                      <TableRow key={order.id}>
+                        <TableCell className="font-medium">{order.changeOrderNumber}</TableCell>
+                        <TableCell>
+                          <div>
+                            <p className="font-medium">{order.title}</p>
+                            <p className="text-sm text-muted-foreground line-clamp-1">
+                              {order.description}
+                            </p>
+                          </div>
+                        </TableCell>
+                        <TableCell>{getReasonBadge(order.reason)}</TableCell>
+                        <TableCell>{order.requestedBy.name}</TableCell>
+                        <TableCell>{format(new Date(order.createdAt), 'dd MMM yyyy')}</TableCell>
+                        <TableCell>
                           <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4 text-orange-500" />
-                            <span className="text-orange-600">
-                              +{order.scheduleImpact} days
+                            {order.costImpact > 0 ? (
+                              <TrendingUp className="h-4 w-4 text-red-500" />
+                            ) : order.costImpact < 0 ? (
+                              <TrendingDown className="h-4 w-4 text-green-500" />
+                            ) : null}
+                            <span className={order.costImpact > 0 ? 'text-red-600' : 'text-green-600'}>
+                              RM {Math.abs(order.costImpact).toLocaleString()}
                             </span>
                           </div>
-                        )}
-                      </TableCell>
+                        </TableCell>
+                        <TableCell>
+                          {order.scheduleImpact > 0 && (
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4 text-orange-500" />
+                              <span className="text-orange-600">
+                                +{order.scheduleImpact} days
+                              </span>
+                            </div>
+                          )}
+                        </TableCell>
                       <TableCell>{getStatusBadge(order.status)}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
