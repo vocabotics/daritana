@@ -424,6 +424,26 @@ export const OnboardingWizard: React.FC = () => {
   const [selectedIntegrations, setSelectedIntegrations] = useState<string[]>([])
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
 
+  // Load company registration data if available
+  React.useEffect(() => {
+    const savedData = localStorage.getItem('companyRegistrationData')
+    if (savedData) {
+      try {
+        const companyData = JSON.parse(savedData)
+        // Pre-populate organization data from company registration
+        setOrganizationData({
+          name: companyData.companyName || '',
+          type: companyData.businessType || 'architecture',
+          size: companyData.teamSize || 'small',
+          country: companyData.country || 'Malaysia',
+          description: companyData.description || '',
+        })
+      } catch (error) {
+        console.error('Failed to load company registration data:', error)
+      }
+    }
+  }, [])
+
   const steps: OnboardingStep[] = [
     {
       id: 'welcome',
@@ -547,14 +567,17 @@ export const OnboardingWizard: React.FC = () => {
         
         console.log('Creating organization:', orgData)
         const orgResult = await organizationService.createOrganization(orgData)
-        setOrganizationId(orgResult.organization.id)
-        
+        setOrganizationId(orgResult.id) // FIX: orgResult is Organization directly, not { organization: Organization }
+
+        // Store organization name for member onboarding
+        localStorage.setItem('organizationName', orgResult.name)
+
         // Step 2: Invite team members if any
         const validMembers = teamMembers.filter(m => m.email && m.email !== adminEmail)
         if (validMembers.length > 0) {
           console.log('Inviting team members:', validMembers)
           const inviteResults = await organizationService.inviteMultipleUsers(
-            orgResult.organization.id,
+            orgResult.id, // FIX: Use orgResult.id directly
             validMembers.map(m => ({
               email: m.email,
               firstName: m.name.split(' ')[0] || '',
