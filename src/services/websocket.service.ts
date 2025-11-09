@@ -30,7 +30,7 @@ class WebSocketService {
   private presenceData: Map<string, UserPresence> = new Map();
   private currentUserId: string | null = null;
 
-  connect(userId: string, token: string) {
+  connect(userId: string) {
     if (this.socket?.connected) {
       return;
     }
@@ -38,8 +38,9 @@ class WebSocketService {
     this.currentUserId = userId;
     const serverUrl = import.meta.env.VITE_WS_URL || 'http://localhost:7001';
 
+    // SECURITY: Use HTTP-Only cookies for authentication (no token parameter)
     this.socket = io(serverUrl, {
-      auth: { token },
+      withCredentials: true, // Send HTTP-Only cookies with WebSocket handshake
       transports: ['websocket', 'polling'],
       reconnection: true,
       reconnectionAttempts: this.maxReconnectAttempts,

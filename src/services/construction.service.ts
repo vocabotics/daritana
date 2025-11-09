@@ -122,8 +122,7 @@ class ConstructionService {
   async getSite(siteId: string) {
     try {
       console.log('Fetching construction site:', siteId);
-      const token = localStorage.getItem('access_token');
-      console.log('Token available:', !!token);
+      // SECURITY: Authentication handled by HTTP-Only cookies (withCredentials: true)
       const response = await api.get(`/construction/sites/${siteId}`);
       console.log('Construction site response:', response.data);
       

@@ -84,8 +84,9 @@ export function UnifiedHeader() {
   // Initialize WebSocket connection
   useEffect(() => {
     if (user) {
-      wsService.connect(user.id, localStorage.getItem('access_token') || '');
-      
+      // SECURITY: WebSocket uses HTTP-Only cookies for auth (no token needed)
+      wsService.connect(user.id);
+
       wsService.on('connection', (data: any) => {
         setIsConnected(data.status === 'connected');
       });

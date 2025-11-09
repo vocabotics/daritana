@@ -70,8 +70,8 @@ export function VirtualOfficeHeader() {
 
   useEffect(() => {
     if (user) {
-      // Connect to WebSocket
-      wsService.connect(user.id, localStorage.getItem('access_token') || '');
+      // SECURITY: WebSocket uses HTTP-Only cookies for auth (no token needed)
+      wsService.connect(user.id);
 
       // Listen for connection status
       wsService.on('connection', (data: any) => {
