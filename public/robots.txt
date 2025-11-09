@@ -1,0 +1,55 @@
+# Daritana - Architecture Project Management Platform
+# Production Robots.txt
+
+# Allow all search engines
+User-agent: *
+
+# Allow all pages except authentication and admin areas
+Disallow: /login
+Disallow: /signup
+Disallow: /reset-password
+Disallow: /admin/*
+Disallow: /api/*
+Disallow: /settings/security
+Disallow: /settings/billing
+
+# Allow public marketplace and community
+Allow: /marketplace
+Allow: /community
+Allow: /help
+
+# Crawl delay to be respectful
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://daritana.com/sitemap.xml
+
+# Specific bot rules
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0.5
+
+# Baidu (Chinese search engine)
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
