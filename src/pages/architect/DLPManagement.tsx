@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -19,16 +19,61 @@ import {
   Plus,
   Eye,
   Download,
-  Shield
+  Shield,
+  Loader2
 } from 'lucide-react'
 import { format, differenceInDays } from 'date-fns'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PageWrapper from '@/components/PageWrapper'
 import type { DLPManagement, DLPDefect } from '@/types/architect'
+import { useDLPStore } from '@/store/architect/dlpStore'
 
 export default function DLPManagementPage() {
-  const [dlpProjects, setDlpProjects] = useState<DLPManagement[]>([
+  // ✅ Connect to backend store
+  const { records, loading, error, fetchRecords, clearError } = useDLPStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchRecords();
+  }, [fetchRecords]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="DLP Management">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading DLP records...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="DLP Management">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchRecords();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.records data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
+  const dlpProjects: DLPManagement[] = [
     {
       id: '1',
       projectId: 'proj-1',
@@ -106,7 +151,7 @@ export default function DLPManagementPage() {
       createdAt: new Date('2023-12-15').toISOString(),
       updatedAt: new Date('2024-06-20').toISOString()
     }
-  ])
+  ];
 
   const getDaysRemaining = (expiryDate: string) => {
     const days = differenceInDays(new Date(expiryDate), new Date())

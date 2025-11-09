@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,12 +17,14 @@ import {
   Eye,
   Calendar,
   MapPin,
-  CheckCheck
+  CheckCheck,
+  Loader2
 } from 'lucide-react';
 import PageWrapper from '@/components/PageWrapper';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { useAuthoritySubmissionsStore } from '@/store/architect/authoritySubmissionsStore';
 
 /**
  * Authority Submission Tracking
@@ -64,7 +66,49 @@ export default function AuthorityTracking() {
   const [selectedProject] = useState('proj-1');
   const [selectedAuthority, setSelectedAuthority] = useState<string>('dbkl');
 
-  // Malaysian Authorities
+  // ✅ Connect to backend store
+  const { submissions, loading, error, fetchSubmissions, clearError } = useAuthoritySubmissionsStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchSubmissions();
+  }, [fetchSubmissions]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="Authority Submissions">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading authority submissions...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="Authority Submissions">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchSubmissions();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.submissions data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
   const authorities: Authority[] = [
     {
       id: 'dbkl',

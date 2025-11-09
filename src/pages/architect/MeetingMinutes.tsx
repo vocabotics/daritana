@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -18,16 +18,61 @@ import {
   Plus,
   Eye,
   Download,
-  ClipboardList
+  ClipboardList,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PageWrapper from '@/components/PageWrapper'
 import type { MeetingMinutes } from '@/types/architect'
+import { useMeetingMinutesStore } from '@/store/architect/meetingMinutesStore'
 
 export default function MeetingMinutesManagement() {
-  const [meetings, setMeetings] = useState<MeetingMinutes[]>([
+  // ✅ Connect to backend store
+  const { minutes, loading, error, fetchMinutes, clearError } = useMeetingMinutesStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchMinutes();
+  }, [fetchMinutes]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="Meeting Minutes">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading meeting minutes...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="Meeting Minutes">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchMinutes();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.minutes data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
+  const meetings: MeetingMinutes[] = [
     {
       id: '1',
       meetingNumber: 'MOM-001',
@@ -103,7 +148,7 @@ export default function MeetingMinutesManagement() {
       createdAt: new Date('2024-01-15').toISOString(),
       updatedAt: new Date('2024-01-16').toISOString()
     }
-  ])
+  ];
 
   const getStatusBadge = (status: MeetingMinutes['status']) => {
     const config: Record<MeetingMinutes['status'], { label: string; className: string; icon: React.ReactNode }> = {

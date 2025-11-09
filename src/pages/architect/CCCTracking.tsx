@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -44,16 +44,61 @@ import {
   Eye,
   Plus,
   Search,
-  Filter
+  Filter,
+  Loader2
 } from 'lucide-react'
 import { format, differenceInDays } from 'date-fns'
 import { toast } from 'sonner'
 import PageWrapper from '@/components/PageWrapper'
 import { cn } from '@/lib/utils'
 import type { CCCTracking, CCCInspection, CCCDocument } from '@/types/architect'
+import { useCCCApplicationsStore } from '@/store/architect/cccApplicationsStore'
 
 export default function CCCTrackingPage() {
-  const [cccApplications, setCccApplications] = useState<CCCTracking[]>([
+  // ✅ Connect to backend store
+  const { applications, loading, error, fetchApplications, clearError } = useCCCApplicationsStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchApplications();
+  }, [fetchApplications]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="CCC Tracking System">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading CCC applications...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="CCC Tracking System">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchApplications();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.applications data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
+  const cccApplications: CCCTracking[] = [
     {
       id: 'ccc-1',
       projectId: 'proj-1',
@@ -202,7 +247,7 @@ export default function CCCTrackingPage() {
       createdAt: new Date('2024-01-05').toISOString(),
       updatedAt: new Date('2024-01-05').toISOString()
     }
-  ])
+  ];
 
   const [showNewApplication, setShowNewApplication] = useState(false)
   const [selectedApplication, setSelectedApplication] = useState<CCCTracking | null>(null)

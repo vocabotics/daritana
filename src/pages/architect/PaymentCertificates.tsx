@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -32,12 +32,14 @@ import {
   Calendar,
   TrendingUp,
   AlertCircle,
-  Printer
+  Printer,
+  Loader2
 } from 'lucide-react';
 import PageWrapper from '@/components/PageWrapper';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { usePaymentCertificatesStore } from '@/store/architect/paymentCertificatesStore';
 
 /**
  * Payment Certificate Generation
@@ -100,7 +102,49 @@ export default function PaymentCertificates() {
   const [showNewCertificate, setShowNewCertificate] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState<PaymentCertificate | null>(null);
 
-  // Mock contracts with sample data
+  // ✅ Connect to backend store
+  const { certificates, loading, error, fetchCertificates, clearError } = usePaymentCertificatesStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchCertificates();
+  }, [fetchCertificates]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="Payment Certificates">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading payment certificates...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="Payment Certificates">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchCertificates();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.certificates data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
   const contracts: PAMContract[] = [
     {
       id: 'contract-1',

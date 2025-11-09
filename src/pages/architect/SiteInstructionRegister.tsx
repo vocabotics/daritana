@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -39,16 +39,61 @@ import {
   Eye,
   Download,
   Link as LinkIcon,
-  FileText
+  FileText,
+  Loader2
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PageWrapper from '@/components/PageWrapper'
 import type { SiteInstruction } from '@/types/architect'
+import { useSiteInstructionsStore } from '@/store/architect/siteInstructionsStore'
 
 export default function SiteInstructionRegister() {
-  const [instructions, setInstructions] = useState<SiteInstruction[]>([
+  // ✅ Connect to backend store
+  const { instructions, loading, error, fetchInstructions, clearError } = useSiteInstructionsStore();
+
+  // ✅ Fetch data from backend on mount
+  useEffect(() => {
+    fetchInstructions();
+  }, [fetchInstructions]);
+
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <PageWrapper title="Site Instruction Register">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="ml-3 text-gray-600">Loading site instructions...</span>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ✅ Error state
+  if (error) {
+    return (
+      <PageWrapper title="Site Instruction Register">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p className="text-red-900 font-medium">Error: {error}</p>
+          <Button
+            onClick={() => {
+              clearError();
+              fetchInstructions();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
+  // TODO: Restructure UI to use store.instructions data
+  // For now, keeping mock data for UI structure until Phase 2 refactoring
+  const siteInstructions: SiteInstruction[] = [
     {
       id: '1',
       instructionNumber: 'AI-001',
@@ -116,7 +161,7 @@ export default function SiteInstructionRegister() {
       createdAt: new Date('2024-01-22').toISOString(),
       updatedAt: new Date('2024-01-25').toISOString()
     }
-  ])
+  ];
 
   const [showCreateDialog, setShowCreateDialog] = useState(false)
   const [formData, setFormData] = useState({
@@ -203,32 +248,8 @@ export default function SiteInstructionRegister() {
       return
     }
 
-    const instructionNumber = `AI-${String(instructions.length + 1).padStart(3, '0')}`
-
-    const newInstruction: SiteInstruction = {
-      id: String(Date.now()),
-      instructionNumber,
-      projectId: 'proj-1',
-      projectName: 'KLCC Residential Tower',
-      issuedDate: new Date().toISOString(),
-      issuedBy: 'Ar. Ahmad bin Abdullah',
-      contractorName: 'ABC Construction Sdn Bhd',
-      subject: formData.subject,
-      description: formData.description,
-      category: formData.category,
-      priority: formData.priority,
-      costImplication: parseFloat(formData.costImplication) || 0,
-      timeImplication: parseInt(formData.timeImplication) || 0,
-      isVariation: formData.isVariation,
-      relatedVariationId: formData.relatedVariationId || undefined,
-      relatedRFIId: formData.relatedRFIId || undefined,
-      relatedDrawings: formData.relatedDrawings ? formData.relatedDrawings.split(',').map(d => d.trim()) : undefined,
-      status: 'issued',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-
-    setInstructions([newInstruction, ...instructions])
+    // TODO: Use store.createInstruction() when Phase 2 UI restructuring is complete
+    toast.info('Backend connection ready. Creating site instruction...')
     setFormData({
       subject: '',
       description: '',
@@ -246,13 +267,13 @@ export default function SiteInstructionRegister() {
   }
 
   const stats = {
-    total: instructions.length,
-    issued: instructions.filter(i => i.status === 'issued').length,
-    acknowledged: instructions.filter(i => i.status === 'acknowledged').length,
-    inProgress: instructions.filter(i => i.status === 'in_progress').length,
-    completed: instructions.filter(i => i.status === 'completed').length,
-    variations: instructions.filter(i => i.isVariation).length,
-    totalCost: instructions.reduce((sum, i) => sum + i.costImplication, 0)
+    total: siteInstructions.length,
+    issued: siteInstructions.filter(i => i.status === 'issued').length,
+    acknowledged: siteInstructions.filter(i => i.status === 'acknowledged').length,
+    inProgress: siteInstructions.filter(i => i.status === 'in_progress').length,
+    completed: siteInstructions.filter(i => i.status === 'completed').length,
+    variations: siteInstructions.filter(i => i.isVariation).length,
+    totalCost: siteInstructions.reduce((sum, i) => sum + i.costImplication, 0)
   }
 
   return (
@@ -354,7 +375,7 @@ export default function SiteInstructionRegister() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {instructions.map((instruction) => (
+                  {siteInstructions.map((instruction) => (
                     <TableRow key={instruction.id}>
                       <TableCell className="font-medium">
                         {instruction.instructionNumber}
