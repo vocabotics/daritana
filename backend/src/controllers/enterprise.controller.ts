@@ -1,9 +1,7 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 import { z } from 'zod'
 import monteCarloService from '../services/monteCarlo.service'
-
-const prisma = new PrismaClient()
 
 // Validation schemas
 const createRiskAssessmentSchema = z.object({

@@ -4,28 +4,25 @@ import { useAuthStore } from '@/store/authStore';
 // API base URL
 const API_BASE_URL = 'http://localhost:5004/api';
 
-// Create axios instance with default config
+// SECURITY: Create axios instance with HTTP-Only cookie authentication
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true, // Send HTTP-Only cookies with all requests
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Add auth interceptor to include token and organization context
+// Add organization context interceptor (cookies handle auth automatically)
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
-    const organizationId = localStorage.getItem('organizationId');
-    
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    
+    // Get organization ID from auth store instead of localStorage
+    const organizationId = useAuthStore.getState().organization?.id;
+
     if (organizationId) {
       config.headers['X-Organization-Id'] = organizationId;
     }
-    
+
     return config;
   },
   (error) => {
@@ -38,10 +35,8 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Clear auth and redirect to login
-      localStorage.removeItem('token');
-      localStorage.removeItem('organizationId');
-      localStorage.removeItem('user');
+      // SECURITY: Cookies cleared by backend on logout
+      // Just redirect to login
       window.location.href = '/login';
     }
     return Promise.reject(error);

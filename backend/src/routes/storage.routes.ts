@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { body, query, param } from 'express-validator'
 import { authenticate, authorize } from '../middleware/auth'
 import { validationResult } from 'express-validator'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 import multer from 'multer'
 import AWS from 'aws-sdk'
 import { v4 as uuidv4 } from 'uuid'
@@ -12,7 +12,6 @@ import sharp from 'sharp'
 import crypto from 'crypto'
 
 const router = Router()
-const prisma = new PrismaClient()
 
 // Configure AWS S3
 const s3 = new AWS.S3({

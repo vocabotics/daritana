@@ -322,13 +322,12 @@ export function TeamPage() {
 
   // Connect to Virtual Office on mount
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token && user) {
-      // Connect to virtual office
-      virtualOfficeService.connect(token);
-      
+    if (user) {
+      // SECURITY: Services use HTTP-Only cookies for auth (no token needed)
+      virtualOfficeService.connect();
+
       // Connect to chat service
-      teamChatService.connect(token).then(() => {
+      teamChatService.connect().then(() => {
         // Load chat rooms
         teamChatService.getChatRooms().then(rooms => {
           setChatRooms(rooms as any);
@@ -553,14 +552,13 @@ export function TeamPage() {
 
   const handleStartVideoCall = async () => {
     try {
-      // Connect to video service
-      const token = localStorage.getItem('access_token')
-      if (!token) {
+      // SECURITY: Video service uses HTTP-Only cookies for auth (no token needed)
+      if (!user) {
         toast.error('Authentication required for video calls')
         return
       }
 
-      videoService.connect(token)
+      videoService.connect()
       
       // Start local media stream
       const stream = await videoService.startLocalStream({

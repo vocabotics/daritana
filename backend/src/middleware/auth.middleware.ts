@@ -18,7 +18,7 @@ declare global {
 }
 
 /**
- * Authenticate user from JWT token
+ * Authenticate user from JWT token (HTTP-Only cookie or Authorization header)
  */
 export const authenticate = async (
   req: Request,
@@ -26,23 +26,27 @@ export const authenticate = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const authHeader = req.headers.authorization;
-    
-    if (!authHeader) {
-      throw new AuthenticationError('No authorization header provided');
-    }
-    
-    const token = authHeader.startsWith('Bearer ')
-      ? authHeader.slice(7)
-      : authHeader;
-    
+    // Try to get token from HTTP-Only cookie first (preferred)
+    let token = req.cookies?.access_token;
+
+    // Fall back to Authorization header for backward compatibility
     if (!token) {
-      throw new AuthenticationError('No token provided');
+      const authHeader = req.headers.authorization;
+
+      if (authHeader) {
+        token = authHeader.startsWith('Bearer ')
+          ? authHeader.slice(7)
+          : authHeader;
+      }
     }
-    
+
+    if (!token) {
+      throw new AuthenticationError('No authentication token provided');
+    }
+
     // Verify token
     const decoded = verifyAccessToken(token);
-    
+
     // Check if user still exists and is active
     const user = await prisma.user.findUnique({
       where: { id: decoded.id },
@@ -54,30 +58,30 @@ export const authenticate = async (
         isBanned: true
       }
     });
-    
+
     if (!user) {
       throw new AuthenticationError('User not found');
     }
-    
+
     if (!user.isActive) {
       throw new AuthenticationError('Account is inactive');
     }
-    
+
     if (user.isBanned) {
       throw new AuthenticationError('Account is banned');
     }
-    
+
     // Attach user to request
     req.user = decoded;
     req.userId = decoded.id;
-    
+
     next();
   } catch (error) {
     if (error instanceof AuthenticationError) {
-      res.status(401).json({ error: error.message });
+      res.status(401).json({ success: false, error: error.message });
     } else {
       logger.error('Authentication error', error);
-      res.status(401).json({ error: 'Authentication failed' });
+      res.status(401).json({ success: false, error: 'Authentication failed' });
     }
   }
 };

@@ -34,34 +34,25 @@ export const useSessionManager = (config: SessionConfig = {}) => {
   const updateActivity = useCallback(() => {
     lastActivityRef.current = Date.now();
     warningShownRef.current = false;
-    
-    // Store in localStorage for cross-tab sync
-    localStorage.setItem('lastActivity', lastActivityRef.current.toString());
+
+    // SECURITY: Removed localStorage - activity tracked by HTTP-Only cookie expiration
+    // Cookies handle cross-tab session automatically
   }, []);
 
-  // Check if session has expired
+  // Check if session has expired (based on local activity tracking)
+  // Note: Actual session validity is managed by HTTP-Only cookies on backend
   const isSessionExpired = useCallback((): boolean => {
-    const lastActivity = Math.max(
-      lastActivityRef.current,
-      parseInt(localStorage.getItem('lastActivity') || '0')
-    );
-    
-    const timeElapsed = Date.now() - lastActivity;
+    const timeElapsed = Date.now() - lastActivityRef.current;
     const timeoutMs = sessionTimeout * 60 * 1000;
-    
+
     return timeElapsed > timeoutMs;
   }, [sessionTimeout]);
 
-  // Check if warning should be shown
+  // Check if warning should be shown (based on local activity)
   const shouldShowWarning = useCallback((): boolean => {
-    const lastActivity = Math.max(
-      lastActivityRef.current,
-      parseInt(localStorage.getItem('lastActivity') || '0')
-    );
-    
-    const timeElapsed = Date.now() - lastActivity;
+    const timeElapsed = Date.now() - lastActivityRef.current;
     const warningMs = (sessionTimeout - warningTime) * 60 * 1000;
-    
+
     return timeElapsed > warningMs && !warningShownRef.current;
   }, [sessionTimeout, warningTime]);
 
@@ -178,29 +169,10 @@ export const useSessionManager = (config: SessionConfig = {}) => {
   }, [isAuthenticated, autoLogoutOnVisible, isSessionExpired, handleSessionExpiry, updateActivity]);
 
   // Handle storage changes (cross-tab synchronization)
+  // SECURITY: Removed localStorage sync - HTTP-Only cookies handle cross-tab sessions automatically
+  // When one tab logs out, cookies are cleared and all tabs become unauthenticated
   useEffect(() => {
-    if (!isAuthenticated) return;
-
-    const handleStorageChange = (event: StorageEvent) => {
-      // If another tab logged out, sync this tab
-      if (event.key === 'access_token' && !event.newValue) {
-        window.location.reload();
-      }
-      
-      // Sync last activity across tabs
-      if (event.key === 'lastActivity' && event.newValue) {
-        lastActivityRef.current = Math.max(
-          lastActivityRef.current,
-          parseInt(event.newValue)
-        );
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
+    // No-op: Cross-tab session handled by shared HTTP-Only cookies
   }, [isAuthenticated]);
 
   // Cleanup on unmount
@@ -219,11 +191,7 @@ export const useSessionManager = (config: SessionConfig = {}) => {
     updateActivity,
     isSessionExpired: isSessionExpired(),
     getTimeRemaining: () => {
-      const lastActivity = Math.max(
-        lastActivityRef.current,
-        parseInt(localStorage.getItem('lastActivity') || '0')
-      );
-      const timeElapsed = Date.now() - lastActivity;
+      const timeElapsed = Date.now() - lastActivityRef.current;
       const timeoutMs = sessionTimeout * 60 * 1000;
       return Math.max(0, timeoutMs - timeElapsed);
     },

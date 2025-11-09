@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // Get all users (admin only)
 router.get('/users', async (req, res) => {

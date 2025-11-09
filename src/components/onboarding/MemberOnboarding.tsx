@@ -64,6 +64,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
+import { useOnboardingStore } from '@/store/onboardingStore'
 import { useNavigate } from 'react-router-dom'
 import { settingsService } from '@/services/settings.service'
 
@@ -122,7 +123,8 @@ interface SocialAccounts {
 
 export const MemberOnboarding: React.FC = () => {
   const navigate = useNavigate()
-  const { user, completeOnboarding } = useAuthStore()
+  const { user, organization, completeOnboarding } = useAuthStore()
+  const { setUserProfile, setSocialAccounts: setSocialAccountsStore, organizationName } = useOnboardingStore()
   const [currentStep, setCurrentStep] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -243,10 +245,21 @@ export const MemberOnboarding: React.FC = () => {
       await settingsService.updatePreferences('notifications', preferences.notifications)
       await settingsService.updatePreferences('workspace', preferences.workspace)
 
-      // Save profile data (would need a profile service)
-      localStorage.setItem('userProfile', JSON.stringify(profile))
-      localStorage.setItem('socialAccounts', JSON.stringify(socialAccounts))
-      
+      // Save profile and social data in onboarding store (memory-only, no localStorage)
+      setUserProfile({
+        fullName: `${profile.firstName} ${profile.lastName}`,
+        email: user?.email || '',
+        phone: profile.phone,
+        jobTitle: profile.title,
+        department: profile.department,
+        bio: profile.bio,
+      })
+      setSocialAccountsStore({
+        linkedin: socialAccounts.linkedin ? 'connected' : undefined,
+        twitter: socialAccounts.twitter ? 'connected' : undefined,
+        github: socialAccounts.github ? 'connected' : undefined,
+      })
+
       // Mark onboarding as complete
       completeOnboarding()
       
@@ -384,7 +397,7 @@ export const MemberOnboarding: React.FC = () => {
                         Hi {profile.firstName || user?.name?.split(' ')[0] || 'there'}! 👋
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-                        You've been invited to join <strong>{localStorage.getItem('organizationName') || 'the organization'}</strong>. 
+                        You've been invited to join <strong>{organizationName || organization?.name || 'the organization'}</strong>.
                         Let's quickly set up your personal profile and preferences.
                       </p>
                     </div>

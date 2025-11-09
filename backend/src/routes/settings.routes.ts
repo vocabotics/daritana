@@ -1,9 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 import { authenticateMultiTenant } from '../middleware/multi-tenant-auth';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // Extended Request type with auth context
 interface AuthenticatedRequest extends Request {

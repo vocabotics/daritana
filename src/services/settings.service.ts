@@ -4,27 +4,17 @@ import { UserSettings } from '@/store/settingsStore';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7001';
 
 // Create axios instance with default config
+// SECURITY: Using HTTP-Only cookies for authentication
 const api = axios.create({
   baseURL: `${API_URL}/api`,
+  withCredentials: true, // Send cookies with requests
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Add auth token to requests
-api.interceptors.request.use((config) => {
-  // Try to get token from localStorage
-  const token = localStorage.getItem('token');
-  const sessionToken = localStorage.getItem('sessionToken');
-  
-  // Use session token if available, otherwise use regular token
-  const authToken = sessionToken || token;
-  
-  if (authToken) {
-    config.headers.Authorization = `Bearer ${authToken}`;
-  }
-  return config;
-});
+// Auth handled by HTTP-Only cookies - no manual token management needed
+// Cookies are sent automatically with each request
 
 // Settings service interface
 export interface SettingsResponse {

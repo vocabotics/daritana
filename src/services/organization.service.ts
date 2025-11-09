@@ -228,6 +228,24 @@ class OrganizationService {
     }
   }
 
+  async inviteMultipleUsers(organizationId: string, members: any[]): Promise<Array<{ success: boolean; email: string; error?: string }>> {
+    try {
+      const response = await api.post<Array<{ success: boolean; email: string; error?: string }>>(
+        `/organizations/${organizationId}/invite-members`,
+        { members }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to invite members to organization ${organizationId}:`, error);
+      // Return error response for all members if the request fails
+      return members.map(m => ({
+        success: false,
+        email: m.email,
+        error: error instanceof Error ? error.message : 'Failed to send invitation'
+      }));
+    }
+  }
+
   async removeOrganizationMember(organizationId: string, memberId: string): Promise<void> {
     try {
       await api.delete(`/organizations/${organizationId}/members/${memberId}`);

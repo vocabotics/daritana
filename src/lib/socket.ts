@@ -12,12 +12,10 @@ class SocketManager {
     }
 
     const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5004';
-    const token = localStorage.getItem('access_token');
 
+    // HTTP-Only cookies are sent automatically with WebSocket handshake
     this.socket = io(socketUrl, {
-      auth: {
-        token,
-      },
+      withCredentials: true, // IMPORTANT: Send cookies with WebSocket connection
       transports: ['websocket', 'polling'],
       timeout: 20000,
       forceNew: true,
@@ -90,10 +88,9 @@ class SocketManager {
 
     // Handle authentication errors
     this.socket.on('auth_error', () => {
-      console.error('Socket authentication failed');
-      // Disabled redirect to prevent loops
-      // localStorage.removeItem('access_token');
-      // window.location.href = '/login';
+      console.error('Socket authentication failed - cookies may be expired');
+      // Cookies are HTTP-Only and managed by the server
+      // User should re-authenticate if this occurs
     });
 
     // Real-time event handlers

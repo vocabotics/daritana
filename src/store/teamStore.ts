@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import teamService from '@/services/team.service';
+import { useAuthStore } from './authStore';
 
 // Types for team management
 export interface TeamMember {
@@ -469,12 +470,14 @@ export const useTeamStore = create<TeamStore>()(
         try {
           await teamService.updatePresence(status);
           // Update local presence
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
-          set((state) => ({
-            presence: state.presence.map(p => 
-              p.userId === currentUserId ? { ...p, status, lastSeen: new Date() } : p
-            )
-          }));
+          const currentUserId = useAuthStore.getState().user?.id || '';
+          if (currentUserId) {
+            set((state) => ({
+              presence: state.presence.map(p =>
+                p.userId === currentUserId ? { ...p, status, lastSeen: new Date() } : p
+              )
+            }));
+          }
         } catch (error) {
           console.error('Failed to update presence:', error);
         }
@@ -483,7 +486,7 @@ export const useTeamStore = create<TeamStore>()(
       updateCurrentPage: async (page) => {
         try {
           // Current page tracking not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             presence: state.presence.map(p => 
               p.userId === currentUserId ? { ...p, currentPage: page, lastSeen: new Date() } : p
@@ -497,7 +500,7 @@ export const useTeamStore = create<TeamStore>()(
       setTyping: async (channelId, isTyping) => {
         try {
           // Typing status not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             presence: state.presence.map(p => 
               p.userId === currentUserId ? { ...p, isTyping } : p
@@ -531,12 +534,13 @@ export const useTeamStore = create<TeamStore>()(
         set({ isLoading: true, error: null });
         try {
           // Chat channels not yet implemented in backend
+          const currentUserId = useAuthStore.getState().user?.id || '';
           const newChannel = {
             id: Date.now().toString(),
             ...channel,
             createdAt: new Date(),
             members: channel.members || [],
-            createdBy: localStorage.getItem('userId') || 'current-user'
+            createdBy: currentUserId
           };
           set((state) => ({
             channels: [...state.channels, newChannel],
@@ -592,7 +596,7 @@ export const useTeamStore = create<TeamStore>()(
         set({ isLoading: true, error: null });
         try {
           // Chat channels not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             channels: state.channels.map(channel => 
               channel.id === id 
@@ -614,7 +618,7 @@ export const useTeamStore = create<TeamStore>()(
         set({ isLoading: true, error: null });
         try {
           // Chat channels not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             channels: state.channels.map(channel => 
               channel.id === id 
@@ -707,7 +711,7 @@ export const useTeamStore = create<TeamStore>()(
       addReaction: async (messageId, emoji) => {
         try {
           // Message reactions not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             messages: state.messages.map(msg => {
               if (msg.id === messageId) {
@@ -741,7 +745,7 @@ export const useTeamStore = create<TeamStore>()(
       removeReaction: async (messageId, emoji) => {
         try {
           // Message reactions not yet implemented in backend
-          const currentUserId = localStorage.getItem('userId') || 'current-user';
+          const currentUserId = useAuthStore.getState().user?.id || '';
           set((state) => ({
             messages: state.messages.map(msg => {
               if (msg.id === messageId) {

@@ -2,11 +2,10 @@ import { Router } from 'express';
 import { body, param, query } from 'express-validator';
 import { authenticate } from '../middleware/auth';
 import { validate } from '../middleware/validate';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 import { differenceInDays, addDays } from 'date-fns';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // All routes require authentication
 router.use(authenticate);

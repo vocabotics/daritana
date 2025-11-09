@@ -3,23 +3,16 @@ import { toast } from 'sonner';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5004/api';
 
-// Get auth token from localStorage
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Authorization': token ? `Bearer ${token}` : '',
+// SECURITY: Create axios instance with HTTP-Only cookie authentication
+const api = axios.create({
+  baseURL: API_URL,
+  withCredentials: true, // Send HTTP-Only cookies with all requests
+  headers: {
     'Content-Type': 'application/json'
-  };
-};
+  }
+});
 
-// Get multipart headers for file upload
-const getMultipartHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Authorization': token ? `Bearer ${token}` : '',
-    'Content-Type': 'multipart/form-data'
-  };
-};
+// No manual Authorization headers needed - cookies sent automatically
 
 export interface Document {
   id: string;
@@ -147,9 +140,8 @@ class DocumentsService {
       if (filters?.category) params.append('category', filters.category);
       if (filters?.projectId) params.append('projectId', filters.projectId);
 
-      const response = await axios.get(`${this.apiUrl}?${params.toString()}`, {
-        headers: getAuthHeaders()
-      });
+      // SECURITY: Cookies sent automatically with withCredentials
+      const response = await api.get(`/documents?${params.toString()}`);
 
       return response.data.documents || [];
     } catch (error: any) {
@@ -162,8 +154,7 @@ class DocumentsService {
   // Get single document by ID
   async getDocument(id: string): Promise<Document> {
     try {
-      const response = await axios.get(`${this.apiUrl}/${id}`, {
-        headers: getAuthHeaders()
+      const response = await api.get(`${this.apiUrl}/${id}`, {
       });
 
       return response.data;
@@ -183,11 +174,9 @@ class DocumentsService {
       if (data.category) formData.append('category', data.category);
       if (data.projectId) formData.append('projectId', data.projectId);
 
-      const response = await axios.post(this.apiUrl, formData, {
-        headers: {
-          'Authorization': localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''
-        }
-      });
+      // SECURITY: Cookies sent automatically with withCredentials
+      // Content-Type automatically set to multipart/form-data for FormData
+      const response = await api.post(this.apiUrl, formData);
 
       toast.success('Document uploaded successfully');
       return response.data;
@@ -201,8 +190,7 @@ class DocumentsService {
   // Update document
   async updateDocument(id: string, data: UpdateDocumentData): Promise<Document> {
     try {
-      const response = await axios.patch(`${this.apiUrl}/${id}`, data, {
-        headers: getAuthHeaders()
+      const response = await api.patch(`${this.apiUrl}/${id}`, data, {
       });
 
       toast.success('Document updated successfully');
@@ -217,8 +205,7 @@ class DocumentsService {
   // Delete document
   async deleteDocument(id: string): Promise<void> {
     try {
-      await axios.delete(`${this.apiUrl}/${id}`, {
-        headers: getAuthHeaders()
+      await api.delete(`${this.apiUrl}/${id}`, {
       });
 
       toast.success('Document deleted successfully');
@@ -239,11 +226,8 @@ class DocumentsService {
       if (data.description) formData.append('description', data.description);
       if (data.file) formData.append('file', data.file);
 
-      const response = await axios.post(`${this.apiUrl}/${documentId}/versions`, formData, {
-        headers: {
-          'Authorization': localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''
-        }
-      });
+      // SECURITY: Cookies sent automatically with withCredentials
+      const response = await api.post(`${this.apiUrl}/${documentId}/versions`, formData);
 
       toast.success('New version created successfully');
       return response.data;
@@ -257,8 +241,7 @@ class DocumentsService {
   // Get document versions
   async getVersions(documentId: string): Promise<DocumentVersion[]> {
     try {
-      const response = await axios.get(`${this.apiUrl}/${documentId}/versions`, {
-        headers: getAuthHeaders()
+      const response = await api.get(`${this.apiUrl}/${documentId}/versions`, {
       });
 
       return response.data.versions || [];
@@ -272,8 +255,7 @@ class DocumentsService {
   // Share document
   async shareDocument(documentId: string, data: ShareDocumentData): Promise<void> {
     try {
-      await axios.post(`${this.apiUrl}/${documentId}/share`, data, {
-        headers: getAuthHeaders()
+      await api.post(`${this.apiUrl}/${documentId}/share`, data, {
       });
 
       toast.success('Document shared successfully');
@@ -287,8 +269,7 @@ class DocumentsService {
   // Download document
   async downloadDocument(documentId: string): Promise<void> {
     try {
-      const response = await axios.get(`${this.apiUrl}/${documentId}/download`, {
-        headers: getAuthHeaders(),
+      const response = await api.get(`${this.apiUrl}/${documentId}/download`, {
         responseType: 'blob'
       });
 
@@ -333,11 +314,10 @@ class DocumentsService {
   // Request document approval
   async requestApproval(documentId: string, reviewers: string[], message?: string): Promise<void> {
     try {
-      await axios.post(`${this.apiUrl}/${documentId}/request-approval`, {
+      await api.post(`${this.apiUrl}/${documentId}/request-approval`, {
         reviewers,
         message
       }, {
-        headers: getAuthHeaders()
       });
 
       toast.success('Approval request sent successfully');
@@ -351,11 +331,10 @@ class DocumentsService {
   // Approve or reject document
   async reviewDocument(documentId: string, action: 'approve' | 'reject', comments?: string): Promise<void> {
     try {
-      await axios.post(`${this.apiUrl}/${documentId}/review`, {
+      await api.post(`${this.apiUrl}/${documentId}/review`, {
         action,
         comments
       }, {
-        headers: getAuthHeaders()
       });
 
       toast.success(`Document ${action === 'approve' ? 'approved' : 'rejected'} successfully`);
@@ -369,11 +348,10 @@ class DocumentsService {
   // Add annotation to document
   async addAnnotation(documentId: string, content: string, position?: { x: number; y: number; page?: number }): Promise<void> {
     try {
-      await axios.post(`${this.apiUrl}/${documentId}/annotations`, {
+      await api.post(`${this.apiUrl}/${documentId}/annotations`, {
         content,
         position
       }, {
-        headers: getAuthHeaders()
       });
 
       toast.success('Annotation added successfully');
@@ -387,8 +365,7 @@ class DocumentsService {
   // Resolve annotation
   async resolveAnnotation(documentId: string, annotationId: string): Promise<void> {
     try {
-      await axios.patch(`${this.apiUrl}/${documentId}/annotations/${annotationId}/resolve`, {}, {
-        headers: getAuthHeaders()
+      await api.patch(`${this.apiUrl}/${documentId}/annotations/${annotationId}/resolve`, {}, {
       });
 
       toast.success('Annotation resolved');
@@ -411,8 +388,7 @@ class DocumentsService {
   }> {
     try {
       const params = projectId ? `?projectId=${projectId}` : '';
-      const response = await axios.get(`${this.apiUrl}/statistics${params}`, {
-        headers: getAuthHeaders()
+      const response = await api.get(`${this.apiUrl}/statistics${params}`, {
       });
 
       return response.data;
@@ -434,8 +410,7 @@ class DocumentsService {
   // Get document categories
   async getCategories(): Promise<Array<{ id: string; name: string; code: string; }>> {
     try {
-      const response = await axios.get(`${this.apiUrl}/categories`, {
-        headers: getAuthHeaders()
+      const response = await api.get(`${this.apiUrl}/categories`, {
       });
 
       return response.data.categories || [];

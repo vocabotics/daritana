@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { OnboardingWizard } from '@/components/onboarding/OnboardingWizard';
+import { useOnboardingStore } from '@/store/onboardingStore';
 
 interface CompanyRegistrationData {
   name: string;
@@ -37,6 +38,7 @@ interface CompanyRegistrationData {
 
 export const CompanyRegistration: React.FC = () => {
   const navigate = useNavigate();
+  const setCompanyRegistrationData = useOnboardingStore((state) => state.setCompanyRegistrationData);
   const [step, setStep] = useState<'registration' | 'onboarding'>('registration');
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<CompanyRegistrationData>({
@@ -76,11 +78,24 @@ export const CompanyRegistration: React.FC = () => {
     }
 
     setIsLoading(true);
-    
+
     try {
-      // Store registration data for onboarding wizard
-      localStorage.setItem('companyRegistrationData', JSON.stringify(formData));
-      
+      // Store registration data in onboarding store (memory-only, no localStorage)
+      setCompanyRegistrationData({
+        companyName: formData.name,
+        businessType: formData.type,
+        teamSize: formData.size,
+        country: formData.country,
+        description: formData.description || '',
+        registrationNumber: '',
+        businessAddress: formData.address || '',
+        city: formData.city || '',
+        state: formData.state || '',
+        postcode: formData.postalCode || '',
+        phone: formData.phone || '',
+        website: formData.website || '',
+      });
+
       // Move to onboarding wizard
       setStep('onboarding');
       toast.success('Company registration successful! Let\'s set up your workspace.');

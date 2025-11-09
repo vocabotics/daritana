@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { body, validationResult } from 'express-validator'
 import { asyncHandler } from '../middleware/errorHandler'
-import { AuthController } from '../controllers/auth.controller'
-import { authenticate } from '../middleware/auth'
+import { AuthController } from '../controllers/auth.prisma.controller'
+import { authenticate } from '../middleware/auth.middleware'
 import { ApiError } from '../middleware/errorHandler'
 
 const router = Router()
@@ -33,11 +33,8 @@ router.post('/login', [
   validate
 ], asyncHandler(AuthController.login))
 
-// Refresh token
-router.post('/refresh', [
-  body('refreshToken').notEmpty(),
-  validate
-], asyncHandler(AuthController.refreshToken))
+// Refresh token (from HTTP-Only cookie)
+router.post('/refresh', asyncHandler(AuthController.refreshToken))
 
 // Verify email
 router.get('/verify-email/:token', asyncHandler(AuthController.verifyEmail))
@@ -54,20 +51,32 @@ router.post('/reset-password/:token', [
   validate
 ], asyncHandler(AuthController.resetPassword))
 
-// Protected routes
+// Protected routes (require authentication via HTTP-Only cookie)
 router.use(authenticate)
 
-// Get current user
+// Get current user (returns user + organization + permissions)
 router.get('/me', asyncHandler(AuthController.getCurrentUser))
 
-// Update password
-router.put('/update-password', [
+// Verify token validity
+router.post('/verify', asyncHandler(AuthController.verifyToken))
+
+// Complete onboarding
+router.post('/onboarding-complete', [
+  body('type').isIn(['organization', 'member', 'vendor']).withMessage('Type must be organization, member, or vendor'),
+  validate
+], asyncHandler(AuthController.completeOnboarding))
+
+// Update profile
+router.put('/profile', asyncHandler(AuthController.updateProfile))
+
+// Change password
+router.put('/change-password', [
   body('currentPassword').notEmpty(),
   body('newPassword').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
   validate
-], asyncHandler(AuthController.updatePassword))
+], asyncHandler(AuthController.changePassword))
 
-// Logout
+// Logout (clears HTTP-Only cookies)
 router.post('/logout', asyncHandler(AuthController.logout))
 
 export default router

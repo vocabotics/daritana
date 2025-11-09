@@ -1,0 +1,526 @@
+import React, { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Badge } from '@/components/ui/badge'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import {
+  DollarSign,
+  Calendar,
+  FileText,
+  Plus,
+  Download,
+  Upload,
+  CheckCircle,
+  XCircle,
+  Clock,
+  AlertTriangle,
+  TrendingUp,
+  TrendingDown,
+  Edit,
+  Eye,
+  Send,
+  Calculator,
+  Loader2
+} from 'lucide-react'
+import { format } from 'date-fns'
+import { toast } from 'sonner'
+import PageWrapper from '@/components/PageWrapper'
+import { useChangeOrderStore } from '@/store/architect/changeOrderStore'
+import { useAuthStore } from '@/store/authStore'
+import { ChangeOrderDetail } from '@/components/architect/ChangeOrderDetail'
+import type { ChangeOrder, ChangeOrderApproval } from '@/types/architect'
+
+export default function ChangeOrderManagement() {
+  // Zustand store
+  const {
+    changeOrders,
+    costSummary,
+    loading,
+    error,
+    fetchChangeOrders,
+    fetchCostSummary,
+    approveChangeOrder,
+    clearError
+  } = useChangeOrderStore()
+
+  // Auth store for current user
+  const { user } = useAuthStore()
+
+  // Local UI state
+  const [showNewChangeOrder, setShowNewChangeOrder] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState<ChangeOrder | null>(null)
+  const [showDetailModal, setShowDetailModal] = useState(false)
+  const [filter, setFilter] = useState('all')
+
+  // Load data on mount
+  useEffect(() => {
+    fetchChangeOrders()
+    fetchCostSummary('proj-1') // TODO: Get from project context
+  }, [fetchChangeOrders, fetchCostSummary])
+
+  // Error handling
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      clearError()
+    }
+  }, [error, clearError])
+
+  // Approval handlers
+  const handleApprove = async (changeOrderId: string, approvalId: string, comments: string) => {
+    if (!user) return
+
+    const approval: Omit<ChangeOrderApproval, 'id'> = {
+      approverId: user.id,
+      approverName: user.name || user.email,
+      approverRole: user.role,
+      status: 'approved',
+      comments,
+      date: new Date().toISOString()
+    }
+
+    await approveChangeOrder(changeOrderId, approval)
+  }
+
+  const handleReject = async (changeOrderId: string, approvalId: string, comments: string) => {
+    if (!user) return
+
+    const approval: Omit<ChangeOrderApproval, 'id'> = {
+      approverId: user.id,
+      approverName: user.name || user.email,
+      approverRole: user.role,
+      status: 'rejected',
+      comments,
+      date: new Date().toISOString()
+    }
+
+    await approveChangeOrder(changeOrderId, approval)
+  }
+
+  const openDetailModal = (order: ChangeOrder) => {
+    setSelectedOrder(order)
+    setShowDetailModal(true)
+  }
+
+  const getStatusBadge = (status: ChangeOrder['status']) => {
+    const variants: Record<ChangeOrder['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
+      draft: 'secondary',
+      pending_review: 'default',
+      approved: 'default',
+      rejected: 'destructive',
+      in_progress: 'default',
+      completed: 'secondary'
+    }
+
+    const colors: Record<ChangeOrder['status'], string> = {
+      draft: 'text-gray-600',
+      pending_review: 'text-yellow-600',
+      approved: 'text-green-600',
+      rejected: 'text-red-600',
+      in_progress: 'text-blue-600',
+      completed: 'text-gray-600'
+    }
+
+    return (
+      <Badge variant={variants[status]} className={colors[status]}>
+        {status.replace('_', ' ')}
+      </Badge>
+    )
+  }
+
+  const getReasonBadge = (reason: ChangeOrder['reason']) => {
+    const labels: Record<ChangeOrder['reason'], string> = {
+      design_change: 'Design Change',
+      site_condition: 'Site Condition',
+      client_request: 'Client Request',
+      error_omission: 'Error/Omission',
+      regulatory: 'Regulatory',
+      other: 'Other'
+    }
+    return <Badge variant="outline">{labels[reason]}</Badge>
+  }
+
+  const filteredOrders = changeOrders.filter(order => {
+    if (filter === 'all') return true
+    return order.status === filter
+  })
+
+  const stats = costSummary || {
+    original: 0,
+    approved: changeOrders
+      .filter(o => o.status === 'approved')
+      .reduce((sum, o) => sum + o.costImpact, 0),
+    pending: changeOrders
+      .filter(o => o.status === 'pending_review')
+      .reduce((sum, o) => sum + o.costImpact, 0),
+    total: changeOrders.reduce((sum, o) => sum + o.costImpact, 0)
+  }
+
+  const calculatedStats = {
+    total: changeOrders.length,
+    pending: changeOrders.filter(o => o.status === 'pending_review').length,
+    approved: changeOrders.filter(o => o.status === 'approved').length,
+    totalCostImpact: stats.approved,
+    totalScheduleImpact: changeOrders
+      .filter(o => o.status === 'approved')
+      .reduce((sum, o) => sum + o.scheduleImpact, 0),
+    percentChange: stats.original > 0
+      ? ((stats.approved / stats.original) * 100).toFixed(2)
+      : '0.00'
+  }
+
+  return (
+    <PageWrapper title="Change Order Management">
+      <div className="space-y-6">
+        {/* Loading State */}
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">Loading change orders...</span>
+          </div>
+        )}
+
+        {/* Header Stats */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Total Changes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{calculatedStats.total}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Pending Review</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-yellow-600">{calculatedStats.pending}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Approved</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">{calculatedStats.approved}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Cost Impact</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                RM {calculatedStats.totalCostImpact.toLocaleString()}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {calculatedStats.percentChange}% of contract
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Schedule Impact</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{calculatedStats.totalScheduleImpact} days</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Main Content */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Change Orders</CardTitle>
+              <div className="flex items-center gap-2">
+                <Dialog open={showNewChangeOrder} onOpenChange={setShowNewChangeOrder}>
+                  <DialogTrigger asChild>
+                    <Button>
+                      <Plus className="h-4 w-4 mr-2" />
+                      New Change Order
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle>Create Change Order</DialogTitle>
+                      <DialogDescription>
+                        Document changes to the original contract scope
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="co-title">Title</Label>
+                        <Input id="co-title" placeholder="Brief description of change" />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="co-reason">Reason</Label>
+                          <Select>
+                            <SelectTrigger id="co-reason">
+                              <SelectValue placeholder="Select reason" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="design_change">Design Change</SelectItem>
+                              <SelectItem value="site_condition">Site Condition</SelectItem>
+                              <SelectItem value="client_request">Client Request</SelectItem>
+                              <SelectItem value="error_omission">Error/Omission</SelectItem>
+                              <SelectItem value="regulatory">Regulatory</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="co-requested">Requested By</Label>
+                          <Input id="co-requested" placeholder="Name of requestor" />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="co-description">Description</Label>
+                        <Textarea
+                          id="co-description"
+                          placeholder="Detailed description of the change..."
+                          rows={4}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="co-cost">Cost Impact (RM)</Label>
+                          <Input
+                            id="co-cost"
+                            type="number"
+                            placeholder="0.00"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="co-schedule">Schedule Impact (days)</Label>
+                          <Input
+                            id="co-schedule"
+                            type="number"
+                            placeholder="0"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label>Related RFIs</Label>
+                        <Input placeholder="e.g., RFI-001, RFI-002" />
+                      </div>
+                      <div>
+                        <Label>Attachments</Label>
+                        <div className="flex items-center gap-2">
+                          <Button variant="outline" size="sm">
+                            <Upload className="h-4 w-4 mr-2" />
+                            Upload Files
+                          </Button>
+                          <span className="text-sm text-muted-foreground">
+                            Drawings, specifications, quotes
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button variant="outline" onClick={() => setShowNewChangeOrder(false)}>
+                        Cancel
+                      </Button>
+                      <Button onClick={() => {
+                        toast.success('Change order created')
+                        setShowNewChangeOrder(false)
+                      }}>
+                        Create Draft
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Button variant="outline" size="icon">
+                  <Calculator className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon">
+                  <Download className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {/* Filters */}
+            <div className="flex items-center gap-4 mb-6">
+              <Select value={filter} onValueChange={setFilter}>
+                <SelectTrigger className="w-48">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="pending_review">Pending Review</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
+                  <SelectItem value="in_progress">In Progress</SelectItem>
+                  <SelectItem value="completed">Completed</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Change Orders Table */}
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>CO #</TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Reason</TableHead>
+                    <TableHead>Requested By</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Cost Impact</TableHead>
+                    <TableHead>Schedule Impact</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredOrders.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                        No change orders found
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    filteredOrders.map((order) => (
+                      <TableRow key={order.id}>
+                        <TableCell className="font-medium">{order.changeOrderNumber}</TableCell>
+                        <TableCell>
+                          <div>
+                            <p className="font-medium">{order.title}</p>
+                            <p className="text-sm text-muted-foreground line-clamp-1">
+                              {order.description}
+                            </p>
+                          </div>
+                        </TableCell>
+                        <TableCell>{getReasonBadge(order.reason)}</TableCell>
+                        <TableCell>{order.requestedBy.name}</TableCell>
+                        <TableCell>{format(new Date(order.createdAt), 'dd MMM yyyy')}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1">
+                            {order.costImpact > 0 ? (
+                              <TrendingUp className="h-4 w-4 text-red-500" />
+                            ) : order.costImpact < 0 ? (
+                              <TrendingDown className="h-4 w-4 text-green-500" />
+                            ) : null}
+                            <span className={order.costImpact > 0 ? 'text-red-600' : 'text-green-600'}>
+                              RM {Math.abs(order.costImpact).toLocaleString()}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          {order.scheduleImpact > 0 && (
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4 text-orange-500" />
+                              <span className="text-orange-600">
+                                +{order.scheduleImpact} days
+                              </span>
+                            </div>
+                          )}
+                        </TableCell>
+                      <TableCell>{getStatusBadge(order.status)}</TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => openDetailModal(order)}
+                            title="View details and approvals"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          {order.status === 'pending_review' && (
+                            <>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-green-600"
+                                onClick={() => openDetailModal(order)}
+                                title="Approve"
+                              >
+                                <CheckCircle className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-red-600"
+                                onClick={() => openDetailModal(order)}
+                                title="Reject"
+                              >
+                                <XCircle className="h-4 w-4" />
+                              </Button>
+                            </>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Summary */}
+            <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium">Contract Summary</p>
+                  <p className="text-xs text-muted-foreground">Impact on original contract</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm">Original Contract: RM 2,500,000</p>
+                  <p className="text-sm text-red-600">
+                    Approved Changes: +RM {stats.totalCostImpact.toLocaleString()}
+                  </p>
+                  <p className="text-sm font-bold">
+                    Revised Contract: RM {(2500000 + stats.totalCostImpact).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Change Order Detail Modal with Approval Workflow */}
+      {user && (
+        <ChangeOrderDetail
+          changeOrder={selectedOrder}
+          open={showDetailModal}
+          onOpenChange={setShowDetailModal}
+          currentUserId={user.id}
+          currentUserRole={user.role}
+          onApprove={handleApprove}
+          onReject={handleReject}
+        />
+      )}
+    </PageWrapper>
+  )
+}

@@ -68,6 +68,7 @@ import {
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
+import { useOnboardingStore } from '@/store/onboardingStore'
 import { useNavigate } from 'react-router-dom'
 import { marketplaceService } from '@/services/marketplace.service'
 
@@ -168,7 +169,8 @@ interface Insurance {
 
 export const VendorOnboarding: React.FC = () => {
   const navigate = useNavigate()
-  const { user } = useAuthStore()
+  const { user, completeOnboarding } = useAuthStore()
+  const { setVendorOnboardingComplete } = useOnboardingStore()
   const [currentStep, setCurrentStep] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -389,10 +391,13 @@ export const VendorOnboarding: React.FC = () => {
 
       // Save to backend
       await marketplaceService.createVendorProfile(vendorData)
-      
-      // Mark vendor onboarding as complete
-      localStorage.setItem('vendorOnboardingComplete', 'true')
-      
+
+      // Mark vendor onboarding as complete in onboarding store (memory-only, no localStorage)
+      setVendorOnboardingComplete(true)
+
+      // Also complete onboarding in auth store
+      await completeOnboarding('vendor')
+
       toast.success('Vendor registration submitted! We\'ll review your application within 2-3 business days.')
       
       // Redirect to marketplace dashboard

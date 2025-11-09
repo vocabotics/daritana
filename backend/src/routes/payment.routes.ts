@@ -2,11 +2,10 @@ import { Router } from 'express'
 import { body, query, param } from 'express-validator'
 import { authenticate, authorize } from '../middleware/auth'
 import { validationResult } from 'express-validator'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 import Stripe from 'stripe'
 
 const router = Router()
-const prisma = new PrismaClient()
 
 // Initialize Stripe (will be configured with actual keys in production)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {

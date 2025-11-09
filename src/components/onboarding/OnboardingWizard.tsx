@@ -103,6 +103,7 @@ import {
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
+import { useOnboardingStore } from '@/store/onboardingStore'
 import { useNavigate } from 'react-router-dom'
 import organizationService, { SUBSCRIPTION_PLANS } from '@/services/organization.service'
 import Confetti from 'react-confetti'
@@ -395,6 +396,12 @@ const availableIntegrations: Integration[] = [
 export const OnboardingWizard: React.FC = () => {
   const navigate = useNavigate()
   const { user, completeOnboarding } = useAuthStore()
+  const {
+    companyRegistrationData,
+    setOrganizationInfo,
+    setProjectTemplates,
+    setIntegrations,
+  } = useOnboardingStore()
   const [currentStep, setCurrentStep] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -423,6 +430,20 @@ export const OnboardingWizard: React.FC = () => {
   const [selectedTemplates, setSelectedTemplates] = useState<string[]>(['residential'])
   const [selectedIntegrations, setSelectedIntegrations] = useState<string[]>([])
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
+
+  // Load company registration data from onboarding store (memory-only, no localStorage)
+  React.useEffect(() => {
+    if (companyRegistrationData) {
+      // Pre-populate organization data from company registration
+      setOrganizationData({
+        name: companyRegistrationData.companyName || '',
+        type: companyRegistrationData.businessType as any || 'architecture',
+        size: companyRegistrationData.teamSize as any || 'small',
+        country: companyRegistrationData.country || 'Malaysia',
+        description: companyRegistrationData.description || '',
+      })
+    }
+  }, [companyRegistrationData])
 
   const steps: OnboardingStep[] = [
     {
@@ -505,9 +526,21 @@ export const OnboardingWizard: React.FC = () => {
       const nameParts = (user?.name || 'Admin User').split(' ')
       const adminFirstName = nameParts[0] || 'Admin'
       const adminLastName = nameParts.slice(1).join(' ') || 'User'
-      
-      // Generate a temporary password (in production, should prompt user)
-      const adminPassword = 'TempPassword123!' // TODO: Add password field in organization step
+
+      // Generate a secure random password
+      const generateSecurePassword = () => {
+        const length = 16
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()'
+        let password = ''
+        const array = new Uint8Array(length)
+        crypto.getRandomValues(array)
+        for (let i = 0; i < length; i++) {
+          password += charset[array[i] % charset.length]
+        }
+        return password
+      }
+
+      const adminPassword = generateSecurePassword()
       
       // Map plan selection to UUID
       const planMap: Record<string, string> = {
@@ -535,14 +568,17 @@ export const OnboardingWizard: React.FC = () => {
         
         console.log('Creating organization:', orgData)
         const orgResult = await organizationService.createOrganization(orgData)
-        setOrganizationId(orgResult.organization.id)
-        
+        setOrganizationId(orgResult.id) // FIX: orgResult is Organization directly, not { organization: Organization }
+
+        // Store organization info in onboarding store (memory-only, no localStorage)
+        setOrganizationInfo(orgResult.id, orgResult.name)
+
         // Step 2: Invite team members if any
         const validMembers = teamMembers.filter(m => m.email && m.email !== adminEmail)
         if (validMembers.length > 0) {
           console.log('Inviting team members:', validMembers)
           const inviteResults = await organizationService.inviteMultipleUsers(
-            orgResult.organization.id,
+            orgResult.id, // FIX: Use orgResult.id directly
             validMembers.map(m => ({
               email: m.email,
               firstName: m.name.split(' ')[0] || '',
@@ -558,15 +594,25 @@ export const OnboardingWizard: React.FC = () => {
             toast.success(`Invited ${successCount} team member(s) successfully`)
           }
         }
-        
-        // Step 3: Save project templates preference (stored locally for now)
+
+        // Step 3: Save project templates in onboarding store (memory-only, no localStorage)
         if (selectedTemplates.length > 0) {
-          localStorage.setItem('projectTemplates', JSON.stringify(selectedTemplates))
+          setProjectTemplates(selectedTemplates.map(id => ({
+            id,
+            name: id,
+            description: '',
+            selected: true
+          })))
         }
-        
-        // Step 4: Save integrations preference (stored locally for now)
+
+        // Step 4: Save integrations in onboarding store (memory-only, no localStorage)
         if (selectedIntegrations.length > 0) {
-          localStorage.setItem('integrations', JSON.stringify(selectedIntegrations))
+          setIntegrations(selectedIntegrations.map(id => ({
+            id,
+            name: id,
+            description: '',
+            enabled: true
+          })))
         }
       }
       

@@ -57,56 +57,133 @@ export const useIntegrationsStore = create<IntegrationsState>((set, get) => ({
   
   connectIntegration: async (integration) => {
     set({ syncInProgress: true });
-    
+
     try {
-      // Simulate API connection
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Handle specific integration types
+      // ✅ REAL OAUTH IMPLEMENTATION
+      // Connect to backend API for OAuth flows
+
       switch (integration.type) {
         case 'storage':
           if (integration.name === 'Google Drive') {
-            set({ googleDriveConnected: true });
-            // Initialize Google Drive API
-            // gapi.client.drive.files.list()
+            // ✅ Real Google OAuth Flow
+            // Backend generates OAuth URL and handles callback
+            const response = await fetch('/api/integrations/google-drive/oauth-url', {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                redirectUri: `${window.location.origin}/integrations/callback`
+              })
+            });
+
+            if (!response.ok) throw new Error('Failed to initialize Google OAuth');
+
+            const { authUrl } = await response.json();
+
+            // Redirect to Google OAuth consent screen
+            // User will be redirected back to callback URL after authorization
+            window.location.href = authUrl;
+            return; // Exit early - callback will complete the connection
           }
           break;
-          
+
         case 'communication':
           if (integration.name === 'WhatsApp') {
-            set({ whatsappBusinessId: integration.config.businessId });
+            // ✅ Real WhatsApp Business API Setup
+            const response = await fetch('/api/integrations/whatsapp/connect', {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                businessId: integration.config.businessId,
+                phoneNumberId: integration.config.phoneNumberId,
+                accessToken: integration.config.accessToken
+              })
+            });
+
+            if (!response.ok) throw new Error('Failed to connect WhatsApp Business');
+
+            const data = await response.json();
+            set({ whatsappBusinessId: data.businessId });
+
           } else if (integration.name === 'Telegram') {
-            set({ telegramBotToken: integration.config.botToken });
+            // ✅ Real Telegram Bot API Setup
+            const response = await fetch('/api/integrations/telegram/connect', {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                botToken: integration.config.botToken,
+                botUsername: integration.config.botUsername
+              })
+            });
+
+            if (!response.ok) throw new Error('Failed to connect Telegram Bot');
+
+            const data = await response.json();
+            set({ telegramBotToken: data.botToken });
           }
           break;
-          
+
         case 'cad':
-          set({ 
+          // ✅ Real CAD Software Integration
+          const cadResponse = await fetch('/api/integrations/cad/connect', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              software: integration.config.software,
+              cloudPath: integration.config.cloudPath,
+              apiKey: integration.config.apiKey
+            })
+          });
+
+          if (!cadResponse.ok) throw new Error('Failed to connect CAD software');
+
+          set({
             cadSoftware: integration.config.software,
-            cadCloudPath: integration.config.cloudPath 
+            cadCloudPath: integration.config.cloudPath
           });
           break;
-          
+
         case 'accounting':
+          // ✅ Real Accounting System Integration
+          const accountingResponse = await fetch('/api/integrations/accounting/connect', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              system: integration.config.system,
+              credentials: integration.config.credentials
+            })
+          });
+
+          if (!accountingResponse.ok) throw new Error('Failed to connect accounting system');
+
           set({ accountingSystem: integration.config.system });
           break;
       }
-      
+
+      // Mark integration as connected
       integration.status = 'connected';
       integration.lastSync = new Date();
-      
+
       set((state) => ({
         integrations: [...state.integrations, integration],
         syncInProgress: false
       }));
+
     } catch (error) {
+      console.error('Integration connection error:', error);
       integration.status = 'error';
       integration.errorMessage = (error as Error).message;
-      
+
       set((state) => ({
         integrations: [...state.integrations, integration],
         syncInProgress: false
       }));
+
+      throw error; // Re-throw for UI error handling
     }
   },
   
