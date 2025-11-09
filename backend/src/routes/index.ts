@@ -26,6 +26,7 @@ import organizationMembersRoutes from './organization-members.routes'
 import organizationRoutes from './organization.routes'
 import ganttRoutes from './gantt.routes'
 import stripeRoutes from './stripe.routes'
+import architectRoutes from './architect.routes'
 
 const router = Router()
 
@@ -69,5 +70,6 @@ router.use('/organization-members', organizationMembersRoutes)
 router.use('/organizations', organizationRoutes)
 router.use('/gantt', ganttRoutes)
 router.use('/stripe', stripeRoutes)
+router.use('/architect', architectRoutes)
 
 export default router

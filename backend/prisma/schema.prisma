@@ -2255,3 +2255,804 @@ enum PresenceStatus {
   DO_NOT_DISTURB
   OFFLINE
 }
+
+// ============================================================================
+// ARCHITECT-SPECIFIC MODELS
+// Malaysian Architect Practice Management
+// ============================================================================
+
+// 1. Authority Tracking (Submissions to local authorities - DBKL, MBPJ, etc.)
+model AuthoritySubmission {
+  id                String                    @id @default(uuid())
+  projectId         String
+  organizationId    String
+  submissionNo      String                    @unique
+  authority         String                    // DBKL, MBPJ, MBSA, etc.
+  submissionType    AuthoritySubmissionType
+  documentType      String                    // Building Plan, Layout Plan, etc.
+  title             String
+  description       String?
+  submittedDate     DateTime
+  targetApprovalDate DateTime?
+  actualApprovalDate DateTime?
+  status            AuthoritySubmissionStatus @default(DRAFT)
+  priority          Priority                  @default(MEDIUM)
+  submittedBy       String
+  approvedBy        String?
+  rejectionReason   String?
+  conditions        String[]                  // Approval conditions
+  fees              Float?
+  receiptNo         String?
+  paymentDate       DateTime?
+  documents         Json[]                    // Array of {id, name, url, type, uploadedAt}
+  comments          Json[]                    // Array of {id, userId, userName, comment, createdAt}
+  createdAt         DateTime                  @default(now())
+  updatedAt         DateTime                  @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+  @@index([submittedDate])
+}
+
+// 2. CCC Tracking (Certificate of Completion & Compliance)
+model CCCApplication {
+  id                   String              @id @default(uuid())
+  projectId            String
+  organizationId       String
+  applicationNo        String              @unique
+  localAuthority       String              // DBKL, MBPJ, etc.
+  projectName          String
+  projectAddress       String
+  lotNo                String?
+  titleNo              String?
+  status               CCCStatus           @default(DRAFT)
+  submittedDate        DateTime?
+  inspectionDate       DateTime?
+  inspectionTime       String?
+  inspectionStatus     InspectionStatus?
+  inspectionNotes      String?
+  inspector            String?
+  defectsFound         Json[]              // Array of {id, description, severity, rectified, rectifiedDate}
+  approvedDate         DateTime?
+  certificateNo        String?
+  certificateIssueDate DateTime?
+  expiryDate           DateTime?
+  consultantName       String
+  consultantRegNo      String              // LAM/BEM registration number
+  contractorName       String
+  contractorRegNo      String?
+  fees                 Float?
+  documents            Json[]              // Required documents
+  remarks              String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+// 3. Change Order Management
+model ChangeOrder {
+  id                String            @id @default(uuid())
+  projectId         String
+  organizationId    String
+  changeOrderNo     String            @unique
+  title             String
+  description       String
+  reason            String
+  category          ChangeOrderCategory
+  status            ChangeOrderStatus @default(PENDING_REVIEW)
+  priority          Priority          @default(MEDIUM)
+  requestedBy       String
+  requestedDate     DateTime          @default(now())
+  reviewedBy        String?
+  reviewedDate      DateTime?
+  approvedBy        String?
+  approvedDate      DateTime?
+  rejectedReason    String?
+  originalCost      Float?
+  additionalCost    Float
+  totalCost         Float?
+  originalDuration  Int?              // in days
+  additionalDuration Int?              // in days
+  totalDuration     Int?
+  impactAssessment  Json?             // {schedule: "", budget: "", resources: "", quality: ""}
+  documents         Json[]
+  comments          Json[]
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+// 4. DLP Management (Defects Liability Period)
+model DefectsLiabilityPeriod {
+  id                    String        @id @default(uuid())
+  projectId             String
+  organizationId        String
+  contractValue         Float
+  dlpStartDate          DateTime
+  dlpDuration           Int           // months (typically 12 or 24)
+  dlpEndDate            DateTime
+  halfRetentionReleaseDate DateTime?
+  finalRetentionReleaseDate DateTime?
+  status                DLPStatus     @default(ACTIVE)
+  totalDefectsReported  Int           @default(0)
+  totalDefectsResolved  Int           @default(0)
+  pendingDefects        Int           @default(0)
+  defects               DLPDefect[]
+  inspections           DLPInspection[]
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+model DLPDefect {
+  id                String                   @id @default(uuid())
+  dlpId             String
+  defectNo          String                   @unique
+  location          String
+  description       String
+  severity          DefectSeverity
+  category          String                   // Structural, M&E, Finishes, etc.
+  reportedDate      DateTime                 @default(now())
+  reportedBy        String
+  assignedTo        String?
+  targetFixDate     DateTime?
+  actualFixDate     DateTime?
+  status            DefectStatus             @default(REPORTED)
+  photos            String[]                 // URLs to defect photos
+  rectificationCost Float?
+  remarks           String?
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+
+  dlp DefectsLiabilityPeriod @relation(fields: [dlpId], references: [id], onDelete: Cascade)
+
+  @@index([dlpId])
+  @@index([status])
+}
+
+model DLPInspection {
+  id               String                   @id @default(uuid())
+  dlpId            String
+  inspectionNo     String                   @unique
+  inspectionDate   DateTime
+  inspector        String
+  inspectionType   InspectionType
+  findings         String
+  newDefectsFound  Int                      @default(0)
+  defectsResolved  Int                      @default(0)
+  status           String                   // Satisfactory, Unsatisfactory
+  nextInspectionDate DateTime?
+  documents        String[]
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
+
+  dlp DefectsLiabilityPeriod @relation(fields: [dlpId], references: [id], onDelete: Cascade)
+
+  @@index([dlpId])
+}
+
+// 5. Drawing Management
+model Drawing {
+  id              String         @id @default(uuid())
+  projectId       String
+  organizationId  String
+  drawingNo       String         @unique
+  title           String
+  discipline      DrawingDiscipline
+  category        String         // Floor Plan, Section, Elevation, Detail, etc.
+  scale           String?        // 1:100, 1:50, etc.
+  currentRevision String         @default("A")
+  status          DrawingStatus  @default(DRAFT)
+  drawnBy         String
+  checkedBy       String?
+  approvedBy      String?
+  issuedFor       DrawingPurpose @default(INTERNAL_REVIEW)
+  fileUrl         String
+  fileSize        Int
+  format          String         // PDF, DWG, DXF
+  revisions       DrawingRevision[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+model DrawingRevision {
+  id           String   @id @default(uuid())
+  drawingId    String
+  revision     String   // A, B, C, etc.
+  description  String   // What changed
+  revisedBy    String
+  checkedBy    String?
+  approvedBy   String?
+  revisionDate DateTime @default(now())
+  fileUrl      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  drawing Drawing @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+
+  @@index([drawingId])
+}
+
+// 6. Meeting Minutes
+model MeetingMinute {
+  id              String         @id @default(uuid())
+  projectId       String
+  organizationId  String
+  meetingNo       String         @unique
+  title           String
+  meetingType     MeetingType
+  date            DateTime
+  startTime       String
+  endTime         String
+  venue           String
+  chairperson     String
+  minuteTaker     String
+  attendees       Json[]         // Array of {id, name, email, organization, role}
+  absentees       Json[]
+  agenda          Json[]         // Array of {no, item, presenter}
+  discussions     Json[]         // Array of {agendaNo, discussion, decisions}
+  actionItems     MeetingAction[]
+  nextMeetingDate DateTime?
+  documents       String[]       // URLs to attachments
+  status          String         @default("DRAFT") // DRAFT, ISSUED
+  issuedDate      DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+}
+
+model MeetingAction {
+  id             String         @id @default(uuid())
+  meetingMinuteId String
+  actionNo       String
+  description    String
+  assignedTo     String
+  dueDate        DateTime
+  status         ActionStatus   @default(OPEN)
+  completedDate  DateTime?
+  remarks        String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  meetingMinute MeetingMinute @relation(fields: [meetingMinuteId], references: [id], onDelete: Cascade)
+
+  @@index([meetingMinuteId])
+  @@index([status])
+}
+
+// 7. PAM Contract Administration
+model PAMContract {
+  id                String              @id @default(uuid())
+  projectId         String
+  organizationId    String
+  contractNo        String              @unique
+  contractType      PAMContractType     // PAM 2006, PAM 2018, etc.
+  contractTitle     String
+  employer          String
+  architect         String
+  contractor        String
+  consultants       Json[]              // Array of {name, role, contact}
+  contractSum       Float
+  revisedContractSum Float?
+  commencementDate  DateTime
+  completionPeriod  Int                 // months
+  originalCompletionDate DateTime
+  revisedCompletionDate DateTime?
+  actualCompletionDate DateTime?
+  status            PAMContractStatus   @default(ACTIVE)
+  eotApplied        Int                 @default(0) // Extension of Time in days
+  ladApplicable     Boolean             @default(true)
+  ladRate           Float?              // per day
+  retentionPercentage Float             @default(5.0)
+  defectsLiabilityPeriod Int            @default(12) // months
+  insurances        Json[]              // Array of insurance details
+  bonds             Json[]              // Array of bond details
+  documents         String[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+// 8. Payment Certificates (Interim & Final)
+model PaymentCertificate {
+  id                    String                  @id @default(uuid())
+  projectId             String
+  organizationId        String
+  certificateNo         String                  @unique
+  certificateType       PaymentCertificateType
+  certificationDate     DateTime                @default(now())
+  periodFrom            DateTime
+  periodTo              DateTime
+  status                PaymentCertStatus       @default(DRAFT)
+  originalContractSum   Float
+  revisedContractSum    Float?
+  previousCertifiedAmount Float                 @default(0)
+  currentWorksDone      Float
+  materialsOnSite       Float                   @default(0)
+  totalAmountCertified  Float
+  lessRetention         Float
+  lessPreviousPayment   Float
+  currentPaymentDue     Float
+  gstAmount             Float                   @default(0)
+  totalPayable          Float
+  workProgress          Float                   // percentage
+  retentionHeld         Float
+  retentionReleased     Float                   @default(0)
+  workItems             Json[]                  // Array of work breakdown
+  variations            Json[]                  // Variation orders
+  certifiedBy           String
+  checkedBy             String?
+  approvedBy            String?
+  issueDate             DateTime?
+  paymentDueDate        DateTime?
+  paidDate              DateTime?
+  paidAmount            Float?
+  remarks               String?
+  documents             String[]
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+  @@index([certificateType])
+}
+
+// 9. Punch List Management (Snagging List)
+model PunchList {
+  id             String         @id @default(uuid())
+  projectId      String
+  organizationId String
+  listNo         String         @unique
+  title          String
+  inspectionDate DateTime
+  inspector      String
+  location       String?
+  status         PunchListStatus @default(OPEN)
+  totalItems     Int            @default(0)
+  completedItems Int            @default(0)
+  items          PunchListItem[]
+  dueDate        DateTime?
+  closedDate     DateTime?
+  remarks        String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+model PunchListItem {
+  id              String           @id @default(uuid())
+  punchListId     String
+  itemNo          String
+  location        String
+  description     String
+  trade           String           // Architectural, M&E, Landscape, etc.
+  severity        DefectSeverity
+  responsibleParty String
+  status          PunchItemStatus  @default(OPEN)
+  reportedDate    DateTime         @default(now())
+  targetFixDate   DateTime?
+  completedDate   DateTime?
+  verifiedDate    DateTime?
+  verifiedBy      String?
+  photos          String[]
+  remarks         String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  punchList PunchList @relation(fields: [punchListId], references: [id], onDelete: Cascade)
+
+  @@index([punchListId])
+  @@index([status])
+}
+
+// 10. RFI Management (Request for Information)
+model RFI {
+  id             String      @id @default(uuid())
+  projectId      String
+  organizationId String
+  rfiNo          String      @unique
+  subject        String
+  description    String
+  category       RFICategory
+  priority       Priority    @default(MEDIUM)
+  raisedBy       String
+  raisedDate     DateTime    @default(now())
+  assignedTo     String
+  dueDate        DateTime
+  status         RFIStatus   @default(OPEN)
+  question       String
+  answer         String?
+  answeredBy     String?
+  answeredDate   DateTime?
+  closedDate     DateTime?
+  relatedDrawings String[]   // Drawing numbers
+  attachments    String[]    // URLs to documents
+  impactOnSchedule Boolean   @default(false)
+  impactOnCost   Boolean     @default(false)
+  remarks        String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+  @@index([raisedDate])
+}
+
+// 11. Retention Tracking
+model RetentionRecord {
+  id                        String    @id @default(uuid())
+  projectId                 String
+  organizationId            String
+  contractValue             Float
+  retentionPercentage       Float     @default(5.0)
+  totalRetentionAmount      Float
+  halfRetentionAmount       Float
+  finalRetentionAmount      Float
+  currentRetentionHeld      Float
+  halfRetentionReleased     Boolean   @default(false)
+  halfRetentionReleaseDate  DateTime?
+  halfRetentionReleasedAmount Float   @default(0)
+  finalRetentionReleased    Boolean   @default(false)
+  finalRetentionReleaseDate DateTime?
+  finalRetentionReleasedAmount Float  @default(0)
+  dlpStartDate              DateTime
+  dlpEndDate                DateTime
+  status                    RetentionStatus @default(ACTIVE)
+  remarks                   String?
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+}
+
+// 12. Site Instruction Register
+model SiteInstruction {
+  id               String                 @id @default(uuid())
+  projectId        String
+  organizationId   String
+  siNo             String                 @unique
+  date             DateTime               @default(now())
+  subject          String
+  description      String
+  category         SiteInstructionCategory
+  issuedBy         String
+  issuedTo         String
+  priority         Priority               @default(MEDIUM)
+  status           SiteInstructionStatus  @default(ISSUED)
+  acknowledgedBy   String?
+  acknowledgedDate DateTime?
+  completedDate    DateTime?
+  costImpact       Float?
+  timeImpact       Int?                   // days
+  relatedDrawings  String[]
+  relatedDocuments String[]
+  attachments      String[]
+  remarks          String?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([organizationId])
+  @@index([status])
+  @@index([date])
+}
+
+// ============================================================================
+// ENUMS FOR ARCHITECT MODELS
+// ============================================================================
+
+enum AuthoritySubmissionType {
+  BUILDING_PLAN
+  LAYOUT_PLAN
+  EARTHWORK_PLAN
+  STRUCTURAL_PLAN
+  MECH_ELEC_PLAN
+  LANDSCAPE_PLAN
+  RENOVATION_PLAN
+  DEMOLITION_PERMIT
+  SIGNBOARD_PERMIT
+  HOARDING_PERMIT
+  OTHER
+}
+
+enum AuthoritySubmissionStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  ADDITIONAL_INFO_REQUIRED
+  APPROVED_WITH_CONDITIONS
+  APPROVED
+  REJECTED
+  WITHDRAWN
+  EXPIRED
+}
+
+enum CCCStatus {
+  DRAFT
+  SUBMITTED
+  INSPECTION_SCHEDULED
+  INSPECTION_COMPLETED
+  DEFECTS_NOTED
+  DEFECTS_RECTIFIED
+  APPROVED
+  REJECTED
+  CERTIFICATE_ISSUED
+}
+
+enum InspectionStatus {
+  SCHEDULED
+  COMPLETED
+  PASSED
+  FAILED
+  RESCHEDULED
+}
+
+enum ChangeOrderCategory {
+  DESIGN_CHANGE
+  SCOPE_ADDITION
+  SCOPE_REDUCTION
+  MATERIAL_SUBSTITUTION
+  METHOD_CHANGE
+  CLIENT_REQUEST
+  UNFORESEEN_CONDITIONS
+  REGULATORY_REQUIREMENT
+  OTHER
+}
+
+enum ChangeOrderStatus {
+  PENDING_REVIEW
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  IMPLEMENTED
+  CANCELLED
+}
+
+enum DLPStatus {
+  ACTIVE
+  HALF_RELEASED
+  COMPLETED
+  EXPIRED
+}
+
+enum DefectSeverity {
+  CRITICAL
+  MAJOR
+  MINOR
+  COSMETIC
+}
+
+enum DefectStatus {
+  REPORTED
+  ACKNOWLEDGED
+  IN_PROGRESS
+  RECTIFIED
+  VERIFIED
+  CLOSED
+  REJECTED
+}
+
+enum InspectionType {
+  INITIAL
+  INTERIM
+  FINAL
+  SPOT_CHECK
+  FOLLOW_UP
+}
+
+enum DrawingDiscipline {
+  ARCHITECTURAL
+  STRUCTURAL
+  MECHANICAL
+  ELECTRICAL
+  PLUMBING
+  LANDSCAPE
+  INTERIOR
+  CIVIL
+  OTHER
+}
+
+enum DrawingStatus {
+  DRAFT
+  FOR_REVIEW
+  FOR_APPROVAL
+  APPROVED
+  ISSUED_FOR_CONSTRUCTION
+  AS_BUILT
+  SUPERSEDED
+  CANCELLED
+}
+
+enum DrawingPurpose {
+  INTERNAL_REVIEW
+  CLIENT_REVIEW
+  AUTHORITY_SUBMISSION
+  TENDER
+  CONSTRUCTION
+  AS_BUILT
+  RECORD
+}
+
+enum MeetingType {
+  SITE_MEETING
+  COORDINATION_MEETING
+  DESIGN_REVIEW
+  CLIENT_MEETING
+  CONTRACTOR_MEETING
+  CONSULTANT_MEETING
+  AUTHORITY_MEETING
+  HANDOVER_MEETING
+  OTHER
+}
+
+enum ActionStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+  CANCELLED
+}
+
+enum PAMContractType {
+  PAM_2006
+  PAM_2018
+  PWD_203A
+  PWD_DB
+  CIDB
+  FIDIC
+  CUSTOM
+}
+
+enum PAMContractStatus {
+  ACTIVE
+  SUSPENDED
+  COMPLETED
+  TERMINATED
+  UNDER_ARBITRATION
+}
+
+enum PaymentCertificateType {
+  INTERIM
+  FINAL
+  ADVANCE_PAYMENT
+  RETENTION_RELEASE
+  VARIATION
+}
+
+enum PaymentCertStatus {
+  DRAFT
+  ISSUED
+  APPROVED
+  PAID
+  DISPUTED
+  CANCELLED
+}
+
+enum PunchListStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CLOSED
+}
+
+enum PunchItemStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  VERIFIED
+  REJECTED
+}
+
+enum RFICategory {
+  DESIGN_CLARIFICATION
+  MATERIAL_SPECIFICATION
+  CONSTRUCTION_METHOD
+  COORDINATION
+  SCHEDULING
+  CODE_COMPLIANCE
+  SUBMITTAL
+  GENERAL
+}
+
+enum RFIStatus {
+  OPEN
+  UNDER_REVIEW
+  ANSWERED
+  CLOSED
+  WITHDRAWN
+}
+
+enum RetentionStatus {
+  ACTIVE
+  HALF_RELEASED
+  FULLY_RELEASED
+}
+
+enum SiteInstructionCategory {
+  DESIGN_CLARIFICATION
+  WORK_VARIATION
+  REMEDIAL_WORK
+  SAFETY_INSTRUCTION
+  QUALITY_IMPROVEMENT
+  SCHEDULE_ADJUSTMENT
+  MATERIAL_SUBSTITUTION
+  COORDINATION
+  OTHER
+}
+
+enum SiteInstructionStatus {
+  ISSUED
+  ACKNOWLEDGED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
