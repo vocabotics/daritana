@@ -3,13 +3,12 @@ import { body, param, query } from 'express-validator';
 import { authenticate } from '../middleware/auth';
 import { validate } from '../middleware/validate';
 import storageService from '../services/storage.service';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 import path from 'path';
 import fs from 'fs/promises';
 import crypto from 'crypto';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // All routes require authentication
 router.use(authenticate);

@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 
-const prisma = new PrismaClient();
 
 /**
  * ARCHITECT FEATURES CONTROLLER

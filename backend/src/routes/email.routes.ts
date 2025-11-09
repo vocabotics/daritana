@@ -2,14 +2,13 @@ import { Router } from 'express'
 import { body, query, param } from 'express-validator'
 import { authenticate, authorize } from '../middleware/auth'
 import { validationResult } from 'express-validator'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 import nodemailer from 'nodemailer'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import handlebars from 'handlebars'
 
 const router = Router()
-const prisma = new PrismaClient()
 
 // Email transporter configuration
 const createTransporter = () => {

@@ -1,11 +1,10 @@
 import express, { Request, Response, Router } from 'express';
 import Stripe from 'stripe';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 import { authenticate } from '../middleware/auth';
 import { rateLimit } from 'express-rate-limit';
 
 const router: Router = express.Router();
-const prisma = new PrismaClient();
 
 // Initialize Stripe with environment-based configuration
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {

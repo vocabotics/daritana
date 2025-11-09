@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { body, query, param } from 'express-validator'
 import { authenticate, authorize } from '../middleware/auth'
 import { validationResult } from 'express-validator'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 import bcrypt from 'bcryptjs'
 import speakeasy from 'speakeasy'
 import QRCode from 'qrcode'
@@ -12,7 +12,6 @@ import rateLimit from 'express-rate-limit'
 import { UAParser } from 'ua-parser-js'
 
 const router = Router()
-const prisma = new PrismaClient()
 
 // Rate limiting configurations
 const loginLimiter = rateLimit({

@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { authenticateToken } from '../middleware/auth.middleware';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // Global search endpoint
 router.get('/search', authenticateToken, async (req, res) => {

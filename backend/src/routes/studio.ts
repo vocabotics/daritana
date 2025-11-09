@@ -1,8 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { authenticate } from '../middleware/auth';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 
-const prisma = new PrismaClient();
 const router = Router();
 
 // Types for feed items

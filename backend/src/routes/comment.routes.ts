@@ -2,10 +2,9 @@ import { Router } from 'express'
 import { body, query, param } from 'express-validator'
 import { authenticate } from '../middleware/auth'
 import { validationResult } from 'express-validator'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../server'
 
 const router = Router()
-const prisma = new PrismaClient()
 
 // Validation middleware
 const validate = (req: any, res: any, next: any) => {

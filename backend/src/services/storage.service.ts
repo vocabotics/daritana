@@ -5,9 +5,8 @@ import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs/promises';
 import crypto from 'crypto';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server';
 
-const prisma = new PrismaClient();
 
 // Storage configuration
 interface StorageConfig {
