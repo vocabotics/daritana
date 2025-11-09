@@ -5,8 +5,9 @@ import dotenv from 'dotenv'
 import { createServer } from 'http'
 import { Server as SocketIOServer } from 'socket.io'
 import path from 'path'
-import { PrismaClient } from '@prisma/client'
 import rateLimit from 'express-rate-limit'
+// Use Prisma singleton to prevent connection pool exhaustion
+import { prisma } from './lib/prisma'
 
 // Import routers
 import multiTenantAuthRouter from './routes/multi-tenant-auth'
@@ -63,10 +64,8 @@ import { NotificationService } from './sockets/notification'
 // Load environment variables
 dotenv.config()
 
-// Initialize Prisma
-export const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-})
+// Prisma is imported from ./lib/prisma singleton (line 10)
+// Removed duplicate initialization to prevent connection pool exhaustion
 
 const app: Express = express()
 const httpServer = createServer(app)

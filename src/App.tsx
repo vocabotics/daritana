@@ -75,6 +75,12 @@ function App() {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const { installApp, isInstallable, isOffline, isUpdateAvailable } = usePWA();
   const { isMobile, isTablet } = useResponsive();
+
+  // React Router v7 future flags to prepare for migration
+  const routerFutureConfig = {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+  };
   
   // Initialize service worker for PWA
   const { offlineReady, updateAvailable } = useServiceWorker();

@@ -1,17 +1,8 @@
-import axios from 'axios';
 import { UserSettings } from '@/store/settingsStore';
+import { api } from '@/lib/api';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7001';
-
-// Create axios instance with default config
-// SECURITY: Using HTTP-Only cookies for authentication
-const api = axios.create({
-  baseURL: `${API_URL}/api`,
-  withCredentials: true, // Send cookies with requests
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// Use shared axios instance from lib/api.ts to avoid duplicate /api path
+// The shared instance already has baseURL configured correctly
 
 // Auth handled by HTTP-Only cookies - no manual token management needed
 // Cookies are sent automatically with each request
