@@ -142,89 +142,21 @@ export default function PaymentCertificates() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.certificates data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const contracts: PAMContract[] = [
-    {
-      id: 'contract-1',
-      contractNumber: 'PAM-KLCC-2025-001',
-      projectName: 'KLCC Mixed Development',
-      contractSum: 45000000,
-      retentionPercentage: 5,
-      retentionSum: 2250000,
-      commencementDate: new Date('2025-02-01'),
-      completionDate: new Date('2026-12-31'),
-      certificates: [
-        {
-          id: 'cert-1',
-          contractId: 'contract-1',
-          certificateNumber: 'PC-01',
-          certificateDate: new Date('2025-08-31'),
-          periodFrom: new Date('2025-02-01'),
-          periodTo: new Date('2025-08-31'),
-          type: 'interim',
-          grossValuation: 15000000,
-          retentionPercentage: 5,
-          retentionAmount: 750000,
-          previousPayments: 0,
-          amountDue: 14250000,
-          workDescription: 'Foundation works completed, superstructure up to Level 5',
-          variationOrders: [
-            {
-              voNumber: 'VO-001',
-              description: 'Additional fire escape staircase',
-              amount: 250000,
-            },
-          ],
-          status: 'paid',
-          issuedDate: new Date('2025-08-31'),
-          approvedDate: new Date('2025-09-05'),
-          paidDate: new Date('2025-09-20'),
-          remarks: 'Payment released on schedule',
-        },
-        {
-          id: 'cert-2',
-          contractId: 'contract-1',
-          certificateNumber: 'PC-02',
-          certificateDate: new Date('2025-10-31'),
-          periodFrom: new Date('2025-09-01'),
-          periodTo: new Date('2025-10-31'),
-          type: 'interim',
-          grossValuation: 8000000,
-          retentionPercentage: 5,
-          retentionAmount: 400000,
-          previousPayments: 14250000,
-          amountDue: 7600000,
-          workDescription: 'Superstructure Level 6-10 completed, M&E rough-in ongoing',
-          variationOrders: [],
-          status: 'approved',
-          issuedDate: new Date('2025-10-31'),
-          approvedDate: new Date('2025-11-05'),
-          remarks: 'Awaiting payment',
-        },
-        {
-          id: 'cert-3',
-          contractId: 'contract-1',
-          certificateNumber: 'PC-03',
-          certificateDate: new Date('2025-11-30'),
-          periodFrom: new Date('2025-11-01'),
-          periodTo: new Date('2025-11-30'),
-          type: 'interim',
-          grossValuation: 6500000,
-          retentionPercentage: 5,
-          retentionAmount: 325000,
-          previousPayments: 21850000,
-          amountDue: 6175000,
-          workDescription: 'Superstructure Level 11-15 in progress',
-          variationOrders: [],
-          status: 'draft',
-        },
-      ],
-    },
-  ];
+  // Group certificates by project for display
+  const contractCertificates = certificates.filter(cert => cert.contractId === selectedContract);
 
-  const contract = contracts.find((c) => c.id === selectedContract);
+  // Calculate contract-like summary from certificates
+  const contract = contractCertificates.length > 0 ? {
+    id: selectedContract,
+    contractNumber: `PAM-${selectedContract}`,
+    projectName: contractCertificates[0].projectName || 'Project',
+    contractSum: 45000000, // This would come from project data in real implementation
+    retentionPercentage: 5,
+    retentionSum: 2250000,
+    commencementDate: new Date(),
+    completionDate: new Date(),
+    certificates: contractCertificates
+  } : null;
 
   const calculateCumulativeValues = () => {
     if (!contract) return { totalCertified: 0, totalPaid: 0, totalRetention: 0, percentageComplete: 0 };

@@ -89,164 +89,6 @@ export default function RetentionTrackingPage() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.records data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const retentionRecords: RetentionTracking[] = [
-    {
-      id: 'ret-1',
-      projectId: 'proj-1',
-      projectName: 'Residential Bungalow - Damansara Heights',
-      contractSum: 2500000,
-      retentionPercentage: 5,
-      totalRetentionHeld: 125000,
-      halfRetentionAmount: 62500,
-      finalRetentionAmount: 62500,
-      halfRetentionReleased: true,
-      halfRetentionReleaseDate: new Date('2024-01-15').toISOString(),
-      halfRetentionReleasedAmount: 62500,
-      finalRetentionReleased: false,
-      finalRetentionReleaseDate: null,
-      finalRetentionReleasedAmount: 0,
-      currentRetentionHeld: 62500,
-      practicalCompletionDate: new Date('2023-07-15').toISOString(),
-      dlpExpiryDate: new Date('2024-07-15').toISOString(),
-      retentionSchedule: [
-        {
-          certificateNumber: 'PC-01',
-          certificateDate: new Date('2023-03-15').toISOString(),
-          certifiedAmount: 500000,
-          retentionDeducted: 25000,
-          retentionReleased: 25000,
-          releaseDate: new Date('2024-01-15').toISOString(),
-          status: 'released'
-        },
-        {
-          certificateNumber: 'PC-02',
-          certificateDate: new Date('2023-04-15').toISOString(),
-          certifiedAmount: 500000,
-          retentionDeducted: 25000,
-          retentionReleased: 25000,
-          releaseDate: new Date('2024-01-15').toISOString(),
-          status: 'released'
-        },
-        {
-          certificateNumber: 'PC-03',
-          certificateDate: new Date('2023-05-15').toISOString(),
-          certifiedAmount: 500000,
-          retentionDeducted: 25000,
-          retentionReleased: 12500,
-          releaseDate: new Date('2024-01-15').toISOString(),
-          status: 'partially_released'
-        },
-        {
-          certificateNumber: 'PC-04',
-          certificateDate: new Date('2023-06-15').toISOString(),
-          certifiedAmount: 500000,
-          retentionDeducted: 25000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-Final',
-          certificateDate: new Date('2023-07-15').toISOString(),
-          certifiedAmount: 500000,
-          retentionDeducted: 25000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        }
-      ],
-      status: 'half_released',
-      contractor: 'ABC Construction Sdn Bhd',
-      architect: 'Ar. Ahmad bin Abdullah',
-      remarks: 'Half retention released upon 6 months DLP. Final retention pending DLP completion.',
-      createdAt: new Date('2023-03-15').toISOString(),
-      updatedAt: new Date('2024-01-15').toISOString()
-    },
-    {
-      id: 'ret-2',
-      projectId: 'proj-2',
-      projectName: 'Commercial Office Tower - KLCC',
-      contractSum: 58000000,
-      retentionPercentage: 5,
-      totalRetentionHeld: 2900000,
-      halfRetentionAmount: 1450000,
-      finalRetentionAmount: 1450000,
-      halfRetentionReleased: false,
-      halfRetentionReleaseDate: null,
-      halfRetentionReleasedAmount: 0,
-      finalRetentionReleased: false,
-      finalRetentionReleaseDate: null,
-      finalRetentionReleasedAmount: 0,
-      currentRetentionHeld: 2900000,
-      practicalCompletionDate: new Date('2024-01-01').toISOString(),
-      dlpExpiryDate: new Date('2026-01-01').toISOString(),
-      retentionSchedule: [
-        {
-          certificateNumber: 'PC-01',
-          certificateDate: new Date('2023-01-15').toISOString(),
-          certifiedAmount: 5000000,
-          retentionDeducted: 250000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-02',
-          certificateDate: new Date('2023-03-15').toISOString(),
-          certifiedAmount: 8000000,
-          retentionDeducted: 400000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-03',
-          certificateDate: new Date('2023-06-15').toISOString(),
-          certifiedAmount: 10000000,
-          retentionDeducted: 500000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-04',
-          certificateDate: new Date('2023-09-15').toISOString(),
-          certifiedAmount: 12000000,
-          retentionDeducted: 600000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-05',
-          certificateDate: new Date('2023-12-15').toISOString(),
-          certifiedAmount: 15000000,
-          retentionDeducted: 750000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        },
-        {
-          certificateNumber: 'PC-Final',
-          certificateDate: new Date('2024-01-01').toISOString(),
-          certifiedAmount: 8000000,
-          retentionDeducted: 400000,
-          retentionReleased: 0,
-          releaseDate: null,
-          status: 'held'
-        }
-      ],
-      status: 'active',
-      contractor: 'DEF Construction Sdn Bhd',
-      architect: 'Ar. Sarah Lee',
-      remarks: 'Practical completion achieved. DLP period of 24 months.',
-      createdAt: new Date('2023-01-15').toISOString(),
-      updatedAt: new Date('2024-01-01').toISOString()
-    }
-  ];
 
   const [selectedRecord, setSelectedRecord] = useState<RetentionTracking | null>(null)
   const [showDetailDialog, setShowDetailDialog] = useState(false)
@@ -332,15 +174,15 @@ export default function RetentionTrackingPage() {
   }
 
   const stats = {
-    totalProjects: retentionRecords.length,
-    totalHeld: retentionRecords.reduce((sum, r) => sum + r.currentRetentionHeld, 0),
-    totalReleased: retentionRecords.reduce((sum, r) =>
-      sum + r.halfRetentionReleasedAmount + r.finalRetentionReleasedAmount, 0
+    totalProjects: records.length,
+    totalHeld: records.reduce((sum, r) => sum + (r.currentRetentionHeld || 0), 0),
+    totalReleased: records.reduce((sum, r) =>
+      sum + (r.halfRetentionReleasedAmount || 0) + (r.finalRetentionReleasedAmount || 0), 0
     ),
-    pendingRelease: retentionRecords.filter(r =>
+    pendingRelease: records.filter(r =>
       !r.halfRetentionReleased || !r.finalRetentionReleased
     ).length,
-    overdueReleases: retentionRecords.filter(r => {
+    overdueReleases: records.filter(r => {
       if (!r.halfRetentionReleased) {
         const halfRelease = getDaysToRelease(r.dlpExpiryDate, true)
         if (halfRelease.overdue) return true
@@ -438,7 +280,7 @@ export default function RetentionTrackingPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {retentionRecords.map((record) => (
+                  {records.map((record) => (
                     <TableRow key={record.id}>
                       <TableCell>
                         <div>

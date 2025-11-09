@@ -106,176 +106,59 @@ export default function AuthorityTracking() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.submissions data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const authorities: Authority[] = [
-    {
-      id: 'dbkl',
+  // ✅ Group submissions by authority from backend data
+  const groupSubmissionsByAuthority = () => {
+    const grouped = submissions.reduce((acc, submission) => {
+      const authorityId = submission.authority || 'other';
+      if (!acc[authorityId]) {
+        acc[authorityId] = [];
+      }
+      acc[authorityId].push(submission);
+      return acc;
+    }, {} as Record<string, typeof submissions>);
+
+    return grouped;
+  };
+
+  // ✅ Define authority metadata (UI display data only)
+  const authorityMetadata: Record<string, { name: string; shortName: string; icon: any; color: string }> = {
+    'dbkl': {
       name: 'Dewan Bandaraya Kuala Lumpur',
       shortName: 'DBKL',
       icon: Building,
       color: 'blue',
-      submissions: [
-        {
-          id: 'dbkl-1',
-          authority: 'DBKL',
-          type: 'Building Plan Approval',
-          status: 'under_review',
-          submittedDate: new Date('2025-10-01'),
-          referenceNumber: 'BP/2025/001234',
-          documents: [
-            'Architectural_Plans.pdf',
-            'Structural_Drawings.pdf',
-            'M&E_Drawings.pdf',
-            'Soil_Investigation_Report.pdf',
-          ],
-          nextAction: 'Awaiting technical review',
-          dueDate: new Date('2025-12-01'),
-        },
-        {
-          id: 'dbkl-2',
-          authority: 'DBKL',
-          type: 'Amendment to Approved Plans',
-          status: 'draft',
-          documents: [],
-          nextAction: 'Prepare amendment documents',
-        },
-        {
-          id: 'dbkl-3',
-          authority: 'DBKL',
-          type: 'Certificate of Completion and Compliance (CCC)',
-          status: 'draft',
-          documents: [],
-          nextAction: 'To be submitted upon completion',
-        },
-      ],
     },
-    {
-      id: 'bomba',
-      name: 'Jabatan Bomba dan Penyelamat Malaysia',
-      shortName: 'BOMBA',
+    'bomba': {
+      name: 'Jabatan Bomba dan Penyelamat',
+      shortName: 'Bomba',
       icon: Flame,
       color: 'red',
-      submissions: [
-        {
-          id: 'bomba-1',
-          authority: 'BOMBA',
-          type: 'Fire Safety Plan (FSP)',
-          status: 'submitted',
-          submittedDate: new Date('2025-10-15'),
-          referenceNumber: 'BOMBA/FSP/2025/5678',
-          documents: [
-            'Fire_Safety_Plan.pdf',
-            'Fire_Protection_System.pdf',
-            'Evacuation_Plan.pdf',
-          ],
-          comments: 'Pending site inspection',
-          nextAction: 'Schedule site inspection with Bomba officer',
-          dueDate: new Date('2025-11-30'),
-        },
-        {
-          id: 'bomba-2',
-          authority: 'BOMBA',
-          type: 'Fire Certificate (FC)',
-          status: 'draft',
-          documents: [],
-          nextAction: 'Submit after FSP approval',
-        },
-      ],
     },
-    {
-      id: 'tnb',
+    'tnb': {
       name: 'Tenaga Nasional Berhad',
       shortName: 'TNB',
       icon: Zap,
       color: 'yellow',
-      submissions: [
-        {
-          id: 'tnb-1',
-          authority: 'TNB',
-          type: 'Electricity Supply Application',
-          status: 'approved',
-          submittedDate: new Date('2025-09-01'),
-          approvedDate: new Date('2025-10-01'),
-          referenceNumber: 'TNB/APP/2025/9876',
-          documents: ['Electrical_Single_Line.pdf', 'Load_Calculation.pdf'],
-          conditions: [
-            'Install substation as per TNB specifications',
-            'Submit meter installation request 2 weeks before TOP',
-          ],
-        },
-        {
-          id: 'tnb-2',
-          authority: 'TNB',
-          type: 'Substation Design Approval',
-          status: 'under_review',
-          submittedDate: new Date('2025-10-10'),
-          referenceNumber: 'TNB/SS/2025/5432',
-          documents: ['Substation_Layout.pdf', 'Substation_Specs.pdf'],
-          nextAction: 'Awaiting TNB technical review',
-        },
-      ],
     },
-    {
-      id: 'iwk',
+    'iwk': {
       name: 'Indah Water Konsortium',
       shortName: 'IWK',
       icon: Droplets,
       color: 'cyan',
-      submissions: [
-        {
-          id: 'iwk-1',
-          authority: 'IWK',
-          type: 'Sewerage Connection Approval',
-          status: 'approved',
-          submittedDate: new Date('2025-09-15'),
-          approvedDate: new Date('2025-10-05'),
-          referenceNumber: 'IWK/SCA/2025/3456',
-          documents: ['Sewerage_Layout.pdf', 'Plumbing_Drawings.pdf'],
-          conditions: ['Pay connection fees before construction', 'Submit as-built drawings after completion'],
-        },
-      ],
     },
-    {
-      id: 'jkr',
-      name: 'Jabatan Kerja Raya',
-      shortName: 'JKR',
-      icon: MapPin,
-      color: 'green',
-      submissions: [
-        {
-          id: 'jkr-1',
-          authority: 'JKR',
-          type: 'Road Access Approval',
-          status: 'submitted',
-          submittedDate: new Date('2025-10-20'),
-          referenceNumber: 'JKR/RA/2025/7890',
-          documents: ['Access_Plan.pdf', 'Traffic_Impact_Assessment.pdf'],
-          nextAction: 'Awaiting JKR site visit',
-        },
-      ],
+  };
+
+  const groupedSubmissions = groupSubmissionsByAuthority();
+  const authorities = Object.keys(groupedSubmissions).map(authorityId => ({
+    id: authorityId,
+    ...authorityMetadata[authorityId] || {
+      name: authorityId.toUpperCase(),
+      shortName: authorityId.toUpperCase(),
+      icon: FileText,
+      color: 'gray',
     },
-    {
-      id: 'did',
-      name: 'Department of Irrigation and Drainage',
-      shortName: 'DID',
-      icon: Droplets,
-      color: 'blue',
-      submissions: [
-        {
-          id: 'did-1',
-          authority: 'DID',
-          type: 'Earthwork and Drainage Approval',
-          status: 'under_review',
-          submittedDate: new Date('2025-10-05'),
-          referenceNumber: 'DID/ED/2025/2345',
-          documents: ['Earthwork_Plan.pdf', 'Stormwater_Drainage.pdf', 'OSD_Design.pdf'],
-          nextAction: 'Awaiting technical review',
-        },
-      ],
-    },
-  ];
+    submissions: groupedSubmissions[authorityId],
+  }));
 
   const getStatusBadge = (status: Submission['status']) => {
     const variants = {

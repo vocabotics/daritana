@@ -95,160 +95,6 @@ export default function CCCTrackingPage() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.applications data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const cccApplications: CCCTracking[] = [
-    {
-      id: 'ccc-1',
-      projectId: 'proj-1',
-      projectName: 'Residential Bungalow - Damansara Heights',
-      projectAddress: 'Lot 123, Jalan Damansara, 50490 Kuala Lumpur',
-      authority: 'DBKL',
-      applicationNumber: 'CCC/DBKL/2024/001',
-      submissionDate: new Date('2024-01-10').toISOString(),
-      targetCompletionDate: new Date('2024-03-10').toISOString(),
-      actualCompletionDate: null,
-      status: 'under_review',
-      applicant: 'Ar. Ahmad bin Abdullah',
-      buildingType: 'residential',
-      grossFloorArea: 450,
-      numberOfStoreys: 2,
-      occupancyLoad: 8,
-      inspections: [
-        {
-          id: 'insp-1',
-          cccId: 'ccc-1',
-          inspectionType: 'structural',
-          scheduledDate: new Date('2024-01-15').toISOString(),
-          completedDate: new Date('2024-01-15').toISOString(),
-          inspector: 'Ir. Mohd Hassan',
-          status: 'passed',
-          findings: 'All structural elements comply with approved plans',
-          attachments: []
-        },
-        {
-          id: 'insp-2',
-          cccId: 'ccc-1',
-          inspectionType: 'mep',
-          scheduledDate: new Date('2024-01-20').toISOString(),
-          completedDate: null,
-          inspector: 'Ir. Lee Chong Wei',
-          status: 'scheduled',
-          findings: '',
-          attachments: []
-        },
-        {
-          id: 'insp-3',
-          cccId: 'ccc-1',
-          inspectionType: 'fire_safety',
-          scheduledDate: new Date('2024-01-25').toISOString(),
-          completedDate: null,
-          inspector: 'Bomba Officer Ahmad',
-          status: 'scheduled',
-          findings: '',
-          attachments: []
-        }
-      ],
-      documents: [
-        {
-          id: 'doc-1',
-          cccId: 'ccc-1',
-          documentType: 'approved_plans',
-          documentName: 'Approved Building Plans',
-          uploadedDate: new Date('2024-01-10').toISOString(),
-          uploadedBy: 'Ar. Ahmad',
-          status: 'verified',
-          fileUrl: '/documents/ccc-1-plans.pdf',
-          fileSize: 5242880,
-          expiryDate: null
-        },
-        {
-          id: 'doc-2',
-          cccId: 'ccc-1',
-          documentType: 'structural_certificate',
-          documentName: 'Structural Engineer Certificate',
-          uploadedDate: new Date('2024-01-10').toISOString(),
-          uploadedBy: 'Ir. Hassan',
-          status: 'verified',
-          fileUrl: '/documents/ccc-1-struct.pdf',
-          fileSize: 1048576,
-          expiryDate: null
-        },
-        {
-          id: 'doc-3',
-          cccId: 'ccc-1',
-          documentType: 'mep_certificate',
-          documentName: 'MEP Completion Certificate',
-          uploadedDate: null,
-          uploadedBy: '',
-          status: 'pending',
-          fileUrl: '',
-          fileSize: 0,
-          expiryDate: null
-        }
-      ],
-      complianceChecklist: {
-        structuralCompliance: true,
-        mepCompliance: false,
-        fireSafetyCompliance: false,
-        accessibilityCompliance: true,
-        environmentalCompliance: true,
-        buildingPlanCompliance: true
-      },
-      rejectionReason: null,
-      remarks: 'Pending MEP and fire safety inspections',
-      createdBy: 'Ar. Ahmad bin Abdullah',
-      createdAt: new Date('2024-01-10').toISOString(),
-      updatedAt: new Date('2024-01-15').toISOString()
-    },
-    {
-      id: 'ccc-2',
-      projectId: 'proj-2',
-      projectName: 'Commercial Office Tower - KLCC',
-      projectAddress: 'Jalan Ampang, 50450 Kuala Lumpur',
-      authority: 'DBKL',
-      applicationNumber: 'CCC/DBKL/2024/002',
-      submissionDate: new Date('2024-01-05').toISOString(),
-      targetCompletionDate: new Date('2024-04-05').toISOString(),
-      actualCompletionDate: null,
-      status: 'pending_documents',
-      applicant: 'Ar. Sarah Lee',
-      buildingType: 'commercial',
-      grossFloorArea: 12500,
-      numberOfStoreys: 15,
-      occupancyLoad: 500,
-      inspections: [],
-      documents: [
-        {
-          id: 'doc-4',
-          cccId: 'ccc-2',
-          documentType: 'approved_plans',
-          documentName: 'Approved Building Plans',
-          uploadedDate: new Date('2024-01-05').toISOString(),
-          uploadedBy: 'Ar. Sarah',
-          status: 'verified',
-          fileUrl: '/documents/ccc-2-plans.pdf',
-          fileSize: 15728640,
-          expiryDate: null
-        }
-      ],
-      complianceChecklist: {
-        structuralCompliance: false,
-        mepCompliance: false,
-        fireSafetyCompliance: false,
-        accessibilityCompliance: false,
-        environmentalCompliance: false,
-        buildingPlanCompliance: true
-      },
-      rejectionReason: null,
-      remarks: 'Awaiting submission of required certificates',
-      createdBy: 'Ar. Sarah Lee',
-      createdAt: new Date('2024-01-05').toISOString(),
-      updatedAt: new Date('2024-01-05').toISOString()
-    }
-  ];
-
   const [showNewApplication, setShowNewApplication] = useState(false)
   const [selectedApplication, setSelectedApplication] = useState<CCCTracking | null>(null)
   const [showDetailDialog, setShowDetailDialog] = useState(false)
@@ -331,13 +177,13 @@ export default function CCCTrackingPage() {
   }
 
   const stats = {
-    total: cccApplications.length,
-    submitted: cccApplications.filter(c => c.status === 'submitted').length,
-    underReview: cccApplications.filter(c => c.status === 'under_review').length,
-    approved: cccApplications.filter(c => c.status === 'approved').length,
-    issued: cccApplications.filter(c => c.status === 'issued').length,
-    pendingInspections: cccApplications.reduce((sum, c) =>
-      sum + c.inspections.filter(i => i.status === 'scheduled' || i.status === 'in_progress').length, 0
+    total: applications.length,
+    submitted: applications.filter(c => c.status === 'submitted').length,
+    underReview: applications.filter(c => c.status === 'under_review').length,
+    approved: applications.filter(c => c.status === 'approved').length,
+    issued: applications.filter(c => c.status === 'issued').length,
+    pendingInspections: applications.reduce((sum, c) =>
+      sum + (c.inspections?.filter(i => i.status === 'scheduled' || i.status === 'in_progress').length || 0), 0
     )
   }
 
@@ -530,10 +376,10 @@ export default function CCCTrackingPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {cccApplications.map((application) => {
+                  {applications.map((application) => {
                     const daysRemaining = getDaysRemaining(application.targetCompletionDate)
-                    const passedInspections = application.inspections.filter(i => i.status === 'passed').length
-                    const totalInspections = application.inspections.length
+                    const passedInspections = application.inspections?.filter(i => i.status === 'passed').length || 0
+                    const totalInspections = application.inspections?.length || 0
 
                     return (
                       <TableRow key={application.id}>

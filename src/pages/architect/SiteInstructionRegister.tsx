@@ -90,78 +90,6 @@ export default function SiteInstructionRegister() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.instructions data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const siteInstructions: SiteInstruction[] = [
-    {
-      id: '1',
-      instructionNumber: 'AI-001',
-      projectId: 'proj-1',
-      projectName: 'KLCC Residential Tower',
-      issuedDate: new Date('2024-01-15').toISOString(),
-      issuedBy: 'Ar. Ahmad bin Abdullah',
-      contractorName: 'ABC Construction Sdn Bhd',
-      subject: 'Modification to external facade cladding',
-      description: 'Change facade cladding from aluminum composite panel to ceramic tiles as per client request. Contractor to submit samples and cost implications within 7 days.',
-      category: 'variation',
-      priority: 'high',
-      costImplication: 85000,
-      timeImplication: 14,
-      isVariation: true,
-      relatedVariationId: 'VO-003',
-      relatedDrawings: ['A-101', 'A-102', 'A-201'],
-      status: 'acknowledged',
-      acknowledgedBy: 'Project Manager - ABC Construction',
-      acknowledgedDate: new Date('2024-01-16').toISOString(),
-      createdAt: new Date('2024-01-15').toISOString(),
-      updatedAt: new Date('2024-01-16').toISOString()
-    },
-    {
-      id: '2',
-      instructionNumber: 'AI-002',
-      projectId: 'proj-1',
-      projectName: 'KLCC Residential Tower',
-      issuedDate: new Date('2024-01-18').toISOString(),
-      issuedBy: 'Ar. Ahmad bin Abdullah',
-      contractorName: 'ABC Construction Sdn Bhd',
-      subject: 'Rectification of concrete spalling at Level 5',
-      description: 'Concrete spalling observed at columns C3 and C7 on Level 5. Contractor to hack and replace affected concrete using approved repair mortar. Works to be supervised by structural consultant.',
-      category: 'rectification',
-      priority: 'urgent',
-      costImplication: 0, // Under contractor's obligation
-      timeImplication: 7,
-      isVariation: false,
-      relatedDrawings: ['S-105'],
-      status: 'in_progress',
-      acknowledgedBy: 'Site Agent - ABC Construction',
-      acknowledgedDate: new Date('2024-01-18').toISOString(),
-      createdAt: new Date('2024-01-18').toISOString(),
-      updatedAt: new Date('2024-01-20').toISOString()
-    },
-    {
-      id: '3',
-      instructionNumber: 'AI-003',
-      projectId: 'proj-1',
-      projectName: 'KLCC Residential Tower',
-      issuedDate: new Date('2024-01-22').toISOString(),
-      issuedBy: 'Ar. Ahmad bin Abdullah',
-      contractorName: 'ABC Construction Sdn Bhd',
-      subject: 'Sequence of work - MEP installation',
-      description: 'MEP contractor to complete all vertical piping installation before plastering works commence. Coordinate with main contractor for access and schedule.',
-      category: 'sequence',
-      priority: 'normal',
-      costImplication: 0,
-      timeImplication: 0,
-      isVariation: false,
-      status: 'completed',
-      acknowledgedBy: 'MEP Coordinator',
-      acknowledgedDate: new Date('2024-01-22').toISOString(),
-      completionDate: new Date('2024-01-25').toISOString(),
-      createdAt: new Date('2024-01-22').toISOString(),
-      updatedAt: new Date('2024-01-25').toISOString()
-    }
-  ];
 
   const [showCreateDialog, setShowCreateDialog] = useState(false)
   const [formData, setFormData] = useState({
@@ -267,13 +195,13 @@ export default function SiteInstructionRegister() {
   }
 
   const stats = {
-    total: siteInstructions.length,
-    issued: siteInstructions.filter(i => i.status === 'issued').length,
-    acknowledged: siteInstructions.filter(i => i.status === 'acknowledged').length,
-    inProgress: siteInstructions.filter(i => i.status === 'in_progress').length,
-    completed: siteInstructions.filter(i => i.status === 'completed').length,
-    variations: siteInstructions.filter(i => i.isVariation).length,
-    totalCost: siteInstructions.reduce((sum, i) => sum + i.costImplication, 0)
+    total: instructions.length,
+    issued: instructions.filter(i => i.status === 'issued').length,
+    acknowledged: instructions.filter(i => i.status === 'acknowledged').length,
+    inProgress: instructions.filter(i => i.status === 'in_progress').length,
+    completed: instructions.filter(i => i.status === 'completed').length,
+    variations: instructions.filter(i => i.isVariation).length,
+    totalCost: instructions.reduce((sum, i) => sum + (i.costImplication || 0), 0)
   }
 
   return (
@@ -375,7 +303,7 @@ export default function SiteInstructionRegister() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {siteInstructions.map((instruction) => (
+                  {instructions.map((instruction) => (
                     <TableRow key={instruction.id}>
                       <TableCell className="font-medium">
                         {instruction.instructionNumber}

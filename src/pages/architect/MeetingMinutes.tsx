@@ -69,86 +69,6 @@ export default function MeetingMinutesManagement() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.minutes data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const meetings: MeetingMinutes[] = [
-    {
-      id: '1',
-      meetingNumber: 'MOM-001',
-      projectId: 'proj-1',
-      meetingType: 'site_progress',
-      title: 'Monthly Site Progress Meeting - January 2024',
-      date: new Date('2024-01-15').toISOString(),
-      startTime: '10:00',
-      endTime: '12:00',
-      venue: 'Site Office, KLCC Project',
-      chairperson: 'Ar. Ahmad bin Abdullah',
-      attendees: [
-        { id: '1', name: 'Ahmad bin Abdullah', company: 'XYZ Architects', role: 'Principal Architect', present: true },
-        { id: '2', name: 'John Tan', company: 'ABC Construction', role: 'Project Manager', present: true },
-        { id: '3', name: 'Siti Aminah', company: 'Client Rep', role: 'Project Owner', present: true },
-        { id: '4', name: 'Ir. Kumar', company: 'ABC Consulting', role: 'Structural Engineer', present: true }
-      ],
-      apologies: ['Ir. Lee - M&E Consultant'],
-      agenda: [
-        { id: '1', number: '1.0', title: 'Review of Previous Minutes' },
-        { id: '2', number: '2.0', title: 'Project Progress Update' },
-        { id: '3', number: '3.0', title: 'Outstanding Issues' },
-        { id: '4', number: '4.0', title: 'Any Other Business' }
-      ],
-      previousMinutesReview: { reviewed: true, comments: 'All action items from MOM-001 have been completed' },
-      matters: [
-        {
-          id: '1',
-          agendaItemNumber: '2.0',
-          matter: 'Overall project progress is at 45%, slightly behind schedule due to recent rain delays',
-          discussionPoints: [
-            'Concrete works for Level 5 completed',
-            'Formwork for Level 6 in progress',
-            'MEP rough-in on Levels 1-3 ongoing'
-          ]
-        }
-      ],
-      actionItems: [
-        {
-          id: '1',
-          actionNumber: 'A-001',
-          description: 'Submit revised construction schedule accounting for rain delays',
-          assignedTo: 'Project Manager',
-          company: 'ABC Construction',
-          dueDate: new Date('2024-01-22').toISOString(),
-          priority: 'high',
-          status: 'pending'
-        },
-        {
-          id: '2',
-          actionNumber: 'A-002',
-          description: 'Provide shop drawings for curtain wall system',
-          assignedTo: 'Facade Contractor',
-          company: 'XYZ Facade',
-          dueDate: new Date('2024-01-29').toISOString(),
-          priority: 'urgent',
-          status: 'in_progress'
-        }
-      ],
-      decisions: [
-        {
-          id: '1',
-          decisionNumber: 'D-001',
-          decision: 'Approved extension of 7 days for concrete works due to weather delays',
-          madeBy: 'Ar. Ahmad & Client Rep',
-          impact: 'time'
-        }
-      ],
-      nextMeetingDate: new Date('2024-02-15').toISOString(),
-      status: 'approved',
-      circulatedDate: new Date('2024-01-16').toISOString(),
-      preparedBy: 'Site Clerk of Works',
-      createdAt: new Date('2024-01-15').toISOString(),
-      updatedAt: new Date('2024-01-16').toISOString()
-    }
-  ];
 
   const getStatusBadge = (status: MeetingMinutes['status']) => {
     const config: Record<MeetingMinutes['status'], { label: string; className: string; icon: React.ReactNode }> = {
@@ -190,13 +110,13 @@ export default function MeetingMinutesManagement() {
   }
 
   const stats = {
-    total: meetings.length,
-    draft: meetings.filter(m => m.status === 'draft').length,
-    circulated: meetings.filter(m => m.status === 'circulated').length,
-    approved: meetings.filter(m => m.status === 'approved').length,
-    totalActionItems: meetings.reduce((sum, m) => sum + m.actionItems.length, 0),
-    pendingActions: meetings.reduce((sum, m) =>
-      sum + m.actionItems.filter(a => a.status === 'pending' || a.status === 'in_progress').length, 0
+    total: minutes.length,
+    draft: minutes.filter(m => m.status === 'draft').length,
+    circulated: minutes.filter(m => m.status === 'circulated').length,
+    approved: minutes.filter(m => m.status === 'approved').length,
+    totalActionItems: minutes.reduce((sum, m) => sum + (m.actionItems?.length || 0), 0),
+    pendingActions: minutes.reduce((sum, m) =>
+      sum + (m.actionItems?.filter(a => a.status === 'pending' || a.status === 'in_progress').length || 0), 0
     )
   }
 
@@ -288,7 +208,7 @@ export default function MeetingMinutesManagement() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {meetings.map((meeting) => (
+                  {minutes.map((meeting) => (
                     <TableRow key={meeting.id}>
                       <TableCell className="font-medium">{meeting.meetingNumber}</TableCell>
                       <TableCell>
@@ -319,10 +239,10 @@ export default function MeetingMinutesManagement() {
                       <TableCell>
                         <div className="flex items-center gap-1">
                           <ClipboardList className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm">{meeting.actionItems.length} actions</span>
-                          {meeting.actionItems.filter(a => a.status === 'pending' || a.status === 'in_progress').length > 0 && (
+                          <span className="text-sm">{meeting.actionItems?.length || 0} actions</span>
+                          {(meeting.actionItems?.filter(a => a.status === 'pending' || a.status === 'in_progress').length || 0) > 0 && (
                             <Badge variant="outline" className="ml-1 text-xs bg-orange-50">
-                              {meeting.actionItems.filter(a => a.status === 'pending' || a.status === 'in_progress').length} pending
+                              {meeting.actionItems?.filter(a => a.status === 'pending' || a.status === 'in_progress').length || 0} pending
                             </Badge>
                           )}
                         </div>
