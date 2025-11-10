@@ -49,7 +49,7 @@ export function KeyboardShortcutsDialog() {
           action: () => navigate('/timeline'),
         },
         {
-          key: 'f',
+          key: 'm',
           ctrl: true,
           description: 'Go to Financial',
           action: () => navigate('/financial'),
@@ -63,13 +63,10 @@ export function KeyboardShortcutsDialog() {
           key: 'n',
           ctrl: true,
           description: 'Create New Item',
-          action: () => console.log('Create new'),
-        },
-        {
-          key: 's',
-          ctrl: true,
-          description: 'Save Current Form',
-          action: () => console.log('Save'),
+          action: () => {
+            // Emit custom event for create new
+            window.dispatchEvent(new CustomEvent('keyboard-create-new'));
+          },
         },
         {
           key: '/',
@@ -78,12 +75,6 @@ export function KeyboardShortcutsDialog() {
             const searchInput = document.querySelector('input[type="search"]') as HTMLInputElement;
             searchInput?.focus();
           },
-        },
-        {
-          key: 'r',
-          ctrl: true,
-          description: 'Refresh Data',
-          action: () => window.location.reload(),
         },
       ],
     },
@@ -94,7 +85,10 @@ export function KeyboardShortcutsDialog() {
           key: 'b',
           ctrl: true,
           description: 'Toggle Sidebar',
-          action: () => console.log('Toggle sidebar'),
+          action: () => {
+            // Emit custom event for sidebar toggle
+            window.dispatchEvent(new CustomEvent('keyboard-toggle-sidebar'));
+          },
         },
         {
           key: '?',
@@ -174,27 +168,17 @@ export function KeyboardShortcutsDialog() {
 }
 
 // Keyboard shortcuts button for help menu
-export function KeyboardShortcutsButton() {
-  const [open, setOpen] = useState(false);
-
+export function KeyboardShortcutsButton({ onClick }: { onClick?: () => void }) {
   return (
-    <>
-      <button
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-md hover:bg-muted"
-      >
-        <Keyboard className="h-4 w-4" />
-        Keyboard Shortcuts
-        <kbd className="ml-auto px-1.5 py-0.5 text-xs bg-muted border border-border rounded">
-          ?
-        </kbd>
-      </button>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl">
-          <KeyboardShortcutsDialog />
-        </DialogContent>
-      </Dialog>
-    </>
+    <button
+      onClick={onClick}
+      className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-md hover:bg-muted"
+    >
+      <Keyboard className="h-4 w-4" />
+      Keyboard Shortcuts
+      <kbd className="ml-auto px-1.5 py-0.5 text-xs bg-muted border border-border rounded">
+        ?
+      </kbd>
+    </button>
   );
 }
