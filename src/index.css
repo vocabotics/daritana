@@ -59,76 +59,96 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
   }
 }
 
-/* Custom styles for minimalist architect aesthetic */
-.architect-grid {
-  background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
+/* Tutorial highlighting animation */
+@keyframes tutorial-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
 }
 
-.pencil-sketch {
-  filter: contrast(1.2) brightness(0.9);
+.tutorial-highlight {
+  position: relative;
+  z-index: 9999;
+  animation: tutorial-pulse 2s ease-in-out infinite;
+  outline: 3px solid rgb(59, 130, 246);
+  outline-offset: 4px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.minimal-shadow {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.tutorial-highlight::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 12px;
+  pointer-events: none;
 }
 
-.architect-border {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Clean typography */
+/* Architect specific styles */
 .architect-heading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 300;
-  letter-spacing: 0.025em;
-  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .architect-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  color: rgba(0, 0, 0, 0.8);
 }
 
-/* Kanban board styles */
-.kanban-column {
-  min-height: 500px;
-  background: rgba(0, 0, 0, 0.02);
+.architect-border {
+  border: 1px solid hsl(var(--border));
 }
 
-.kanban-card {
-  transition: all 0.2s ease;
+.minimal-shadow {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-.kanban-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.architect-card {
+  @apply bg-white architect-border rounded-lg minimal-shadow transition-all duration-200;
 }
 
-/* Timeline styles */
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(0, 0, 0, 0.1);
+.architect-card:hover {
+  @apply shadow-md;
 }
 
-.timeline-marker {
-  position: absolute;
-  left: -4px;
-  top: 8px;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border: 2px solid black;
-  border-radius: 50%;
+/* Professional loading spinner */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1.5s linear infinite;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

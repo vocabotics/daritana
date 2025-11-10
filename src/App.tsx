@@ -42,6 +42,7 @@ import { ARIAFloatingAssistant } from '@/components/aria/ARIAFloatingAssistant';
 import { ARIACommandCenter } from '@/components/aria/ARIACommandCenter';
 import { KeyboardShortcutsDialog } from '@/components/KeyboardShortcutsDialog';
 import { FullPageSkeleton } from '@/components/ui/skeleton';
+import { HelpWidget } from '@/components/help/ContextualHelp';
 import { initializeAIServices } from '@/services/ai';
 import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -351,6 +352,9 @@ function App() {
 
               {/* Keyboard Shortcuts Dialog */}
               <KeyboardShortcutsDialog />
+
+              {/* Help Widget - Always available floating help */}
+              <HelpWidget />
             </>
           )}
           <Toaster />
