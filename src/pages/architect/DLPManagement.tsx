@@ -70,88 +70,6 @@ export default function DLPManagementPage() {
     );
   }
 
-  // ❌ MOCK DATA - TO BE REMOVED IN PHASE 2
-  // TODO: Restructure UI to use store.records data
-  // For now, keeping mock data for UI structure until Phase 2 refactoring
-  const dlpProjects: DLPManagement[] = [
-    {
-      id: '1',
-      projectId: 'proj-1',
-      projectName: 'KLCC Residential Tower',
-      practicalCompletionDate: new Date('2023-12-15').toISOString(),
-      dlpPeriod: 12,
-      dlpStartDate: new Date('2023-12-15').toISOString(),
-      dlpExpiryDate: new Date('2024-12-15').toISOString(),
-      halfDLPDate: new Date('2024-06-15').toISOString(),
-      contractSum: 25000000,
-      retentionPercentage: 5,
-      totalRetentionHeld: 1250000,
-      halfRetentionAmount: 625000,
-      finalRetentionAmount: 625000,
-      halfRetentionReleased: true,
-      halfRetentionReleaseDate: new Date('2024-06-20').toISOString(),
-      finalRetentionReleased: false,
-      defects: [
-        {
-          id: '1',
-          defectNumber: 'DLP-D-001',
-          description: 'Water seepage at bathroom window',
-          location: 'Unit 5-02, Master Bathroom',
-          category: 'architectural',
-          severity: 'major',
-          reportedDate: new Date('2024-02-10').toISOString(),
-          reportedBy: 'Homeowner',
-          targetCompletionDate: new Date('2024-02-24').toISOString(),
-          status: 'completed',
-          completedDate: new Date('2024-02-22').toISOString(),
-          verifiedDate: new Date('2024-02-23').toISOString(),
-          verifiedBy: 'Ar. Ahmad'
-        },
-        {
-          id: '2',
-          defectNumber: 'DLP-D-002',
-          description: 'Door handle loose - Main entrance door',
-          location: 'Unit 7-08, Main Door',
-          category: 'architectural',
-          severity: 'minor',
-          reportedDate: new Date('2024-05-15').toISOString(),
-          reportedBy: 'Homeowner',
-          targetCompletionDate: new Date('2024-05-22').toISOString(),
-          status: 'in_progress'
-        },
-        {
-          id: '3',
-          defectNumber: 'DLP-D-003',
-          description: 'Electrical socket not working',
-          location: 'Unit 3-05, Living Room',
-          category: 'mep',
-          severity: 'major',
-          reportedDate: new Date('2024-06-01').toISOString(),
-          reportedBy: 'Homeowner',
-          targetCompletionDate: new Date('2024-06-08').toISOString(),
-          status: 'reported'
-        }
-      ],
-      inspections: [
-        {
-          id: '1',
-          inspectionNumber: 'DLP-INS-001',
-          inspectionDate: new Date('2024-06-10').toISOString(),
-          inspectionType: 'half_dlp',
-          inspector: 'Ar. Ahmad bin Abdullah',
-          attendees: ['Project Manager', 'Client Rep'],
-          defectsFound: 12,
-          defectsRectified: 10,
-          defectsOutstanding: 2,
-          remarks: 'Overall condition good. Minor defects to be rectified before final retention release.',
-          nextInspectionDate: new Date('2024-12-01').toISOString()
-        }
-      ],
-      status: 'active',
-      createdAt: new Date('2023-12-15').toISOString(),
-      updatedAt: new Date('2024-06-20').toISOString()
-    }
-  ];
 
   const getDaysRemaining = (expiryDate: string) => {
     const days = differenceInDays(new Date(expiryDate), new Date())
@@ -212,12 +130,12 @@ export default function DLPManagementPage() {
     )
   }
 
-  const allDefects = dlpProjects.flatMap(p => p.defects.map(d => ({ ...d, projectName: p.projectName })))
+  const allDefects = records.flatMap(p => (p.defects || []).map(d => ({ ...d, projectName: p.projectName })))
 
   const stats = {
-    totalProjects: dlpProjects.length,
-    activeProjects: dlpProjects.filter(p => p.status === 'active').length,
-    totalRetentionHeld: dlpProjects.reduce((sum, p) => sum + (p.finalRetentionAmount || 0), 0),
+    totalProjects: records.length,
+    activeProjects: records.filter(p => p.status === 'active').length,
+    totalRetentionHeld: records.reduce((sum, p) => sum + (p.finalRetentionAmount || 0), 0),
     totalDefects: allDefects.length,
     openDefects: allDefects.filter(d => d.status !== 'verified' && d.status !== 'completed').length,
     criticalDefects: allDefects.filter(d => d.severity === 'critical').length
@@ -293,10 +211,11 @@ export default function DLPManagementPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {dlpProjects.map((project) => {
+              {records.map((project) => {
                 const daysLeft = getDaysRemaining(project.dlpExpiryDate)
-                const progressPercentage = project.defects.length > 0
-                  ? (project.defects.filter(d => d.status === 'verified' || d.status === 'completed').length / project.defects.length) * 100
+                const defects = project.defects || []
+                const progressPercentage = defects.length > 0
+                  ? (defects.filter(d => d.status === 'verified' || d.status === 'completed').length / defects.length) * 100
                   : 100
 
                 return (
@@ -399,7 +318,7 @@ export default function DLPManagementPage() {
                         <div className="flex items-center justify-between mb-3">
                           <h4 className="font-medium">Defects Progress</h4>
                           <span className="text-sm text-muted-foreground">
-                            {project.defects.filter(d => d.status === 'verified' || d.status === 'completed').length}/{project.defects.length} resolved
+                            {defects.filter(d => d.status === 'verified' || d.status === 'completed').length}/{defects.length} resolved
                           </span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
@@ -414,7 +333,7 @@ export default function DLPManagementPage() {
                             size="sm"
                             onClick={() => toast.info('View defects list')}
                           >
-                            View All Defects ({project.defects.length})
+                            View All Defects ({defects.length})
                           </Button>
                           <Button
                             variant="outline"

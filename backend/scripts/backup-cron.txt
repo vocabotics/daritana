@@ -1,0 +1,67 @@
+# Daritana Database Backup Cron Jobs
+# Add these to your crontab with: crontab -e
+
+# Backup database every day at 2:00 AM (server time)
+# Includes S3 upload for off-site backup
+0 2 * * * cd /path/to/daritana/backend && ./scripts/backup-database.sh --s3 >> /var/log/daritana/backup.log 2>&1
+
+# Alternative: Backup every 6 hours for critical production systems
+# 0 */6 * * * cd /path/to/daritana/backend && ./scripts/backup-database.sh --s3 >> /var/log/daritana/backup.log 2>&1
+
+# Weekly verification: Test backup integrity every Sunday at 3:00 AM
+# 0 3 * * 0 cd /path/to/daritana/backend && ./scripts/verify-backups.sh >> /var/log/daritana/backup-verify.log 2>&1
+
+# Monthly cleanup: Remove backups older than retention period (first day of month)
+# 0 4 1 * * find /path/to/daritana/backend/backups -name "daritana_backup_*.sql.gz" -type f -mtime +30 -delete
+
+###############################################################################
+# Installation Instructions:
+###############################################################################
+# 1. Replace /path/to/daritana with your actual installation path
+# 2. Create log directory: mkdir -p /var/log/daritana
+# 3. Ensure backup directory exists: mkdir -p /path/to/daritana/backend/backups
+# 4. Test backup script manually first: ./scripts/backup-database.sh
+# 5. Add to crontab: crontab -e
+# 6. Verify cron jobs: crontab -l
+# 7. Monitor logs: tail -f /var/log/daritana/backup.log
+
+###############################################################################
+# Environment Variables Required:
+###############################################################################
+# Set in backend/.env.production:
+# - DB_HOST=localhost
+# - DB_PORT=5432
+# - DB_NAME=daritana_prod
+# - DB_USER=postgres
+# - DB_PASSWORD=your-secure-password
+# - BACKUP_DIR=./backups
+# - BACKUP_RETENTION_DAYS=30
+# - S3_BACKUP_BUCKET=your-s3-bucket-name (optional)
+# - BACKUP_NOTIFICATION_WEBHOOK=https://hooks.slack.com/... (optional)
+
+###############################################################################
+# S3 Configuration (for --s3 flag):
+###############################################################################
+# 1. Install AWS CLI: apt-get install awscli
+# 2. Configure AWS credentials: aws configure
+# 3. Create S3 bucket with lifecycle policy for automatic deletion
+# 4. Set bucket policy for secure access
+
+###############################################################################
+# Monitoring and Alerts:
+###############################################################################
+# - Check backup logs regularly: tail -100 /var/log/daritana/backup.log
+# - Set up log rotation: /etc/logrotate.d/daritana
+# - Configure alerts for backup failures (Slack, email, PagerDuty)
+# - Test restore procedure quarterly
+
+###############################################################################
+# Backup Best Practices:
+###############################################################################
+# - Store backups in multiple locations (local + S3)
+# - Test restore procedure regularly
+# - Monitor backup size trends
+# - Encrypt backups containing sensitive data
+# - Document restore procedure
+# - Keep at least 30 days of backups
+# - Verify backup integrity automatically

@@ -64,16 +64,23 @@ export const useNotificationStore = create<NotificationState>((set, get) => ({
   getUnreadCount: async () => {
     try {
       const response = await notificationsApi.getUnreadCount();
-      // Add null check for response before accessing properties
+      // Add comprehensive null/undefined checks
       if (!response) {
         set({ unreadCount: 0 });
         return;
       }
-      // Handle both response.data.unreadCount and response.unreadCount formats
-      const count = response?.data?.unreadCount ?? response?.unreadCount ?? 0;
-      set({ unreadCount: count });
+      // Handle multiple possible response formats safely
+      const count = response?.data?.unreadCount ??
+                   response?.data?.data?.unreadCount ??
+                   response?.unreadCount ??
+                   0;
+      set({ unreadCount: typeof count === 'number' ? count : 0 });
     } catch (error: any) {
-      console.error('Failed to get unread count:', error);
+      // Silently handle error - API might not be available yet
+      // Don't log to console in production
+      if (import.meta.env.DEV) {
+        console.warn('Notification API not available:', error.message);
+      }
       // Set unreadCount to 0 on error to prevent undefined state
       set({ unreadCount: 0 });
     }
