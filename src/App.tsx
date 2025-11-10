@@ -31,6 +31,7 @@ import SearchResults from '@/pages/SearchResults';
 import { ConstructionDashboard } from '@/pages/ConstructionProgress/ConstructionDashboard';
 import TestChecklist from '@/pages/TestChecklist';
 import Billing from '@/pages/Billing';
+import { HelpCenter } from '@/pages/HelpCenter';
 import { OnboardingWizard } from '@/components/onboarding/OnboardingWizard';
 import { MemberOnboarding } from '@/components/onboarding/MemberOnboarding';
 import { VendorOnboarding } from '@/components/onboarding/VendorOnboarding';
@@ -213,6 +214,7 @@ function App() {
                 <Route path="/security" element={<SecuritySettings />} />
                 <Route path="/reports" element={<SmartDashboard />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/help" element={<HelpCenter />} />
                 <Route path="/meetings" element={<SmartDashboard />} />
                 <Route path="/approvals" element={<SmartDashboard />} />
                 <Route path="/messages" element={<SmartDashboard />} />
