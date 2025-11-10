@@ -10,6 +10,8 @@ import { useAuthStore } from '@/store/authStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { documentsService } from '@/services/documents.service';
+import { CardSkeleton } from '@/components/ui/skeleton';
+import { toast, notifications } from '@/utils/toast';
 
 export default function Documents() {
   const { user } = useAuthStore();
@@ -18,6 +20,7 @@ export default function Documents() {
   const [activeTab, setActiveTab] = useState('documents');
   const [showReviewHub, setShowReviewHub] = useState(false);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [stats, setStats] = useState({
     total: 0,
     inReview: 0,
@@ -34,6 +37,7 @@ export default function Documents() {
   }, []);
 
   const loadStatistics = async () => {
+    setIsLoadingStats(true);
     try {
       const statsData = await documentsService.getStatistics();
       setStats({
@@ -46,6 +50,9 @@ export default function Documents() {
       });
     } catch (error) {
       console.error('Failed to load statistics:', error);
+      notifications.error.generic();
+    } finally {
+      setIsLoadingStats(false);
     }
   };
 
@@ -122,8 +129,15 @@ export default function Documents() {
         {activeTab === 'documents' && (
           <div className="space-y-4">
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Card>
+            {isLoadingStats ? (
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <CardSkeleton key={i} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <Card>
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600">Total Documents</CardTitle>
                 </CardHeader>
@@ -162,7 +176,8 @@ export default function Documents() {
                   <p className="text-xs text-gray-500 mt-1">of 10 GB</p>
                 </CardContent>
               </Card>
-            </div>
+              </div>
+            )}
 
             {/* Category Filters */}
             <Tabs value={activeCategory} onValueChange={setActiveCategory}>

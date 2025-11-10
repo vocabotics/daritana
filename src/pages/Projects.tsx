@@ -12,7 +12,9 @@ import { useProjectContextStore } from '@/store/projectContextStore';
 import { useUIStore } from '@/store/uiStore';
 import { Button } from '@/components/ui/button';
 import { Plus, Briefcase } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast, notifications } from '@/utils/toast';
+import { ProjectCardSkeleton } from '@/components/ui/skeleton';
+import { useOptimisticUpdate } from '@/hooks/useOptimisticUpdate';
 
 interface ProjectLayoutData {
   id: string;
@@ -92,39 +94,40 @@ export function Projects() {
     type: p.type || 'Residential Design'
   }));
 
-  const handleCreateProject = async (data: any) => {
-    setIsCreating(true);
-    try {
+  // Optimistic update hook for project creation
+  const { execute: executeCreate, isLoading: isCreating } = useOptimisticUpdate({
+    mutationFn: async (data: any) => {
       const newProject = await createProject(data);
-      
+      if (!newProject) throw new Error('Failed to create project');
+      return newProject;
+    },
+    onSuccess: async (newProject) => {
+      closeCreateProjectModal();
+
+      // Refresh projects list
+      await fetchProjects();
+
+      // Add to recent projects for quick switching
       if (newProject) {
-        toast.success(t('success.created'));
-        closeCreateProjectModal();
-        
-        // Refresh projects list
-        await fetchProjects();
-        
-        // Add to recent projects for quick switching
-        if (newProject) {
-          addRecentProject({
-            id: newProject.id,
-            name: newProject.name,
-            type: newProject.type,
-            status: newProject.status || 'planning',
-            progress: newProject.progress || 0,
-            lastAccessedAt: new Date().toISOString(),
-          });
-        }
-        
-        // Refresh the project context list
-        await refreshProjectsList();
+        addRecentProject({
+          id: newProject.id,
+          name: newProject.name,
+          type: newProject.type,
+          status: newProject.status || 'planning',
+          progress: newProject.progress || 0,
+          lastAccessedAt: new Date().toISOString(),
+        });
       }
-    } catch (error) {
-      console.error('Error creating project:', error);
-      toast.error(t('errors.createError'));
-    } finally {
-      setIsCreating(false);
-    }
+
+      // Refresh the project context list
+      await refreshProjectsList();
+    },
+    successMessage: t('success.created') || 'Project created successfully',
+    errorMessage: t('errors.createError') || 'Failed to create project',
+  });
+
+  const handleCreateProject = async (data: any) => {
+    await executeCreate(data);
   };
 
   const handleProjectClick = (project: ProjectLayoutData) => {
@@ -148,30 +151,44 @@ export function Projects() {
     navigate(`/projects/${project.id}`);
   };
 
+  // Optimistic update hook for project deletion
+  const { execute: executeDelete } = useOptimisticUpdate({
+    mutationFn: async (projectId: string) => {
+      const success = await deleteProject(projectId);
+      if (!success) throw new Error('Failed to delete project');
+      return success;
+    },
+    onSuccess: async () => {
+      await fetchProjects();
+    },
+    successMessage: t('success.archived') || 'Project archived successfully',
+    errorMessage: t('errors.deleteError') || 'Failed to archive project',
+  });
+
+  // Optimistic update hook for project status update
+  const { execute: executeUpdate } = useOptimisticUpdate({
+    mutationFn: async ({ projectId, updates }: { projectId: string; updates: any }) => {
+      const success = await updateProject(projectId, updates);
+      if (!success) throw new Error('Failed to update project');
+      return success;
+    },
+    onSuccess: async () => {
+      await fetchProjects();
+    },
+    successMessage: t('success.updated') || 'Project updated successfully',
+    errorMessage: t('errors.updateError') || 'Failed to update project',
+  });
+
   const handleProjectArchive = async (project: ProjectLayoutData) => {
     if (confirm('Are you sure you want to archive this project?')) {
-      const success = await deleteProject(project.id);
-      
-      if (success) {
-        toast.success(t('success.archived'));
-        fetchProjects();
-      } else {
-        toast.error(t('errors.deleteError'));
-      }
+      await executeDelete(project.id);
     }
   };
 
   const handleProjectMove = async (projectId: string, newStatus: string) => {
     const project = projects.find(p => p.id === projectId);
     if (project) {
-      const success = await updateProject(projectId, { ...project, status: newStatus });
-      
-      if (success) {
-        toast.success(t('success.updated'));
-        fetchProjects();
-      } else {
-        toast.error(t('errors.updateError'));
-      }
+      await executeUpdate({ projectId, updates: { ...project, status: newStatus } });
     }
   };
   
@@ -224,8 +241,15 @@ export function Projects() {
       toolbar={toolbar}
     >
       <div className="h-full flex flex-col">
-        {/* Show empty state when no projects in real mode */}
-        {shouldShowEmptyState ? (
+        {/* Show loading skeleton */}
+        {isLoading ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <ProjectCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : shouldShowEmptyState ? (
+          /* Show empty state when no projects in real mode */
           <div className="flex-1 flex items-center justify-center">
             <ProjectsEmptyState onCreateProject={openCreateProjectModal} />
           </div>
