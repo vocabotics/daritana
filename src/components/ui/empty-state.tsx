@@ -1,25 +1,22 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button } from './button';
 import { cn } from '@/lib/utils';
-import { 
-  FolderPlus, 
-  Plus, 
-  Users, 
-  ShoppingCart, 
-  MessageSquare, 
-  DollarSign, 
-  CheckSquare, 
-  BarChart3,
+import { Button } from './button';
+import {
+  FolderOpen,
   FileText,
-  Package,
-  Home,
+  Users,
+  Briefcase,
   Calendar,
-  Mail
+  CheckSquare,
+  Search,
+  Filter,
+  AlertCircle,
+  Inbox,
+  LucideIcon,
 } from 'lucide-react';
 
-export interface EmptyStateProps {
-  icon?: React.ReactNode;
+interface EmptyStateProps {
+  icon?: LucideIcon;
   title: string;
   description: string;
   action?: {
@@ -32,79 +29,42 @@ export interface EmptyStateProps {
     onClick: () => void;
   };
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
 }
 
 export function EmptyState({
-  icon,
+  icon: Icon = Inbox,
   title,
   description,
   action,
   secondaryAction,
   className,
-  size = 'md'
 }: EmptyStateProps) {
-  const sizeClasses = {
-    sm: 'py-8',
-    md: 'py-12',
-    lg: 'py-20'
-  };
-
-  const iconSizeClasses = {
-    sm: 'w-12 h-12',
-    md: 'w-16 h-16',
-    lg: 'w-20 h-20'
-  };
-
   return (
-    <div className={cn(
-      'flex flex-col items-center justify-center text-center space-y-4',
-      sizeClasses[size],
-      className
-    )}>
-      {icon && (
-        <div className={cn(
-          'text-gray-400 mb-2',
-          iconSizeClasses[size]
-        )}>
-          {icon}
-        </div>
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center py-12 px-4 text-center',
+        className
       )}
-      
-      <div className="space-y-2">
-        <h3 className={cn(
-          'font-semibold text-gray-900',
-          size === 'sm' ? 'text-lg' : size === 'md' ? 'text-xl' : 'text-2xl'
-        )}>
-          {title}
-        </h3>
-        <p className={cn(
-          'text-gray-500 max-w-md mx-auto',
-          size === 'sm' ? 'text-sm' : 'text-base'
-        )}>
-          {description}
-        </p>
+    >
+      <div className="rounded-full bg-muted p-6 mb-4">
+        <Icon className="h-12 w-12 text-muted-foreground" />
       </div>
-
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-sm text-muted-foreground mb-6 max-w-md">
+        {description}
+      </p>
       {(action || secondaryAction) && (
-        <div className="flex flex-col sm:flex-row gap-3 pt-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           {action && (
             <Button
               onClick={action.onClick}
               variant={action.variant || 'default'}
-              size={size === 'sm' ? 'sm' : 'default'}
-              className="min-w-[140px]"
             >
               {action.label}
             </Button>
           )}
           {secondaryAction && (
-            <Button
-              onClick={secondaryAction.onClick}
-              variant="outline"
-              size={size === 'sm' ? 'sm' : 'default'}
-              className="min-w-[140px]"
-            >
+            <Button onClick={secondaryAction.onClick} variant="outline">
               {secondaryAction.label}
             </Button>
           )}
@@ -114,201 +74,183 @@ export function EmptyState({
   );
 }
 
-// Pre-configured empty states for common scenarios
-export const ProjectsEmptyState = ({ onCreateProject }: { onCreateProject: () => void }) => {
-  const { t } = useTranslation();
+// Predefined Empty States for common scenarios
+
+export function NoProjectsEmptyState({ onCreateProject }: { onCreateProject: () => void }) {
   return (
     <EmptyState
-      icon={<FolderPlus className="w-16 h-16" />}
-      title={t('projects.noProjectsTitle')}
-      description={t('projects.noProjectsDescription')}
+      icon={Briefcase}
+      title="No projects yet"
+      description="Create your first project to start managing your architecture and interior design work. Track progress, manage tasks, and collaborate with your team."
       action={{
-        label: t('projects.createProject'),
-        onClick: onCreateProject
+        label: 'Create Project',
+        onClick: onCreateProject,
       }}
       secondaryAction={{
-        label: t('projects.importProjects'),
-        onClick: () => console.log('Import projects')
+        label: 'Import Project',
+        onClick: () => console.log('Import project'),
       }}
     />
   );
-};
+}
 
-export const TasksEmptyState = ({ onCreateTask }: { onCreateTask: () => void }) => {
-  const { t } = useTranslation();
+export function NoTasksEmptyState({ onCreateTask }: { onCreateTask: () => void }) {
   return (
     <EmptyState
-      icon={<CheckSquare className="w-16 h-16" />}
-      title={t('tasks.noTasksTitle')}
-      description={t('tasks.noTasksDescription')}
+      icon={CheckSquare}
+      title="No tasks to display"
+      description="Break down your project into manageable tasks. Assign team members, set deadlines, and track progress on your kanban board."
       action={{
-        label: t('tasks.createTask'),
-        onClick: onCreateTask
+        label: 'Add Task',
+        onClick: onCreateTask,
       }}
     />
   );
-};
+}
 
-export const TeamEmptyState = ({ onInviteTeam }: { onInviteTeam: () => void }) => {
-  const { t } = useTranslation();
+export function NoDocumentsEmptyState({ onUpload }: { onUpload: () => void }) {
   return (
     <EmptyState
-      icon={<Users className="w-16 h-16" />}
-      title={t('team.noTeamTitle') || 'Build your team'}
-      description={t('team.noTeamDescription') || 'Invite architects, designers, contractors, and clients to collaborate on your projects.'}
+      icon={FileText}
+      title="No documents uploaded"
+      description="Upload drawings, specifications, contracts, and other project documents. Keep all your files organized and accessible to your team."
       action={{
-        label: t('team.inviteMembers') || 'Invite Team Members',
-        onClick: onInviteTeam
-      }}
-    />
-  );
-};
-
-export const MarketplaceEmptyState = ({ onBrowseProducts }: { onBrowseProducts: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<ShoppingCart className="w-16 h-16" />}
-      title={t('marketplace.noProductsTitle')}
-      description={t('marketplace.noProductsDescription')}
-      action={{
-        label: t('marketplace.browseProducts'),
-        onClick: onBrowseProducts
+        label: 'Upload Document',
+        onClick: onUpload,
       }}
       secondaryAction={{
-        label: t('marketplace.becomeVendor'),
-        onClick: () => console.log('Become vendor')
+        label: 'Browse Templates',
+        onClick: () => console.log('Browse templates'),
       }}
     />
   );
-};
+}
 
-export const CommunityEmptyState = ({ onJoinCommunity }: { onJoinCommunity: () => void }) => {
-  const { t } = useTranslation();
+export function NoTeamMembersEmptyState({ onInvite }: { onInvite: () => void }) {
   return (
     <EmptyState
-      icon={<MessageSquare className="w-16 h-16" />}
-      title={t('community.noCommunityTitle')}
-      description={t('community.noCommunityDescription')}
+      icon={Users}
+      title="No team members yet"
+      description="Invite architects, designers, contractors, and clients to collaborate on your projects. Assign roles and manage permissions for each member."
       action={{
-        label: t('community.exploreCommunity'),
-        onClick: onJoinCommunity
+        label: 'Invite Team Member',
+        onClick: onInvite,
+      }}
+    />
+  );
+}
+
+export function NoEventsEmptyState({ onCreateEvent }: { onCreateEvent: () => void }) {
+  return (
+    <EmptyState
+      icon={Calendar}
+      title="No events scheduled"
+      description="Schedule site visits, client meetings, design reviews, and project milestones. Keep your team informed and on track."
+      action={{
+        label: 'Create Event',
+        onClick: onCreateEvent,
+      }}
+    />
+  );
+}
+
+export function SearchEmptyState({ searchQuery }: { searchQuery: string }) {
+  return (
+    <EmptyState
+      icon={Search}
+      title="No results found"
+      description={`We couldn't find anything matching "${searchQuery}". Try adjusting your search terms or filters.`}
+    />
+  );
+}
+
+export function FilterEmptyState({ onClearFilters }: { onClearFilters: () => void }) {
+  return (
+    <EmptyState
+      icon={Filter}
+      title="No items match your filters"
+      description="Try adjusting or clearing your filters to see more results."
+      action={{
+        label: 'Clear Filters',
+        onClick: onClearFilters,
+        variant: 'outline',
+      }}
+    />
+  );
+}
+
+export function ErrorEmptyState({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  return (
+    <EmptyState
+      icon={AlertCircle}
+      title="Something went wrong"
+      description={message || 'An error occurred while loading data. Please try again.'}
+      action={
+        onRetry
+          ? {
+              label: 'Try Again',
+              onClick: onRetry,
+            }
+          : undefined
+      }
+    />
+  );
+}
+
+export function NoNotificationsEmptyState() {
+  return (
+    <EmptyState
+      icon={Inbox}
+      title="You're all caught up!"
+      description="No new notifications. We'll notify you when there's something important."
+    />
+  );
+}
+
+export function NoFilesEmptyState({ onUpload }: { onUpload: () => void }) {
+  return (
+    <EmptyState
+      icon={FolderOpen}
+      title="This folder is empty"
+      description="Upload files, create folders, or connect cloud storage to organize your project assets."
+      action={{
+        label: 'Upload Files',
+        onClick: onUpload,
       }}
       secondaryAction={{
-        label: t('community.createFirstPost'),
-        onClick: () => console.log('Create post')
+        label: 'Connect Cloud Storage',
+        onClick: () => console.log('Connect cloud'),
       }}
     />
   );
-};
+}
 
-export const FinancialEmptyState = ({ onCreateInvoice }: { onCreateInvoice: () => void }) => {
-  const { t } = useTranslation();
+// Example usage component showing all states
+export function EmptyStateExamples() {
   return (
-    <EmptyState
-      icon={<DollarSign className="w-16 h-16" />}
-      title={t('financial.title')}
-      description={t('financial.overview')}
-      action={{
-        label: t('financial.createInvoice'),
-        onClick: onCreateInvoice
-      }}
-      secondaryAction={{
-        label: t('financial.budgets'),
-        onClick: () => console.log('Setup budget')
-      }}
-    />
+    <div className="space-y-12 p-8">
+      <div className="border rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Projects Empty State</h2>
+        <NoProjectsEmptyState onCreateProject={() => console.log('Create')} />
+      </div>
+      
+      <div className="border rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Tasks Empty State</h2>
+        <NoTasksEmptyState onCreateTask={() => console.log('Create task')} />
+      </div>
+      
+      <div className="border rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Search Empty State</h2>
+        <SearchEmptyState searchQuery="floor plans" />
+      </div>
+      
+      <div className="border rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Error State</h2>
+        <ErrorEmptyState
+          message="Failed to load projects. Please check your connection."
+          onRetry={() => console.log('Retry')}
+        />
+      </div>
+    </div>
   );
-};
-
-export const InvoicesEmptyState = ({ onCreateInvoice }: { onCreateInvoice: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<FileText className="w-16 h-16" />}
-      title={t('financial.noInvoicesTitle')}
-      description={t('financial.noInvoicesDescription')}
-      action={{
-        label: t('financial.createInvoice'),
-        onClick: onCreateInvoice
-      }}
-      size="md"
-    />
-  );
-};
-
-export const ExpensesEmptyState = ({ onAddExpense }: { onAddExpense: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<Package className="w-16 h-16" />}
-      title={t('financial.noExpensesTitle')}
-      description={t('financial.noExpensesDescription')}
-      action={{
-        label: t('financial.addExpense'),
-        onClick: onAddExpense
-      }}
-      size="md"
-    />
-  );
-};
-
-export const DashboardEmptyState = ({ onCustomizeDashboard }: { onCustomizeDashboard: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<BarChart3 className="w-16 h-16" />}
-      title={t('dashboard.customizeLayout')}
-      description={t('dashboard.addFirstWidget')}
-      action={{
-        label: t('dashboard.addWidget'),
-        onClick: onCustomizeDashboard
-      }}
-      size="sm"
-    />
-  );
-};
-
-export const FilesEmptyState = ({ onUploadFile }: { onUploadFile: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<Home className="w-16 h-16" />}
-      title={t('documents.uploadFiles') || 'Upload project files'}
-      description={t('documents.uploadDescription') || 'Store and organize drawings, documents, photos, and other project materials in one place.'}
-      action={{
-        label: t('common.upload'),
-        onClick: onUploadFile
-      }}
-      size="md"
-    />
-  );
-};
-
-export const CalendarEmptyState = ({ onCreateEvent }: { onCreateEvent: () => void }) => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<Calendar className="w-16 h-16" />}
-      title={t('calendar.scheduleWork') || 'Schedule your work'}
-      description={t('calendar.scheduleDescription') || 'Create events, set project milestones, and manage meeting schedules with your team and clients.'}
-      action={{
-        label: t('calendar.createEvent') || 'Create Event',
-        onClick: onCreateEvent
-      }}
-      size="md"
-    />
-  );
-};
-
-export const NotificationsEmptyState = () => {
-  const { t } = useTranslation();
-  return (
-    <EmptyState
-      icon={<Mail className="w-16 h-16" />}
-      title={t('notifications.allCaughtUp') || "You're all caught up!"}
-      description={t('notifications.noNewNotifications') || "No new notifications. We'll let you know when there are updates on your projects."}
-      size="sm"
-    />
-  );
-};
+}
