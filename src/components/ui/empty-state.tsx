@@ -12,6 +12,7 @@ import {
   Filter,
   AlertCircle,
   Inbox,
+  DollarSign,
   LucideIcon,
 } from 'lucide-react';
 
@@ -220,6 +221,68 @@ export function NoFilesEmptyState({ onUpload }: { onUpload: () => void }) {
       secondaryAction={{
         label: 'Connect Cloud Storage',
         onClick: () => console.log('Connect cloud'),
+      }}
+    />
+  );
+}
+
+// Aliases for backward compatibility
+export const ProjectsEmptyState = NoProjectsEmptyState;
+export const TasksEmptyState = NoTasksEmptyState;
+
+// Financial empty states
+export function FinancialEmptyState({ onCreate }: { onCreate: () => void }) {
+  return (
+    <EmptyState
+      icon={DollarSign}
+      title="No financial records yet"
+      description="Start tracking your project finances by creating invoices and recording expenses."
+      action={{
+        label: 'Create Invoice',
+        onClick: onCreate,
+      }}
+    />
+  );
+}
+
+export function InvoicesEmptyState({ onCreate }: { onCreate: () => void }) {
+  return (
+    <EmptyState
+      icon={DollarSign}
+      title="No invoices yet"
+      description="Create your first invoice to start tracking project billing and payments."
+      action={{
+        label: 'Create Invoice',
+        onClick: onCreate,
+      }}
+    />
+  );
+}
+
+export function ExpensesEmptyState({ onCreate }: { onCreate: () => void }) {
+  return (
+    <EmptyState
+      icon={DollarSign}
+      title="No expenses recorded"
+      description="Start tracking project expenses to monitor your budget and costs."
+      action={{
+        label: 'Record Expense',
+        onClick: onCreate,
+      }}
+    />
+  );
+}
+
+// Community empty state
+export function CommunityEmptyState({ onCreate }: { onCreate: () => void }) {
+  return (
+    <EmptyState
+      icon={Users}
+      title="No community content yet"
+      description="Share your projects, insights, and connect with other professionals."
+      action={{
+        label: 'Create Post',
+        onClick: onCreate,
       }}
     />
   );

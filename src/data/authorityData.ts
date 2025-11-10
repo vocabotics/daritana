@@ -32,3 +32,10 @@ export const defaultSubmissionStats: SubmissionStats = {
   compliance_score_average: 0
 };
 export const defaultAuthorityPerformance: AuthorityPerformance[] = [];
+
+// Helper function to get categories by authority
+export function getCategoriesByAuthority(authorityId: string): SubmissionCategory[] {
+  // This will be implemented with real API data
+  // For now, return empty array - real data fetched from database
+  return [];
+}

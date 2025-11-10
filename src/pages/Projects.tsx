@@ -50,7 +50,6 @@ export function Projects() {
   const { showCreateProjectModal, closeCreateProjectModal, openCreateProjectModal } = useUIStore();
   const [editingProject, setEditingProject] = useState<any>(null);
   const [currentLayout, setCurrentLayout] = useState('grid');
-  const [isCreating, setIsCreating] = useState(false);
   
   useEffect(() => {
     // Fetch projects when component mounts

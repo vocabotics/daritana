@@ -106,7 +106,7 @@ export const notifications = {
     created: () => toast.success('Project created successfully'),
     updated: () => toast.success('Project updated successfully'),
     deleted: () => toast.success('Project deleted successfully'),
-    error: (action: string) => toast.error(\`Failed to \${action} project\`, {
+    error: (action: string) => toast.error(`Failed to ${action} project`, {
       description: 'Please try again or contact support if the issue persists.',
     }),
   },
@@ -116,31 +116,31 @@ export const notifications = {
     created: () => toast.success('Task created successfully'),
     updated: () => toast.success('Task updated successfully'),
     deleted: () => toast.success('Task deleted successfully'),
-    assigned: (assignee: string) => toast.success(\`Task assigned to \${assignee}\`),
+    assigned: (assignee: string) => toast.success(`Task assigned to ${assignee}`),
     completed: () => toast.success('Task marked as complete', {
       description: 'Great job!',
     }),
-    error: (action: string) => toast.error(\`Failed to \${action} task\`),
+    error: (action: string) => toast.error(`Failed to ${action} task`),
   },
 
   // Document notifications
   document: {
     uploaded: (count: number = 1) => toast.success(
-      count === 1 ? 'Document uploaded successfully' : \`\${count} documents uploaded successfully\`
+      count === 1 ? 'Document uploaded successfully' : `${count} documents uploaded successfully`
     ),
     deleted: () => toast.success('Document deleted successfully'),
-    shared: (recipient: string) => toast.success(\`Document shared with \${recipient}\`),
+    shared: (recipient: string) => toast.success(`Document shared with ${recipient}`),
     downloading: () => toast.loading('Downloading document...'),
-    error: (action: string) => toast.error(\`Failed to \${action} document\`),
+    error: (action: string) => toast.error(`Failed to ${action} document`),
   },
 
   // Team notifications
   team: {
-    memberAdded: (name: string) => toast.success(\`\${name} added to team\`),
-    memberRemoved: (name: string) => toast.success(\`\${name} removed from team\`),
-    inviteSent: (email: string) => toast.success(\`Invitation sent to \${email}\`),
-    roleUpdated: (name: string, role: string) => toast.success(\`\${name}'s role updated to \${role}\`),
-    error: (action: string) => toast.error(\`Failed to \${action} team member\`),
+    memberAdded: (name: string) => toast.success(`${name} added to team`),
+    memberRemoved: (name: string) => toast.success(`${name} removed from team`),
+    inviteSent: (email: string) => toast.success(`Invitation sent to ${email}`),
+    roleUpdated: (name: string, role: string) => toast.success(`${name}'s role updated to ${role}`),
+    error: (action: string) => toast.error(`Failed to ${action} team member`),
   },
 
   // Settings notifications
@@ -163,10 +163,10 @@ export const notifications = {
 
   // File operations
   file: {
-    uploading: (filename: string) => toast.loading(\`Uploading \${filename}...\`),
-    uploaded: (filename: string) => toast.success(\`\${filename} uploaded successfully\`),
+    uploading: (filename: string) => toast.loading(`Uploading ${filename}...`),
+    uploaded: (filename: string) => toast.success(`${filename} uploaded successfully`),
     downloadStarted: () => toast.info('Download started'),
-    error: (action: string) => toast.error(\`Failed to \${action} file\`),
+    error: (action: string) => toast.error(`Failed to ${action} file`),
   },
 
   // Form validation
