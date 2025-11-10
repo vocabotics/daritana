@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
@@ -19,8 +19,8 @@ export function KeyboardShortcutsDialog() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Define all application shortcuts
-  const shortcutCategories: ShortcutCategory[] = [
+  // Memoize shortcuts to prevent re-creation on every render
+  const shortcutCategories: ShortcutCategory[] = useMemo(() => [
     {
       name: 'Navigation',
       shortcuts: [
@@ -103,15 +103,15 @@ export function KeyboardShortcutsDialog() {
         },
       ],
     },
-  ];
+  ], [navigate, setOpen]);
 
   // Flatten all shortcuts for the hook
-  const allShortcuts = shortcutCategories.flatMap(category => 
+  const allShortcuts = useMemo(() => shortcutCategories.flatMap(category =>
     category.shortcuts.map(shortcut => ({
       ...shortcut,
       category: category.name,
     }))
-  );
+  ), [shortcutCategories]);
 
   // Register keyboard shortcuts
   useKeyboardShortcuts({
