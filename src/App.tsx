@@ -31,6 +31,7 @@ import SearchResults from '@/pages/SearchResults';
 import { ConstructionDashboard } from '@/pages/ConstructionProgress/ConstructionDashboard';
 import TestChecklist from '@/pages/TestChecklist';
 import Billing from '@/pages/Billing';
+import { HelpCenter } from '@/pages/HelpCenter';
 import { OnboardingWizard } from '@/components/onboarding/OnboardingWizard';
 import { MemberOnboarding } from '@/components/onboarding/MemberOnboarding';
 import { VendorOnboarding } from '@/components/onboarding/VendorOnboarding';
@@ -39,6 +40,9 @@ import { Toaster } from '@/components/ui/sonner';
 import { ARIAProvider } from '@/components/aria/ARIAProvider';
 import { ARIAFloatingAssistant } from '@/components/aria/ARIAFloatingAssistant';
 import { ARIACommandCenter } from '@/components/aria/ARIACommandCenter';
+import { KeyboardShortcutsDialog } from '@/components/KeyboardShortcutsDialog';
+import { FullPageSkeleton } from '@/components/ui/skeleton';
+import { HelpWidget } from '@/components/help/ContextualHelp';
 import { initializeAIServices } from '@/services/ai';
 import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -76,21 +80,16 @@ function App() {
   const { installApp, isInstallable, isOffline, isUpdateAvailable } = usePWA();
   const { isMobile, isTablet } = useResponsive();
 
-  // React Router v7 future flags to prepare for migration
-  const routerFutureConfig = {
-    v7_startTransition: true,
-    v7_relativeSplatPath: true,
-  };
-  
   // Initialize service worker for PWA
-  const { offlineReady, updateAvailable } = useServiceWorker();
+  useServiceWorker();
   
   useEffect(() => {
     // Check authentication status on mount
     checkAuth();
-    
+
     // Disabled automatic token refresh to prevent loops
     // Token refresh commented out until backend is properly configured
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency to run only once on mount
 
   useEffect(() => {
@@ -216,6 +215,7 @@ function App() {
                 <Route path="/security" element={<SecuritySettings />} />
                 <Route path="/reports" element={<SmartDashboard />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/help" element={<HelpCenter />} />
                 <Route path="/meetings" element={<SmartDashboard />} />
                 <Route path="/approvals" element={<SmartDashboard />} />
                 <Route path="/messages" element={<SmartDashboard />} />
@@ -230,104 +230,104 @@ function App() {
 
                 {/* Architect Feature Routes */}
                 <Route path="/architect/rfi" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading RFI Management...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <RFIManagement />
                   </Suspense>
                 } />
                 <Route path="/architect/change-orders" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Change Orders...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <ChangeOrderManagement />
                   </Suspense>
                 } />
                 <Route path="/architect/drawings" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Drawing Management...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <DrawingManagement />
                   </Suspense>
                 } />
                 <Route path="/architect/site-visits" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Site Visits...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <SiteVisitReports />
                   </Suspense>
                 } />
                 <Route path="/architect/punch-list" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Punch List...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <PunchListManagement />
                   </Suspense>
                 } />
                 <Route path="/architect/contracts" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Contract Admin...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <PAMContractAdmin />
                   </Suspense>
                 } />
                 <Route path="/architect/ubbl" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading UBBL Compliance...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <UBBLCompliance />
                   </Suspense>
                 } />
                 <Route path="/architect/authorities" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Authority Tracking...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <AuthorityTracking />
                   </Suspense>
                 } />
                 <Route path="/architect/payment-certificates" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Payment Certificates...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <PaymentCertificates />
                   </Suspense>
                 } />
                 <Route path="/architect/site-instructions" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Site Instructions...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <SiteInstructionRegister />
                   </Suspense>
                 } />
                 <Route path="/architect/submittals" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Submittals...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <SubmittalTracking />
                   </Suspense>
                 } />
                 <Route path="/architect/meeting-minutes" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Meeting Minutes...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <MeetingMinutes />
                   </Suspense>
                 } />
                 <Route path="/architect/dlp" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading DLP Management...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <DLPManagement />
                   </Suspense>
                 } />
                 <Route path="/architect/fee-calculator" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Fee Calculator...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <FeeCalculator />
                   </Suspense>
                 } />
                 <Route path="/architect/ccc-tracking" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading CCC Tracking...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <CCCTracking />
                   </Suspense>
                 } />
                 <Route path="/architect/retention-tracking" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Retention Tracking...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <RetentionTracking />
                   </Suspense>
                 } />
 
                 {/* New Feature Routes with Lazy Loading */}
                 <Route path="/analytics" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Analytics...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <Analytics />
                   </Suspense>
                 } />
                 <Route path="/integrations" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Integrations...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <Integrations />
                   </Suspense>
                 } />
                 <Route path="/security-enhanced" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Security...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <SecurityEnhanced />
                   </Suspense>
                 } />
                 <Route path="/performance" element={
-                  <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading Performance...</div>}>
+                  <Suspense fallback={<FullPageSkeleton />}>
                     <Performance />
                   </Suspense>
                 } />
@@ -346,12 +346,15 @@ function App() {
                 
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
-              
-              {/* PWA Install Prompt */}
-              <InstallPrompt />
-              
+
               {/* ARIA Floating Assistant - Only when escaped from sidebar */}
               <ARIAFloatingAssistant />
+
+              {/* Keyboard Shortcuts Dialog */}
+              <KeyboardShortcutsDialog />
+
+              {/* Help Widget - Always available floating help */}
+              <HelpWidget />
             </>
           )}
           <Toaster />

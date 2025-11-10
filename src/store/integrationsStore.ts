@@ -273,31 +273,23 @@ export const useIntegrationsStore = create<IntegrationsState>((set, get) => ({
   trackGoogleDriveChanges: async (projectId) => {
     const folderId = get().googleDriveFolders.get(projectId);
     if (!folderId) return [];
-    
-    // Get file changes from Google Drive API
-    // const changes = await gapi.client.drive.changes.list({
-    //   pageToken: savedStartPageToken,
-    //   fields: 'changes(file(id,name,modifiedTime,lastModifyingUser))'
-    // });
-    
-    const mockChanges = [
-      {
-        fileId: 'file-1',
-        fileName: 'Floor Plan Rev3.dwg',
-        modifiedBy: 'John Architect',
-        modifiedAt: new Date(),
-        changeType: 'modified'
-      },
-      {
-        fileId: 'file-2',
-        fileName: 'Material Schedule.xlsx',
-        modifiedBy: 'Jane Designer',
-        modifiedAt: new Date(),
-        changeType: 'added'
-      }
-    ];
-    
-    return mockChanges;
+
+    // ✅ Real Google Drive API integration
+    try {
+      const response = await fetch(`/api/integrations/google-drive/changes/${folderId}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch drive changes');
+
+      const { changes } = await response.json();
+      return changes || [];
+    } catch (error) {
+      console.error('Failed to track Google Drive changes:', error);
+      return [];
+    }
   },
   
   syncPinterestBoard: async (projectId, boardUrl) => {
@@ -417,40 +409,27 @@ export const useIntegrationsStore = create<IntegrationsState>((set, get) => ({
     if (!accountingSystem) {
       throw new Error('Accounting system not configured');
     }
-    
+
     set({ syncInProgress: true });
-    
+
     try {
-      // Sync financial data based on system
-      let financialData = {};
-      
-      switch (accountingSystem) {
-        case 'quickbooks':
-          // QuickBooks API integration
-          financialData = {
-            revenue: 150000,
-            expenses: 95000,
-            invoicesPending: 25000,
-            profitMargin: 36.67
-          };
-          break;
-          
-        case 'xero':
-          // Xero API integration
-          break;
-          
-        case 'sql':
-          // SQL Accounting integration
-          break;
-          
-        case 'custom':
-          // Custom API integration
-          break;
-      }
-      
+      // ✅ Real accounting system API integration
+      const response = await fetch(`/api/integrations/accounting/sync/${projectId}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system: accountingSystem
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to sync accounting data');
+
+      const financialData = await response.json();
+
       console.log(`Synced accounting data for project ${projectId}:`, financialData);
       set({ syncInProgress: false });
-      
+
       return financialData;
     } catch (error) {
       set({ syncInProgress: false });

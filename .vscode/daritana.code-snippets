@@ -1,0 +1,54 @@
+{
+  "useDataFetch Hook": {
+    "prefix": "usedf",
+    "body": [
+      "const { data, loading, error, isEmpty, refetch } = useDataFetch({",
+      "  fetchFn: () => ${1:service}.getAll(),",
+      "  dependencies: [],",
+      "});"
+    ],
+    "description": "useDataFetch hook with loading/error/empty states"
+  },
+  "useListFetch Hook": {
+    "prefix": "uself",
+    "body": [
+      "const { items, loading, error, isEmpty, refetch } = useListFetch({",
+      "  fetchFn: () => ${1:service}.getAll(),",
+      "  dependencies: [],",
+      "});"
+    ],
+    "description": "useListFetch hook for arrays"
+  },
+  "DataStateWrapper": {
+    "prefix": "dsw",
+    "body": [
+      "<DataStateWrapper",
+      "  loading={loading}",
+      "  error={error}",
+      "  isEmpty={isEmpty}",
+      "  emptyState={<${1:EmptyState} />}",
+      "  onRetry={refetch}",
+      ">",
+      "  ${2:children}",
+      "</DataStateWrapper>"
+    ],
+    "description": "DataStateWrapper component"
+  },
+  "Error Handling": {
+    "prefix": "werr",
+    "body": [
+      "const result = await withErrorHandling(",
+      "  () => ${1:service}.${2:method}(${3:args}),",
+      "  { operation: '${4:operation name}' }",
+      ");"
+    ],
+    "description": "withErrorHandling wrapper"
+  },
+  "Toast Notification": {
+    "prefix": "notify",
+    "body": [
+      "notifications.${1:category}.${2:action}();"
+    ],
+    "description": "Predefined toast notification"
+  }
+}

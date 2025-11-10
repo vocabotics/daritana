@@ -21,7 +21,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
 import { Label } from '@/components/ui/label'
-import { toast } from 'sonner'
+import { toast, notifications } from '@/utils/toast'
+import { ListSkeleton } from '@/components/ui/skeleton'
+import { useOptimisticUpdate } from '@/hooks/useOptimisticUpdate'
 import { 
   AlertCircle, Activity, MessageSquare, Plus, Video, Calendar, MapPin, Home, Gamepad2, Brain,
   Phone, PhoneOff, Mic, MicOff, Camera, CameraOff, ScreenShare, ScreenShareOff, Volume2, VolumeX,

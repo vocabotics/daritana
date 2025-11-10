@@ -10,7 +10,9 @@ import { useTaskStore } from '@/store/taskStore';
 import { useUIStore } from '@/store/uiStore';
 import { useDemoStore } from '@/store/demoStore';
 import { Plus, Filter, Users, Calendar } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast, notifications } from '@/utils/toast';
+import { KanbanSkeleton } from '@/components/ui/skeleton';
+import { useOptimisticUpdate } from '@/hooks/useOptimisticUpdate';
 
 export function KanbanPage() {
   const { projects, fetchProjects } = useProjectStore();
@@ -20,7 +22,6 @@ export function KanbanPage() {
   const [selectedProject, setSelectedProject] = useState<string>('all');
   const [selectedPriority, setSelectedPriority] = useState<string>('all');
   const [selectedAssignee, setSelectedAssignee] = useState<string>('all');
-  const [isCreatingTask, setIsCreatingTask] = useState(false);
   
   useEffect(() => {
     // Fetch projects and tasks when component mounts
@@ -49,30 +50,30 @@ export function KanbanPage() {
   const doneCount = tasks.filter(t => t.status === 'done').length;
   
   const shouldShowEmptyState = !isLoading && tasks.length === 0 && !isDemoMode;
-  
+
+  // Optimistic update hook for task creation
+  const { execute: executeCreateTask, isLoading: isCreatingTask } = useOptimisticUpdate({
+    mutationFn: async (data: any) => {
+      const success = await createTask(data);
+      if (!success) throw new Error('Failed to create task');
+      return success;
+    },
+    onSuccess: async () => {
+      closeCreateTaskModal();
+
+      // Refresh tasks to show the new task
+      const params: any = {};
+      if (selectedProject !== 'all') params.projectId = selectedProject;
+      if (selectedPriority !== 'all') params.priority = selectedPriority;
+      await fetchTasks(params);
+    },
+    successMessage: 'Task created successfully',
+    errorMessage: 'Failed to create task',
+  });
+
   // Handle task creation
   const handleCreateTask = async (data: any) => {
-    setIsCreatingTask(true);
-    try {
-      const success = await createTask(data);
-      if (success) {
-        toast.success('Task created successfully!');
-        closeCreateTaskModal();
-        
-        // Refresh tasks to show the new task
-        const params: any = {};
-        if (selectedProject !== 'all') params.projectId = selectedProject;
-        if (selectedPriority !== 'all') params.priority = selectedPriority;
-        await fetchTasks(params);
-      } else {
-        toast.error('Failed to create task');
-      }
-    } catch (error) {
-      console.error('Error creating task:', error);
-      toast.error('Failed to create task');
-    } finally {
-      setIsCreatingTask(false);
-    }
+    await executeCreateTask(data);
   };
   
   return (
@@ -168,8 +169,11 @@ export function KanbanPage() {
           </Button>
         </div>
         
-        {/* Show empty state when no tasks in real mode */}
-        {shouldShowEmptyState ? (
+        {/* Show loading skeleton */}
+        {isLoading ? (
+          <KanbanSkeleton />
+        ) : shouldShowEmptyState ? (
+          /* Show empty state when no tasks in real mode */
           <div className="flex items-center justify-center py-20">
             <TasksEmptyState onCreateTask={openCreateTaskModal} />
           </div>
