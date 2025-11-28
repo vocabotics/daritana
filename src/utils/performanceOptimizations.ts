@@ -305,7 +305,7 @@ export const useRenderProfiler = (componentName: string) => {
       const endTime = performance.now();
       const renderTime = endTime - startTime;
       
-      if (process.env.NODE_ENV === 'development' && renderTime > 16.67) {
+      if (import.meta.env.DEV && renderTime > 16.67) {
         console.warn(
           `Slow render detected in ${componentName}: ${renderTime.toFixed(2)}ms`
         );
@@ -327,7 +327,7 @@ export const useMemoryOptimizer = () => {
     cleanupRefs.current = [];
     
     // Force garbage collection if available (development only)
-    if (process.env.NODE_ENV === 'development' && 'gc' in window) {
+    if (import.meta.env.DEV && 'gc' in window) {
       (window as any).gc();
     }
   }, []);

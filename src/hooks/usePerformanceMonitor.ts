@@ -25,7 +25,7 @@ class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetrics> = new Map();
   private componentMetrics: Map<string, ComponentPerformance> = new Map();
   private observers: Map<string, PerformanceObserver> = new Map();
-  private isEnabled: boolean = process.env.NODE_ENV === 'development';
+  private isEnabled: boolean = import.meta.env.DEV;
 
   private constructor() {
     if (this.isEnabled) {
@@ -325,7 +325,7 @@ export const usePerformanceMonitor = (componentName?: string) => {
   const renderStartTime = useRef<number>(0);
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return;
+    if (!import.meta.env.DEV) return;
 
     const startTime = performance.now();
     renderStartTime.current = startTime;
@@ -388,7 +388,7 @@ export const useMemoryLeakDetection = (componentName: string) => {
 };
 
 // Development utilities
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   (window as any).performanceMonitor = {
     getMetrics: () => performanceMonitor.getMetrics(),
     getComponentMetrics: () => performanceMonitor.getComponentMetrics(),

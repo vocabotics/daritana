@@ -48,7 +48,7 @@ class VirtualOfficeSimpleService {
       return;
     }
 
-    const serverUrl = import.meta.env.VITE_WS_URL || 'http://localhost:5004';
+    const serverUrl = import.meta.env.VITE_WS_URL || 'http://localhost:7001';
     
     console.log('Connecting to Virtual Office at', serverUrl);
     

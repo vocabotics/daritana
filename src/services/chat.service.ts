@@ -75,7 +75,7 @@ class ChatService {
       return;
     }
 
-    const serverUrl = import.meta.env.VITE_WS_URL || 'http://localhost:5004';
+    const serverUrl = import.meta.env.VITE_WS_URL || 'http://localhost:7001';
     
     this.socket = io(serverUrl, {
       auth: { token },

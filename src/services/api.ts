@@ -5,8 +5,8 @@ import { performanceMonitor } from '@/hooks/usePerformanceMonitor';
 import { cacheManager, projectsCache, tasksCache, usersCache, filesCache } from '@/utils/caching';
 
 // API base URL - Updated to match backend route structure
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5004/api';
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5004';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:7001/api';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:7001';
 
 // Create axios instance
 const apiClient: AxiosInstance = axios.create({
@@ -61,7 +61,7 @@ apiClient.interceptors.response.use(
       const duration = new Date().getTime() - config.metadata.startTime.getTime();
       
       // Log in development
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log(`✅ ${config.method?.toUpperCase()} ${config.url} - ${duration}ms`);
       }
       
@@ -98,7 +98,7 @@ apiClient.interceptors.response.use(
     }
     
     // Log error details
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.error(`❌ ${originalRequest?.method?.toUpperCase()} ${originalRequest?.url}:`, {
         status: error.response?.status,
         message: error.message,
@@ -168,7 +168,7 @@ apiClient.interceptors.response.use(
     } else if (error.response?.status === 400) {
       // Don't show generic toast for 400 errors as they're usually handled specifically
       const errorMessage = error.response?.data?.message || error.response?.data?.error || 'Invalid request';
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         toast.error('Bad request', {
           description: errorMessage,
         });

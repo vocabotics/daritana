@@ -140,7 +140,7 @@ export const SeedDataManager: React.FC = () => {
     setSeedingOptions(prev => ({ ...prev, [key]: value }));
   };
 
-  if (process.env.NODE_ENV === 'production') {
+  if (import.meta.env.PROD) {
     return (
       <Alert>
         <AlertTriangle className="h-4 w-4" />

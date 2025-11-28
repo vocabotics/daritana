@@ -277,7 +277,7 @@ class DatabaseSeeder {
 
   // Method to clear existing data (use with caution!)
   async clearAllData(): Promise<void> {
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       throw new Error('Data clearing is not allowed in production environment');
     }
 
@@ -304,7 +304,7 @@ class DatabaseSeeder {
 
   // Method to reset to initial state
   async resetToInitialState(): Promise<void> {
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       throw new Error('Data reset is not allowed in production environment');
     }
 
@@ -330,7 +330,7 @@ export const clearAllData = () => databaseSeeder.clearAllData();
 export const resetToInitialState = () => databaseSeeder.resetToInitialState();
 
 // Development-only seeding commands
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   (window as any).seedDatabase = {
     demo: seedDemoData,
     development: seedDevelopmentData,

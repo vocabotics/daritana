@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'sonner';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5004/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7001/api';
 
 // SECURITY: Create axios instance with HTTP-Only cookie authentication
 const api = axios.create({

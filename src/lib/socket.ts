@@ -11,7 +11,7 @@ class SocketManager {
       return this.socket;
     }
 
-    const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5004';
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:7001';
 
     // HTTP-Only cookies are sent automatically with WebSocket handshake
     this.socket = io(socketUrl, {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
 
 // API base URL
-const API_BASE_URL = 'http://localhost:5004/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:7001/api';
 
 // SECURITY: Create axios instance with HTTP-Only cookie authentication
 const apiClient = axios.create({

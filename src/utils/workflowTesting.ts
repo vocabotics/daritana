@@ -400,7 +400,7 @@ export const createWaitStep = (name: string, condition: () => boolean, timeout =
 });
 
 // Development-only testing commands
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   (window as any).workflowTester = {
     run: workflowTester.runWorkflow.bind(workflowTester),
     runSuite: workflowTester.runTestSuite.bind(workflowTester),

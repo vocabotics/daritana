@@ -518,7 +518,7 @@ export const usersCache = createApiCache('users');
 export const filesCache = createApiCache('files');
 
 // Development utilities
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   (window as any).cacheManager = {
     getStats: () => cacheManager.getStats(),
     clear: () => cacheManager.clear(),
